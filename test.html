@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Vocacional UNLu</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Test Vocacional UNLu</h1>
+    <p>Completalo y descubrí tus posibles afinidades universitarias</p>
+  </header>
+
+  <div class="container">
+    <form id="testForm">
+      <div class="question">
+        <h3>1. ¿Qué tipo de actividades disfrutás más?</h3>
+        <label><input type="radio" name="q1" value="logico" required> Resolver problemas matemáticos o lógicos</label><br>
+        <label><input type="radio" name="q1" value="artistico"> Expresar ideas mediante arte o escritura</label><br>
+        <label><input type="radio" name="q1" value="social"> Ayudar y trabajar con personas</label><br>
+        <label><input type="radio" name="q1" value="manual"> Manipular objetos o construir</label>
+      </div>
+
+      <div class="question">
+        <h3>2. ¿En qué ambiente te sentís cómodo trabajando?</h3>
+        <label><input type="radio" name="q2" value="oficina" required> Oficina o frente a una computadora</label><br>
+        <label><input type="radio" name="q2" value="airelibre"> Al aire libre</label><br>
+        <label><input type="radio" name="q2" value="educativo"> En instituciones educativas</label><br>
+        <label><input type="radio" name="q2" value="taller"> Laboratorios o talleres</label>
+      </div>
+
+      <div class="question">
+        <h3>3. ¿Qué te motiva a seguir aprendiendo?</h3>
+        <label><input type="radio" name="q3" value="resolver" required> Resolver nuevos problemas</label><br>
+        <label><input type="radio" name="q3" value="crear"> Crear contenido visual o textual</label><br>
+        <label><input type="radio" name="q3" value="ayudar"> Acompañar procesos de otros</label><br>
+        <label><input type="radio" name="q3" value="experimentar"> Hacer cosas con las manos</label>
+      </div>
+
+      <div class="question">
+        <label for="email">Tu correo para enviarte el resultado y participar del sorteo:</label><br>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <button type="submit">Enviar y ver resultado</button>
+    </form>
+
+    <div id="resultado">
+      <h2>¡Gracias por participar!</h2>
+      <p id="textoResultado"></p>
+      <p>Revisá tu correo o acercate al stand del Centro de Estudiantes.</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('testForm');
+    const resultado = document.getElementById('resultado');
+    const textoResultado = document.getElementById('textoResultado');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      const q1 = data.get('q1');
+      let carrera = '';
+
+      switch (q1) {
+        case 'logico': carrera = 'Lic. en Sistemas de Información'; break;
+        case 'artistico': carrera = 'Lic. en Comunicación'; break;
+        case 'social': carrera = 'Lic. en Psicopedagogía'; break;
+        case 'manual': carrera = 'Tec. en Mecanización Agropecuaria'; break;
+        default: carrera = 'Diversas opciones';
+      }
+
+      textoResultado.textContent = `Según tus respuestas, podrías tener afinidad con: ${carrera}`;
+      form.style.display = 'none';
+      resultado.style.display = 'block';
+
+      // Enviar a Google Apps Script (reemplazar URL):
+      fetch('TU_URL_AQUI', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: data.get('email'),
+          q1: data.get('q1'),
+          q2: data.get('q2'),
+          q3: data.get('q3'),
+          sugerencia: carrera,
+          timestamp: new Date().toISOString()
+        }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+    });
+  </script>
+</body>
+</html>
