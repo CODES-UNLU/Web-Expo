@@ -1,191 +1,228 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Juego UNLu - Adiviná la Palabra</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f6fa;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      color: #2f3640;
-    }
-    header {
-      background: #006837;
-      color: white;
-      padding: 2rem 1rem;
-    }
-    .container {
-      max-width: 600px;
-      margin: 2rem auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .grid {
-      display: grid;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 1rem;
-      grid-template-columns: repeat(auto-fit, 50px);
-    }
-    .tile {
-      width: 50px;
-      height: 50px;
-      border: 2px solid #ccc;
-      font-size: 1.5rem;
-      text-align: center;
-      text-transform: uppercase;
-      border-radius: 6px;
-      background-color: white;
-      transition: background-color 0.3s;
-    }
-    .correct {
-      background-color: #2ecc71;
-      color: white;
-      border: none;
-    }
-    .present {
-      background-color: #f1c40f;
-      color: white;
-      border: none;
-    }
-    .absent {
-      background-color: #bdc3c7;
-      color: white;
-      border: none;
-    }
-    button {
-      background-color: #006837;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 1rem;
-    }
-    button:hover {
-      background-color: #004e2e;
-    }
-    #emailContainer {
-      margin-top: 2rem;
-      display: none;
-    }
-    #nivelActualTexto {
-      font-weight: bold;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Juego UNLu</h1>
-    <p>Adiviná la palabra secreta relacionada con la universidad</p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNLuWords</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      
+      .container {
+        max-width: 600px;
+        margin: 2rem auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .grid {
+        display: grid;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      .tile {
+        width: 50px;
+        height: 50px;
+        border: 2px solid #ccc;
+        font-size: 1.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        border-radius: 6px;
+        background-color: white;
+      }
+      .correct {
+        background-color: #2ecc71;
+        color: white;
+        border: none;
+      }
+      .present {
+        background-color: #f1c40f;
+        color: white;
+        border: none;
+      }
+      .absent {
+        background-color: #bdc3c7;
+        color: white;
+        border: none;
+      }
+      button {
+        background-color: #006837;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+      button:hover {
+        background-color: #004e2e;
+      }
+      #nivelActualTexto {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-row">
+        <img
+          src="LogoUNLuBlanco.png"
+          alt="Logo UNLu"
+          style="border-radius: 50%"
+        />
+        <h1>UNLuWords</h1>
+        <img src="LogoCodes.png" alt="Logo CODES" />
+      </div>
+    </header>
 
-  <div class="container">
-    <div id="gameArea">
-      <p id="nivelActualTexto"></p>
-      <div id="gridContainer"></div>
-      <br>
-      <button onclick="verificarIntento()">Probar</button>
-      <p id="mensaje"></p>
-      <div id="emailContainer">
-        <p>¡Felicitaciones! Completaste el juego en <span id="tiempoTotal"></span> segundos.</p>
-        <label for="email">Dejanos tu correo para participar del sorteo:</label><br>
-        <input type="email" id="email" placeholder="tucorreo@ejemplo.com">
-        <button onclick="enviarEmail()">Enviar</button>
-        <p id="emailMensaje"></p>
+    <div class="container">
+      <div id="gameArea">
+        <p id="nivelActualTexto"></p>
+        <div id="gridContainer"></div>
+        <button onclick="verificarIntento()">Probar</button>
+        <p id="mensaje"></p>
       </div>
     </div>
-  </div>
 
-  <script>
-    const palabras = {
-      5: ['tesis', 'aulas', 'notas', 'libro', 'decan'],
-      6: ['campus', 'alumno', 'codigo', 'formar', 'clases'],
-      7: ['sistemas', 'materia', 'carrera', 'facultad', 'docente']
-    };
+    <script>
+      const palabras = {
+        5: ["tesis", "aulas", "notas", "libro", "curso", "clase"],
+        6: ["campus", "alumno", "codigo", "formar", "clases", "examen"],
+        7: ["materia", "carrera", "sistema", "parcial", "docente"],
+      };
 
-    let nivelActual = 5;
-    let palabraSecreta = '';
-    let intentos = [];
-    let maxIntentos = 6;
-    let inicioTiempo = null;
+      let nivelActual = 5;
+      let palabraSecreta = "";
+      let intentos = [];
+      let maxIntentos = 6;
+      let inicioTiempo = null;
 
-    function iniciarNivel() {
-      if (!inicioTiempo) inicioTiempo = new Date();
-      const lista = palabras[nivelActual];
-      palabraSecreta = lista[Math.floor(Math.random() * lista.length)].toUpperCase();
-      intentos = [];
-      document.getElementById('mensaje').textContent = '';
-      document.getElementById('nivelActualTexto').textContent = `Nivel actual: Palabra de ${nivelActual} letras`;
-      generarGrid();
-    }
+      function iniciarNivel() {
+        if (!inicioTiempo) inicioTiempo = new Date();
+        const lista = palabras[nivelActual].filter(
+          (p) => p.length === nivelActual
+        );
+        palabraSecreta =
+          lista[Math.floor(Math.random() * lista.length)].toUpperCase();
+        intentos = [];
+        document.getElementById("mensaje").textContent = "";
+        document.getElementById(
+          "nivelActualTexto"
+        ).textContent = `Nivel actual: Palabra de ${nivelActual} letras`;
+        generarGrid();
+      }
 
-    function generarGrid() {
-      const gridContainer = document.getElementById('gridContainer');
-      gridContainer.innerHTML = '';
-      for (let i = 0; i < maxIntentos; i++) {
-        const row = document.createElement('div');
-        row.className = 'grid';
-        row.style.gridTemplateColumns = `repeat(${nivelActual}, 50px)`;
-        for (let j = 0; j < nivelActual; j++) {
-          const input = document.createElement('input');
-          input.className = 'tile';
-          input.maxLength = 1;
-          input.id = `cell-${i}-${j}`;
-          row.appendChild(input);
+      function generarGrid() {
+        const gridContainer = document.getElementById("gridContainer");
+        gridContainer.innerHTML = "";
+        for (let i = 0; i < maxIntentos; i++) {
+          const row = document.createElement("div");
+          row.className = "grid";
+          row.style.gridTemplateColumns = `repeat(${nivelActual}, 50px)`;
+          for (let j = 0; j < nivelActual; j++) {
+            const input = document.createElement("input");
+            input.className = "tile";
+            input.maxLength = 1;
+            input.id = `cell-${i}-${j}`;
+            input.autocapitalize = "characters";
+            input.autocomplete = "off";
+            input.spellcheck = false;
+            input.inputMode = "latin"; // sugiere teclado sin números
+
+            // ➕ Limita a una letra, convierte a mayúscula y avanza automáticamente
+            input.addEventListener("input", (e) => {
+              e.target.value = e.target.value.toUpperCase().slice(0, 1);
+              if (e.target.value && j < nivelActual - 1) {
+                const nextInput = document.getElementById(`cell-${i}-${j + 1}`);
+                if (nextInput) nextInput.focus();
+              }
+            });
+
+            // ➕ Permite usar Backspace para retroceder
+            input.addEventListener("keydown", (e) => {
+              if (e.key === "Backspace" && !e.target.value && j > 0) {
+                const prevInput = document.getElementById(`cell-${i}-${j - 1}`);
+                if (prevInput) prevInput.focus();
+              }
+            });
+
+            row.appendChild(input);
+          }
+          gridContainer.appendChild(row);
         }
-        gridContainer.appendChild(row);
       }
-    }
 
-    function verificarIntento() {
-      const fila = intentos.length;
-      let intento = '';
-      for (let i = 0; i < nivelActual; i++) {
-        const celda = document.getElementById(`cell-${fila}-${i}`);
-        intento += celda.value.toUpperCase();
-      }
-      if (intento.length !== nivelActual || intentos.length >= maxIntentos) return;
-      intentos.push(intento);
-      for (let i = 0; i < nivelActual; i++) {
-        const celda = document.getElementById(`cell-${fila}-${i}`);
-        if (intento[i] === palabraSecreta[i]) {
-          celda.classList.add('correct');
-        } else if (palabraSecreta.includes(intento[i])) {
-          celda.classList.add('present');
-        } else {
-          celda.classList.add('absent');
+      function verificarIntento() {
+        const fila = intentos.length;
+        let intento = "";
+        for (let i = 0; i < nivelActual; i++) {
+          const celda = document.getElementById(`cell-${fila}-${i}`);
+          intento += celda.value.toUpperCase();
+        }
+
+        if (intento.length !== nivelActual || intentos.length >= maxIntentos)
+          return;
+
+        intentos.push(intento);
+
+        const resultado = Array(nivelActual).fill("absent");
+        const letrasSecretas = palabraSecreta.split("");
+        const usadas = Array(nivelActual).fill(false);
+
+        // Correctas
+        for (let i = 0; i < nivelActual; i++) {
+          if (intento[i] === letrasSecretas[i]) {
+            resultado[i] = "correct";
+            usadas[i] = true;
+          }
+        }
+
+        // Presentes pero en otra posición
+        for (let i = 0; i < nivelActual; i++) {
+          if (resultado[i] === "correct") continue;
+          for (let j = 0; j < nivelActual; j++) {
+            if (!usadas[j] && intento[i] === letrasSecretas[j]) {
+              resultado[i] = "present";
+              usadas[j] = true;
+              break;
+            }
+          }
+        }
+
+        // Aplicar clases
+        for (let i = 0; i < nivelActual; i++) {
+          const celda = document.getElementById(`cell-${fila}-${i}`);
+          celda.classList.add(resultado[i]);
+        }
+
+        // Verificar éxito
+        if (intento === palabraSecreta) {
+          if (nivelActual < 7) {
+            document.getElementById(
+              "mensaje"
+            ).textContent = `¡Correcto! Pasás al siguiente nivel.`;
+            setTimeout(() => {
+              nivelActual++;
+              iniciarNivel();
+            }, 1500);
+          } else {
+            mostrarFinal();
+          }
+        } else if (intentos.length >= maxIntentos) {
+          document.getElementById(
+            "mensaje"
+          ).textContent = `Perdiste. La palabra era ${palabraSecreta}`;
         }
       }
-      if (intento === palabraSecreta) {
-        if (nivelActual < 7) {
-          document.getElementById('mensaje').textContent = `¡Correcto! Pasás al siguiente nivel.`;
-          setTimeout(() => {
-            nivelActual++;
-            iniciarNivel();
-          }, 1500);
-        } else {
-          mostrarFinal();
-        }
-      } else if (intentos.length >= maxIntentos) {
-        document.getElementById('mensaje').textContent = `Perdiste. La palabra era ${palabraSecreta}`;
-      }
-    }
 
-    function mostrarFinal() {
-      const finTiempo = new Date();
-      const segundos = Math.floor((finTiempo - inicioTiempo) / 1000);
-      document.getElementById('gameArea').innerHTML = `
+      function mostrarFinal() {
+        const fin = new Date();
+        const segundos = Math.floor((fin - inicioTiempo) / 1000);
+        document.getElementById("gameArea").innerHTML = `
         <h2>¡Felicitaciones!</h2>
         <p>Completaste todos los niveles en <strong>${segundos}</strong> segundos.</p>
         <p>Dejanos tu correo para participar del sorteo:</p>
@@ -193,19 +230,37 @@
         <button onclick="enviarEmail()">Enviar</button>
         <p id="emailMensaje"></p>
       `;
-    }
-
-    function enviarEmail() {
-      const email = document.getElementById('email').value;
-      if (email && email.includes('@')) {
-        document.getElementById('emailMensaje').textContent = `¡Gracias por participar! Te contactaremos si ganás.`;
-        // Aquí podrías guardar el correo en una hoja de cálculo usando Google Apps Script o un backend
-      } else {
-        document.getElementById('emailMensaje').textContent = `Por favor ingresá un correo válido.`;
       }
-    }
 
-    window.onload = iniciarNivel;
-  </script>
-</body>
+      function enviarEmail() {
+        const email = document.getElementById("email").value;
+        const mensaje = document.getElementById("emailMensaje");
+        const segundos = Math.floor((new Date() - inicioTiempo) / 1000);
+
+        if (email && email.includes("@")) {
+          fetch(
+            "https://script.google.com/macros/s/AKfycbz2XIqDM5ux2IlTs9ZDFP-bNMqucBZb7jZ-sljE6m5S-rMHFsIuJR6kC4Xw4tTjGjY_2A/exec",
+            {
+              method: "POST",
+              body: JSON.stringify({ email, tiempo: segundos }),
+              contentType: "application/json",
+            }
+          )
+            .then(
+              () =>
+                (mensaje.textContent =
+                  "¡Gracias por participar! Te contactaremos si ganás.")
+            )
+            .catch(
+              () =>
+                (mensaje.textContent = "Ocurrió un error al enviar los datos.")
+            );
+        } else {
+          mensaje.textContent = "Por favor ingresá un correo válido.";
+        }
+      }
+
+      window.onload = iniciarNivel;
+    </script>
+  </body>
 </html>

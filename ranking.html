@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ranking UNLuWords</title>
+  <meta http-equiv="refresh" content="10">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f6fa;
+      color: #2f3640;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      color: #006837;
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 80%;
+    }
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid #ccc;
+      font-size: 1.2rem;
+    }
+    tr:nth-child(even) {
+      background: #ecf0f1;
+    }
+    th {
+      background: #006837;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 Ranking UNLuWords</h1>
+  <table id="tablaRanking">
+    <thead>
+      <tr><th>Puesto</th><th>Email</th><th>Tiempo (s)</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch('TU_URL_DEL_SCRIPT')
+      .then(response => response.json())
+      .then(data => {
+        const cuerpo = document.querySelector('#tablaRanking tbody');
+        cuerpo.innerHTML = '';
+        data.forEach((jugador, index) => {
+          const fila = document.createElement('tr');
+          fila.innerHTML = `<td>${index + 1}</td><td>${jugador.email}</td><td>${jugador.tiempo}</td>`;
+          cuerpo.appendChild(fila);
+        });
+      })
+      .catch(() => {
+        const cuerpo = document.querySelector('#tablaRanking tbody');
+        cuerpo.innerHTML = '<tr><td colspan="3">Error al cargar ranking</td></tr>';
+      });
+  </script>
+</body>
+</html>
