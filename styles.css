@@ -1,12 +1,12 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #f5f6fa;
-  color: #2f3640;
+  background: #f5fafe; /* fondo claro */
+  color: #2f3640; /* texto principal */
 }
 
 header {
-  background: #006837;
+  background: #3e37c6; /* turquesa del logo CODES++ */
   color: white;
   padding: 1rem 2rem;
   text-align: center;
@@ -46,7 +46,7 @@ header {
 /* BOTONES */
 .btn {
   display: inline-block;
-  background-color: #006837;
+  background-color: #3e37c6; /* azul medio del logo Sistemas */
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -56,20 +56,19 @@ header {
   margin: 1rem;
   text-decoration: none;
   transition: background 0.3s ease;
-
   width: 180px;
   text-align: center;
 }
 
 .btn:hover {
-  background-color: #004d2c;
+  background-color: #5e59ce;
 }
 
 /* DESTACADO */
 .highlight {
-  background-color: #eafaf1;
+  background-color: #e0fafd; /* celeste muy claro */
   padding: 1rem;
-  border-left: 6px solid #006837;
+  border-left: 6px solid #37c6c0;
   margin: 2rem 0;
   border-radius: 6px;
 }
@@ -105,8 +104,7 @@ footer {
     width: 100%;
     max-width: 250px;
   }
-}
-@media screen and (max-width: 700px) {
+
   .header-row {
     flex-direction: column;
   }
