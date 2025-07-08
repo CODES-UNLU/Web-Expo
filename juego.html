@@ -6,7 +6,6 @@
     <title>UNLuWords</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
-      
       .container {
         max-width: 600px;
         margin: 2rem auto;
@@ -14,13 +13,16 @@
         padding: 2rem;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
       }
+
       .grid {
         display: grid;
         gap: 10px;
         justify-content: center;
         margin-bottom: 1rem;
       }
+
       .tile {
         width: 50px;
         height: 50px;
@@ -31,23 +33,27 @@
         border-radius: 6px;
         background-color: white;
       }
+
       .correct {
         background-color: #2ecc71;
         color: white;
         border: none;
       }
+
       .present {
         background-color: #f1c40f;
         color: white;
         border: none;
       }
+
       .absent {
         background-color: #bdc3c7;
         color: white;
         border: none;
       }
+
       button {
-        background-color: #006837;
+        background-color: #03b7f8;
         color: white;
         border: none;
         padding: 0.75rem 1.5rem;
@@ -55,37 +61,86 @@
         border-radius: 6px;
         cursor: pointer;
         margin-top: 1rem;
+        transition: background-color 0.3s;
       }
+
       button:hover {
-        background-color: #004e2e;
+        background-color: #336578;
       }
+
       #nivelActualTexto {
         font-weight: bold;
         font-size: 1.1rem;
         margin-bottom: 1rem;
+      }
+
+      ul.reglas {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+      }
+
+      ul.reglas li {
+        background: #ecf0f1;
+        margin: 0.5rem 0;
+        padding: 0.5rem 1rem;
+        border-left: 5px solid #03b7f8;
+        border-radius: 4px;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .oculto {
+        display: none;
       }
     </style>
   </head>
   <body>
     <header>
       <div class="header-row">
-        <img
-          src="LogoUNLuBlanco.png"
-          alt="Logo UNLu"
-          style="border-radius: 50%"
-        />
+        <img src="logoLSIUNLu.svg" alt="Logo Sistemas" height="50" />
         <h1>UNLuWords</h1>
-        <img src="LogoCodes.png" alt="Logo CODES" />
+        <img src="LogoCodes.png" alt="Logo CODES" height="50" />
       </div>
     </header>
 
-    <div class="container">
-      <div id="gameArea">
-        <p id="nivelActualTexto"></p>
-        <div id="gridContainer"></div>
-        <button onclick="verificarIntento()">Probar</button>
-        <p id="mensaje"></p>
-      </div>
+    <!-- Pantalla de bienvenida -->
+    <div id="bienvenida" class="container">
+      <h2>¡Bienvenido a UNLuWords!</h2>
+      <p>Antes de comenzar, conocé las reglas:</p>
+      <p>
+        <strong>💡 Pista:</strong> todas las palabras están relacionadas con la
+        universidad o la carrera de Licenciatura en Sistemas de Información.
+      </p>
+
+      <ul class="reglas">
+        <li>🔤 Adiviná la palabra secreta letra por letra.</li>
+        <li>⏱ Tenés 6 intentos por nivel.</li>
+        <li>🟩 Verde: letra correcta y bien ubicada.</li>
+        <li>🟨 Amarillo: letra correcta pero mal ubicada.</li>
+        <li>⬜ Gris: letra incorrecta.</li>
+        <li>📈 Vas avanzando con cada palabra correcta.</li>
+        <li>🎉 Al finalizar, podés ingresar tu mail para un sorteo.</li>
+      </ul>
+      <button onclick="iniciarJuego()">Comenzar</button>
+    </div>
+
+    <!-- Juego -->
+    <div id="gameArea" class="container oculto">
+      <p id="nivelActualTexto"></p>
+      <div id="gridContainer"></div>
+      <button onclick="verificarIntento()">Probar</button>
+      <p id="mensaje"></p>
     </div>
 
     <script>
@@ -100,6 +155,12 @@
       let intentos = [];
       let maxIntentos = 6;
       let inicioTiempo = null;
+
+      function iniciarJuego() {
+        document.getElementById("bienvenida").classList.add("oculto");
+        document.getElementById("gameArea").classList.remove("oculto");
+        iniciarNivel();
+      }
 
       function iniciarNivel() {
         if (!inicioTiempo) inicioTiempo = new Date();
@@ -131,9 +192,8 @@
             input.autocapitalize = "characters";
             input.autocomplete = "off";
             input.spellcheck = false;
-            input.inputMode = "latin"; // sugiere teclado sin números
+            input.inputMode = "latin";
 
-            // ➕ Limita a una letra, convierte a mayúscula y avanza automáticamente
             input.addEventListener("input", (e) => {
               e.target.value = e.target.value.toUpperCase().slice(0, 1);
               if (e.target.value && j < nivelActual - 1) {
@@ -142,7 +202,6 @@
               }
             });
 
-            // ➕ Permite usar Backspace para retroceder
             input.addEventListener("keydown", (e) => {
               if (e.key === "Backspace" && !e.target.value && j > 0) {
                 const prevInput = document.getElementById(`cell-${i}-${j - 1}`);
@@ -173,7 +232,6 @@
         const letrasSecretas = palabraSecreta.split("");
         const usadas = Array(nivelActual).fill(false);
 
-        // Correctas
         for (let i = 0; i < nivelActual; i++) {
           if (intento[i] === letrasSecretas[i]) {
             resultado[i] = "correct";
@@ -181,7 +239,6 @@
           }
         }
 
-        // Presentes pero en otra posición
         for (let i = 0; i < nivelActual; i++) {
           if (resultado[i] === "correct") continue;
           for (let j = 0; j < nivelActual; j++) {
@@ -193,18 +250,15 @@
           }
         }
 
-        // Aplicar clases
         for (let i = 0; i < nivelActual; i++) {
           const celda = document.getElementById(`cell-${fila}-${i}`);
           celda.classList.add(resultado[i]);
         }
 
-        // Verificar éxito
         if (intento === palabraSecreta) {
           if (nivelActual < 7) {
-            document.getElementById(
-              "mensaje"
-            ).textContent = `¡Correcto! Pasás al siguiente nivel.`;
+            document.getElementById("mensaje").textContent =
+              "¡Correcto! Pasás al siguiente nivel.";
             setTimeout(() => {
               nivelActual++;
               iniciarNivel();
@@ -246,21 +300,17 @@
               contentType: "application/json",
             }
           )
-            .then(
-              () =>
-                (mensaje.textContent =
-                  "¡Gracias por participar! Te contactaremos si ganás.")
-            )
-            .catch(
-              () =>
-                (mensaje.textContent = "Ocurrió un error al enviar los datos.")
-            );
+            .then(() => {
+              mensaje.textContent =
+                "¡Gracias por participar! Te contactaremos si ganás.";
+            })
+            .catch(() => {
+              mensaje.textContent = "Ocurrió un error al enviar los datos.";
+            });
         } else {
           mensaje.textContent = "Por favor ingresá un correo válido.";
         }
       }
-
-      window.onload = iniciarNivel;
     </script>
   </body>
 </html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Explorá la Expo UNLu</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .charlas-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .charlas-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .grilla-charlas {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .grilla-charlas div {
+      padding: 1rem;
+      background-color: #f0f4f8;
+      border-radius: 6px;
+    }
+
+    .grilla-charlas .encabezado {
+      font-weight: bold;
+      background-color: #006837;
+      color: white;
+    }
+
+    @media screen and (max-width: 700px) {
+      .grilla-charlas {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-row">
+      <img src="logoLSIUNLu.svg" alt="Logo UNLu" />
+      <h1>Explorá la Expo UNLu</h1>
+      <img src="LogoCodes.png" alt="Logo CODES" />
+    </div>
+  </header>
+
+  <div class="charlas-container">
+    <h2>Charlas Informativas</h2>
+    <div class="grilla-charlas">
+      <div class="encabezado">Charla</div>
+      <div class="encabezado">Aula</div>
+      <div class="encabezado">Horario</div>
+
+      <div>Lic. en Sistemas</div>
+      <div>Aula 2</div>
+      <div>10:00 hs</div>
+
+      <div>Enfermería</div>
+      <div>Aula 4</div>
+      <div>10:30 hs</div>
+
+      <div>Educación Física</div>
+      <div>Aula 1</div>
+      <div>11:00 hs</div>
+
+      <div>Biología</div>
+      <div>Aula 3</div>
+      <div>11:30 hs</div>
+
+      <div>Turismo</div>
+      <div>Aula 2</div>
+      <div>12:00 hs</div>
+    </div>
+  </div>
+</body>
+</html>

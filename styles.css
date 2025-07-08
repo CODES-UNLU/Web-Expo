@@ -1,12 +1,14 @@
+/* BASE GENERAL */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #f5fafe; /* fondo claro */
-  color: #2f3640; /* texto principal */
+  background: #f5fafe;
+  color: #2f3640;
 }
 
+/* HEADER */
 header {
-  background: #3e37c6; /* turquesa del logo CODES++ */
+  background: #3e37c6;
   color: white;
   padding: 1rem 2rem;
   text-align: center;
@@ -46,7 +48,7 @@ header {
 /* BOTONES */
 .btn {
   display: inline-block;
-  background-color: #3e37c6; /* azul medio del logo Sistemas */
+  background-color: #3e37c6;
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -66,9 +68,9 @@ header {
 
 /* DESTACADO */
 .highlight {
-  background-color: #e0fafd; /* celeste muy claro */
+  background-color: #e0fafd;
   padding: 1rem;
-  border-left: 6px solid #37c6c0;
+  border-left: 6px solid #8a37c6;
   margin: 2rem 0;
   border-radius: 6px;
 }
@@ -81,21 +83,78 @@ footer {
   margin: 2rem 0 1rem;
 }
 
-/* RESPONSIVE MEDIO (TABLETS Y MOVILES GRANDES) */
-@media screen and (max-width: 700px) {
+/* NAVBAR */
+nav {
+  background: #3e37c6;
+  color: white;
+  position: relative;
+  z-index: 10;
+}
+
+.nav-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.menu {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.menu li a:hover {
+  background-color: #5e59ce;
+}
+
+/* MOBILE RESPONSIVE */
+@media screen and (max-width: 768px) {
   header {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    text-align: center;
   }
 
-  header img {
+  .header-row {
+    flex-direction: column;
+  }
+
+  .header-row img {
     height: 60px;
   }
 
-  header h1 {
-    font-size: 1.5rem;
-    flex: unset;
+  .header-row h1 {
+    font-size: 1.4rem;
+  }
+
+  .container {
+    padding: 1.5rem;
+    margin: 1rem;
   }
 
   .btn {
@@ -105,15 +164,38 @@ footer {
     max-width: 250px;
   }
 
-  .header-row {
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu {
+    position: absolute;
+    top: 100%;
+    left: 1rem;
+    right: 1rem;
+    background: white;
     flex-direction: column;
+    display: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 0.5rem 0;
+    z-index: 10;
   }
 
-  .header-row h1 {
-    font-size: 1.4rem;
+  .menu.show {
+    display: flex;
   }
 
-  .header-row img {
-    height: 60px;
+  .menu li a {
+    color: #2f3640;
+    text-align: center;
+    padding: 1rem;
+    display: block;
+    width: 100%;
+  }
+
+  .menu li a:hover {
+    background-color: #f0f0ff;
+    color: #3e37c6;
   }
 }
