@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Test Vocacional UNLu</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -14,118 +14,137 @@
         <img src="LogoCodes.png" alt="Logo CODES" />
       </div>
     </header>
-    <div class="container">
-  <div id="inicio">
-    <p>📱 Completalo y descubrí tus posibles afinidades universitarias</p>
-    <button id="btnIniciar" class="btn">Iniciar test</button>
-  </div>
 
-  <form id="testForm" style="display: none;">
-    <div class="question paso" data-paso="1">
-      <h3>1. ¿Qué tipo de actividades disfrutás más?</h3>
-      <label><input type="radio" name="q1" value="logico" required> Resolver problemas matemáticos o lógicos</label><br>
-      <label><input type="radio" name="q1" value="artistico"> Expresar ideas mediante arte o escritura</label><br>
-      <label><input type="radio" name="q1" value="social"> Ayudar y trabajar con personas</label><br>
-      <label><input type="radio" name="q1" value="manual"> Manipular objetos o construir</label><br>
-      <button type="button" class="btn siguiente">Siguiente</button>
+    <div id="inicio">
+      <p>📱 Completalo y descubrí tus posibles afinidades universitarias</p>
+      <button id="btnIniciar" class="btn">Iniciar test</button>
     </div>
 
-    <div class="question paso" data-paso="2" style="display: none;">
-      <h3>2. ¿En qué ambiente te sentís cómodo trabajando?</h3>
-      <label><input type="radio" name="q2" value="oficina" required> Oficina o frente a una computadora</label><br>
-      <label><input type="radio" name="q2" value="airelibre"> Al aire libre</label><br>
-      <label><input type="radio" name="q2" value="educativo"> En instituciones educativas</label><br>
-      <label><input type="radio" name="q2" value="taller"> Laboratorios o talleres</label><br>
-      <button type="button" class="btn siguiente">Siguiente</button>
+    <form id="testForm" style="display:none;">
+      <!-- Preguntas -->
+      <div class="question paso" data-paso="1">
+        <h3>1. ¿Qué tipo de actividades disfrutás más?</h3>
+        <label><input type="radio" name="q1" value="sistemas" required> Resolver problemas matemáticos o lógicos</label>
+        <label><input type="radio" name="q1" value="comunicacion"> Expresar ideas mediante arte o escritura</label>
+        <label><input type="radio" name="q1" value="trabajosocial"> Ayudar y trabajar con personas</label>
+        <label><input type="radio" name="q1" value="agronomia"> Manipular objetos o construir</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="2" style="display:none;">
+        <h3>2. ¿En qué ambiente te sentís cómodo trabajando?</h3>
+        <label><input type="radio" name="q2" value="sistemas" required> Oficina o frente a una computadora</label>
+        <label><input type="radio" name="q2" value="agronomia"> Al aire libre</label>
+        <label><input type="radio" name="q2" value="profesorado"> En instituciones educativas</label>
+        <label><input type="radio" name="q2" value="industrial"> Laboratorios o talleres</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="3" style="display:none;">
+        <h3>3. ¿Qué te motiva a seguir aprendiendo?</h3>
+        <label><input type="radio" name="q3" value="sistemas" required> Resolver nuevos problemas</label>
+        <label><input type="radio" name="q3" value="comunicacion"> Crear contenido visual o textual</label>
+        <label><input type="radio" name="q3" value="trabajosocial"> Acompañar procesos de otros</label>
+        <label><input type="radio" name="q3" value="agronomia"> Hacer cosas con las manos</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="4" style="display:none;">
+        <h3>4. ¿Qué asignaturas te gustan más?</h3>
+        <label><input type="radio" name="q4" value="sistemas" required> Matemática, lógica, informática</label>
+        <label><input type="radio" name="q4" value="comunicacion"> Literatura, historia, comunicación</label>
+        <label><input type="radio" name="q4" value="trabajosocial"> Psicología, sociología</label>
+        <label><input type="radio" name="q4" value="agronomia"> Biología, química, ecología</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="5" style="display:none;">
+        <h3>5. ¿Qué actividad preferirías en un proyecto?</h3>
+        <label><input type="radio" name="q5" value="sistemas" required> Programar una aplicación o software</label>
+        <label><input type="radio" name="q5" value="comunicacion"> Diseñar una campaña comunicacional</label>
+        <label><input type="radio" name="q5" value="trabajosocial"> Organizar actividades comunitarias</label>
+        <label><input type="radio" name="q5" value="agronomia"> Cuidar y manejar cultivos o animales</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="6" style="display:none;">
+        <h3>6. ¿Cómo resolvés un problema?</h3>
+        <label><input type="radio" name="q6" value="sistemas" required> Analizo la información y busco soluciones lógicas</label>
+        <label><input type="radio" name="q6" value="comunicacion"> Busco nuevas formas de expresarlo</label>
+        <label><input type="radio" name="q6" value="trabajosocial"> Consulto con las personas involucradas</label>
+        <label><input type="radio" name="q6" value="agronomia"> Pruebo con acciones prácticas</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="7" style="display:none;">
+        <h3>7. ¿Qué prefieres en un trabajo?</h3>
+        <label><input type="radio" name="q7" value="sistemas" required> Usar tecnología e innovar</label>
+        <label><input type="radio" name="q7" value="comunicacion"> Crear y comunicar mensajes</label>
+        <label><input type="radio" name="q7" value="trabajosocial"> Apoyar a personas en situaciones difíciles</label>
+        <label><input type="radio" name="q7" value="agronomia"> Trabajar en contacto con la naturaleza</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="8" style="display:none;">
+        <h3>8. ¿Cuál de estos valores es más importante para vos?</h3>
+        <label><input type="radio" name="q8" value="trabajosocial" required> Solidaridad y empatía</label>
+        <label><input type="radio" name="q8" value="comunicacion"> Creatividad y expresión</label>
+        <label><input type="radio" name="q8" value="sistemas"> Razonamiento y precisión</label>
+        <label><input type="radio" name="q8" value="agronomia"> Sustentabilidad y cuidado ambiental</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="9" style="display:none;">
+        <h3>9. ¿Qué tipo de proyecto te gustaría desarrollar?</h3>
+        <label><input type="radio" name="q9" value="sistemas" required> Crear una aplicación móvil</label>
+        <label><input type="radio" name="q9" value="comunicacion"> Producir un documental o contenido multimedia</label>
+        <label><input type="radio" name="q9" value="trabajosocial"> Organizar un programa social</label>
+        <label><input type="radio" name="q9" value="agronomia"> Gestionar una finca o producción agrícola</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="10" style="display:none;">
+        <h3>10. ¿Cómo te ves en 5 años?</h3>
+        <label><input type="radio" name="q10" value="sistemas" required> Trabajando en desarrollo tecnológico</label>
+        <label><input type="radio" name="q10" value="comunicacion"> Comunicando y creando contenido</label>
+        <label><input type="radio" name="q10" value="trabajosocial"> Ayudando a comunidades o personas</label>
+        <label><input type="radio" name="q10" value="agronomia"> Trabajando con el campo y recursos naturales</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="11" style="display:none;">
+        <h3>11. ¿Qué habilidad destacás en vos?</h3>
+        <label><input type="radio" name="q11" value="sistemas" required> Pensamiento analítico y orden</label>
+        <label><input type="radio" name="q11" value="comunicacion"> Comunicación oral y escrita</label>
+        <label><input type="radio" name="q11" value="trabajosocial"> Empatía y escucha activa</label>
+        <label><input type="radio" name="q11" value="agronomia"> Trabajo físico y conexión con la naturaleza</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <div class="question paso" data-paso="12" style="display:none;">
+        <h3>12. Para finalizar, ¿qué valoras más en una carrera?</h3>
+        <label><input type="radio" name="q12" value="sistemas" required> Innovación tecnológica y futuro laboral</label>
+        <label><input type="radio" name="q12" value="comunicacion"> Expresión cultural y artística</label>
+        <label><input type="radio" name="q12" value="trabajosocial"> Impacto social y ayuda comunitaria</label>
+        <label><input type="radio" name="q12" value="agronomia"> Cuidado ambiental y producción sostenible</label>
+        <button type="button" class="btn siguiente">Siguiente</button>
+      </div>
+
+      <!-- Email -->
+      <div class="question paso" data-paso="13" style="display:none;">
+        <label for="email">Tu correo para enviarte el resultado:</label><br />
+        <input type="email" id="email" name="email" required />
+        <br /><br />
+        <button type="submit" class="btn">Enviar y ver resultado</button>
+      </div>
+    </form>
+
+    <div id="resultado" style="display:none;">
+      <h2>¡Gracias por participar!</h2>
+      <p id="textoResultado"></p>
+      <p>Revisá tu correo o acercate al stand del Centro de Estudiantes.</p>
     </div>
 
-    <div class="question paso" data-paso="3" style="display: none;">
-      <h3>3. ¿Qué te motiva a seguir aprendiendo?</h3>
-      <label><input type="radio" name="q3" value="resolver" required> Resolver nuevos problemas</label><br>
-      <label><input type="radio" name="q3" value="crear"> Crear contenido visual o textual</label><br>
-      <label><input type="radio" name="q3" value="ayudar"> Acompañar procesos de otros</label><br>
-      <label><input type="radio" name="q3" value="experimentar"> Hacer cosas con las manos</label><br>
-      <button type="button" class="btn siguiente">Siguiente</button>
-    </div>
-
-    <div class="question paso" data-paso="4" style="display: none;">
-      <label for="email">Tu correo para enviarte el resultado:</label><br>
-      <input type="email" id="email" name="email" required><br>
-      <button type="submit" class="btn">Enviar y ver resultado</button>
-    </div>
-  </form>
-
-  <div id="resultado" style="display: none;">
-    <h2>¡Gracias por participar!</h2>
-    <p id="textoResultado"></p>
-    <p>Revisá tu correo o acercate al stand del Centro de Estudiantes.</p>
-  </div>
-</div>
-
-<script>
-  const btnIniciar = document.getElementById("btnIniciar");
-  const inicio = document.getElementById("inicio");
-  const form = document.getElementById("testForm");
-  const pasos = document.querySelectorAll(".paso");
-  const resultado = document.getElementById("resultado");
-  const textoResultado = document.getElementById("textoResultado");
-
-  let pasoActual = 0;
-
-  btnIniciar.addEventListener("click", () => {
-    inicio.style.display = "none";
-    form.style.display = "block";
-    pasos[pasoActual].style.display = "block";
-  });
-
-  document.querySelectorAll(".siguiente").forEach((btn, index) => {
-    btn.addEventListener("click", () => {
-      const currentPaso = pasos[index];
-      const inputs = currentPaso.querySelectorAll("input[type='radio']");
-      const checked = Array.from(inputs).some(input => input.checked);
-      if (!checked) {
-        alert("Seleccioná una opción antes de continuar");
-        return;
-      }
-
-      currentPaso.style.display = "none";
-      pasoActual++;
-      pasos[pasoActual].style.display = "block";
-    });
-  });
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const data = new FormData(form);
-    const q1 = data.get("q1");
-    let carrera = "";
-
-    switch (q1) {
-      case "logico": carrera = "Lic. en Sistemas de Información"; break;
-      case "artistico": carrera = "Lic. en Comunicación"; break;
-      case "social": carrera = "Lic. en Psicopedagogía"; break;
-      case "manual": carrera = "Tec. en Mecanización Agropecuaria"; break;
-      default: carrera = "Diversas opciones";
-    }
-
-    textoResultado.textContent = `Según tus respuestas, podrías tener afinidad con: ${carrera}`;
-    form.style.display = "none";
-    resultado.style.display = "block";
-
-    // Enviar a Google Apps Script (reemplazar por tu URL)
-    fetch("TU_URL_AQUI", {
-      method: "POST",
-      body: JSON.stringify({
-        email: data.get("email"),
-        q1: data.get("q1"),
-        q2: data.get("q2"),
-        q3: data.get("q3"),
-        sugerencia: carrera,
-        timestamp: new Date().toISOString()
-      }),
-      headers: { "Content-Type": "application/json" }
-    });
-  });
-</script>
-
+    <script src="test.js"></script>
+  </body>
 </html>

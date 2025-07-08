@@ -199,3 +199,243 @@ nav {
     color: #3e37c6;
   }
 }
+/*JUEGO*/
+
+.unluwords-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.unluwords-grid {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.unluwords-tile {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ccc;
+  font-size: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.unluwords-correct {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+}
+
+.unluwords-present {
+  background-color: #f1c40f;
+  color: white;
+  border: none;
+}
+
+.unluwords-absent {
+  background-color: #bdc3c7;
+  color: white;
+  border: none;
+}
+
+button {
+  background-color: #03b7f8;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #336578;
+}
+
+#unluwords-nivel-texto {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.unluwords-reglas {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.unluwords-reglas li {
+  background: #ecf0f1;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 5px solid #03b7f8;
+  border-radius: 4px;
+  animation: unluwords-fadeIn 0.5s ease;
+}
+
+@keyframes unluwords-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.unluwords-oculto {
+  display: none;
+}
+
+.unluwords-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* Contenedor del test */
+
+#inicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* O 100vh si querés */
+  text-align: center;
+  gap: 1rem;
+}
+
+#testForm {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Cada pregunta */
+.question {
+  margin-bottom: 2rem;
+}
+
+/* Título de pregunta */
+.question h3 {
+  font-size: 1.3rem;
+  color: #3e37c6;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+/* Etiquetas de opciones */
+.question label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  color: #2f3640;
+  user-select: none;
+}
+
+/* Inputs radio escondidos para estilizar */
+.question input[type="radio"] {
+  display: none;
+}
+
+/* Custom radio button con pseudo-elementos */
+.question label::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  vertical-align: middle;
+  border: 2px solid #3e37c6;
+  border-radius: 50%;
+  background: white;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Cuando el radio está seleccionado */
+.question input[type="radio"]:checked + label::before {
+  background-color: #3e37c6;
+  border-color: #3e37c6;
+  box-shadow: 0 0 5px rgba(62,55,198,0.7);
+}
+
+/* Botones Siguiente y Enviar */
+.question button.siguiente,
+#testForm button[type="submit"] {
+  display: inline-block;
+  background-color: #3e37c6;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.question button.siguiente:hover,
+#testForm button[type="submit"]:hover {
+  background-color: #5e59ce;
+}
+
+/* Campo email */
+#email {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1.8px solid #3e37c6;
+  border-radius: 8px;
+  outline-offset: 2px;
+  margin-top: 0.5rem;
+  box-sizing: border-box;
+  color: #2f3640;
+}
+
+/* Resultado final */
+#resultado {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #e0fafd;
+  border-left: 6px solid #8a37c6;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  color: #2f3640;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Ocultar pasos por defecto */
+.paso {
+  display: none;
+}
+
+/* Mostrar paso activo */
+.paso.active {
+  display: block;
+}
+
+/* Scroll suave para cambio de pregunta */
+html {
+  scroll-behavior: smooth;
+}
