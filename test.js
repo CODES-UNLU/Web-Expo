@@ -88,7 +88,9 @@ form.addEventListener("submit", function (e) {
           }
         });
 
-      textoResultado.textContent = `Según tus respuestas, podés tener afinidad con: ${carrerasAfinidad.join(", ")}.`;
+      textoResultado.textContent = `Según tus respuestas, podés tener afinidad con: ${carrerasAfinidad.join(
+        ", "
+      )}.`;
     }
 
     analizando.remove();
@@ -129,20 +131,20 @@ function generarSVGProcesando() {
       <rect x="85" y="125" width="30" height="10" fill="#003366" />
       <rect x="75" y="135" width="50" height="5" rx="2" fill="#555" />
 
-      <!-- Barras animadas (datos) -->
-      <rect x="55" y="60" width="10" height="30" fill="#fff">
+      <!-- Barras animadas (datos) centradas -->
+      <rect x="65" y="60" width="10" height="30" fill="#fff">
         <animate attributeName="height" values="30;50;30" dur="1.2s" repeatCount="indefinite" />
         <animate attributeName="y" values="60;40;60" dur="1.2s" repeatCount="indefinite" />
       </rect>
-      <rect x="75" y="65" width="10" height="25" fill="#fff">
+      <rect x="85" y="65" width="10" height="25" fill="#fff">
         <animate attributeName="height" values="25;45;25" dur="1.4s" repeatCount="indefinite" />
         <animate attributeName="y" values="65;45;65" dur="1.4s" repeatCount="indefinite" />
       </rect>
-      <rect x="95" y="55" width="10" height="35" fill="#fff">
+      <rect x="105" y="55" width="10" height="35" fill="#fff">
         <animate attributeName="height" values="35;55;35" dur="1.3s" repeatCount="indefinite" />
         <animate attributeName="y" values="55;35;55" dur="1.3s" repeatCount="indefinite" />
       </rect>
-      <rect x="115" y="70" width="10" height="20" fill="#fff">
+      <rect x="125" y="70" width="10" height="20" fill="#fff">
         <animate attributeName="height" values="20;40;20" dur="1.5s" repeatCount="indefinite" />
         <animate attributeName="y" values="70;50;70" dur="1.5s" repeatCount="indefinite" />
       </rect>
