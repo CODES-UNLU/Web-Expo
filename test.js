@@ -68,7 +68,7 @@ form.addEventListener("submit", function (e) {
     analizando.remove();
     resultado.style.display = "block";
 
-    if ((puntajes.sistemas + puntajes.datos) < 11) {
+    if ((puntajes.sistemas + puntajes.datos) < 10) {
     textoResultado.innerHTML = `
     <h2>😅 ¡Todavía no hiciste match con ninguna carrera!</h2>
     <p>Capaz sos un alma libre, o quizás... ¡un unicornio multidisciplinario! 🦄</p>
