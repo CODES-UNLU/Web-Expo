@@ -68,13 +68,16 @@ form.addEventListener("submit", function (e) {
     analizando.remove();
     resultado.style.display = "block";
 
-    if (ningunoCount === 10) {
-      textoResultado.innerHTML = `
-        <p>🤔 Parece que ninguna de estas opciones te convenció.</p>
-        <p>¡Te invitamos a explorar la Expo y descubrir tu talento oculto! 🔍✨</p>
-      `;
-      return;
-    }
+    if ((puntajes.sistemas + puntajes.datos) < 11) {
+    textoResultado.innerHTML = `
+    <h2>😅 ¡Todavía no hiciste match con ninguna carrera!</h2>
+    <p>Capaz sos un alma libre, o quizás... ¡un unicornio multidisciplinario! 🦄</p>
+    <p>No te preocupes, explorá la <strong>Expo UNLu</strong> y descubrí otras áreas donde puede estar tu talento oculto ✨</p>
+    <p>🙌 A veces, la vocación se encuentra cuando menos lo esperás.</p>
+  `;
+  return;
+}
+
 
     // Normalizar puntajes a porcentaje
     const maxPuntaje = 10; // max puntos por carrera si todas respuestas fueran 10 'sistemas' o 10 'datos'
