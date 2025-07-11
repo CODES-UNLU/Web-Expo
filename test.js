@@ -68,24 +68,24 @@ form.addEventListener("submit", function (e) {
     analizando.remove();
     resultado.style.display = "block";
 
-    if ((puntajes.sistemas + puntajes.datos) < 10) {
-    textoResultado.innerHTML = `
-    <h2>😅 ¡Todavía no hiciste match con ninguna carrera!</h2>
-    <p>Capaz sos un alma libre, o quizás... ¡un unicornio multidisciplinario! 🦄</p>
-    <p>No te preocupes, explorá la <strong>Expo UNLu</strong> y descubrí otras áreas donde puede estar tu talento oculto ✨</p>
-    <p>🙌 A veces, la vocación se encuentra cuando menos lo esperás.</p>
-  `;
-  return;
-}
+    const totalPreguntas = 10;
+    const respuestasConAfinidad = totalPreguntas - ningunoCount;
+    const afinidadTotal = puntajes.sistemas + puntajes.datos;
 
+    // Mostrar mensaje de "no match" si más de la mitad son "ninguno" o si la afinidad total es baja
+    if (ningunoCount >= 5 || afinidadTotal <= 4) {
+      textoResultado.innerHTML = `
+        <h2>😅 ¡Todavía no hiciste match con ninguna carrera!</h2>
+        <p>Capaz sos un alma libre, o quizás... ¡un unicornio multidisciplinario! 🦄</p>
+        <p>No te preocupes, explorá la <strong>Expo UNLu</strong> y descubrí otras áreas donde puede estar tu talento oculto ✨</p>
+        <p>🙌 A veces, la vocación se encuentra cuando menos lo esperás.</p>
+      `;
+      return;
+    }
 
-    // Normalizar puntajes a porcentaje
-    const maxPuntaje = 10; // max puntos por carrera si todas respuestas fueran 10 'sistemas' o 10 'datos'
+    const porcSistemas = Math.round((puntajes.sistemas / respuestasConAfinidad) * 100);
+    const porcDatos = Math.round((puntajes.datos / respuestasConAfinidad) * 100);
 
-    const porcSistemas = Math.round((puntajes.sistemas / maxPuntaje) * 100);
-    const porcDatos = Math.round((puntajes.datos / maxPuntaje) * 100);
-
-    // Función para mostrar corazones según porcentaje (1 corazón por 20%)
     const hearts = (p) => {
       const count = Math.round(p / 20);
       return "❤️".repeat(count) + "🤍".repeat(5 - count);
@@ -95,14 +95,12 @@ form.addEventListener("submit", function (e) {
       <h3>Tu afinidad con las carreras es:</h3>
       <p><strong>Licenciatura en Sistemas de Información:</strong> ${porcSistemas}% ${hearts(porcSistemas)}</p>
       <p><strong>Ciencia de Datos:</strong> ${porcDatos}% ${hearts(porcDatos)}</p>
-      <p>¡Gracias por completar el test! Explora la Expo para seguir descubriendo tu talento.</p>
+      <p>Respuestas sin afinidad específica: ${ningunoCount}</p>
+      <p>¡Gracias por completar el test! Explorá la Expo y descubrí tu vocación 💫</p>
     `;
   }, 3500);
 });
-document.getElementById("btnIniciar").addEventListener("click", function () {
-  document.getElementById("inicio").style.display = "none"; // Oculta el bloque de inicio
-  document.querySelector(".paso[data-paso='1']").style.display = "block"; // Muestra la primera pregunta
-});
+
 function generarSVGProcesando() {
   return `
     <svg width="150" height="150" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -119,15 +117,9 @@ function generarSVGProcesando() {
           </feMerge>
         </filter>
       </defs>
-
-      <!-- Monitor -->
       <rect x="40" y="40" width="120" height="80" rx="10" fill="url(#gradPC)" stroke="#fff" stroke-width="2" filter="url(#glow)" />
-
-      <!-- Base del monitor -->
       <rect x="85" y="125" width="30" height="10" fill="#003366" />
       <rect x="75" y="135" width="50" height="5" rx="2" fill="#555" />
-
-      <!-- Loader circular dentro del monitor -->
       <g transform="translate(100,80)">
         <circle r="18" fill="none" stroke="#ffffff33" stroke-width="4"/>
         <circle r="18" fill="none" stroke="#ffffff" stroke-width="4" stroke-dasharray="90" stroke-dashoffset="0">
