@@ -48,6 +48,8 @@ function generarGrid() {
         if (e.target.value && j < nivelActual - 1) {
           const nextInput = document.getElementById(`cell-${i}-${j + 1}`);
           if (nextInput) nextInput.focus();
+        } else if (e.target.value && j === nivelActual - 1) {
+          verificarIntento(); // Verifica automáticamente al completar última letra
         }
       });
 
@@ -55,6 +57,8 @@ function generarGrid() {
         if (e.key === "Backspace" && !e.target.value && j > 0) {
           const prevInput = document.getElementById(`cell-${i}-${j - 1}`);
           if (prevInput) prevInput.focus();
+        } else if (e.key === "Enter") {
+          verificarIntento(); // Verifica con Enter
         }
       });
 
@@ -101,6 +105,7 @@ function verificarIntento() {
   for (let i = 0; i < nivelActual; i++) {
     const celda = document.getElementById(`cell-${fila}-${i}`);
     celda.classList.add(`unluwords-${resultado[i]}`);
+    celda.disabled = true; // Opcional: desactiva la fila actual tras verificar
   }
 
   if (intento === palabraSecreta) {
