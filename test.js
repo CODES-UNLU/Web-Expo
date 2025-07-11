@@ -24,22 +24,25 @@ document.querySelectorAll(".siguiente").forEach((btn) => {
     }
     currentPaso.style.display = "none";
     pasoActual++;
-    pasos[pasoActual].style.display = "block";
-    window.scrollTo(0, 0);
+    if (pasoActual < pasos.length) {
+      pasos[pasoActual].style.display = "block";
+      window.scrollTo(0, 0);
+    }
   });
 });
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
+
   const data = new FormData(form);
   form.style.display = "none";
 
-  // Pantalla de análisis
   const analizando = document.createElement("div");
   analizando.id = "analizando";
   analizando.innerHTML = `
     <h2>🔍 Analizando tus respuestas...</h2>
     ${generarSVGProcesando()}
+    <p>Esto puede tardar unos segundos, por favor espera.</p>
   `;
   analizando.style.textAlign = "center";
   analizando.style.padding = "50px";
@@ -47,68 +50,56 @@ form.addEventListener("submit", function (e) {
   document.body.appendChild(analizando);
 
   setTimeout(() => {
-    // Calcular afinidades
-    const puntajes = {
-      sistemas: 0,
-      comunicacion: 0,
-      trabajosocial: 0,
-      agronomia: 0,
-    };
+    let puntajes = { sistemas: 0, datos: 0 };
+    let ningunoCount = 0;
 
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 10; i++) {
       const val = data.get("q" + i);
-      if (val && puntajes.hasOwnProperty(val)) {
-        puntajes[val]++;
+      if (val === "sistemas") puntajes.sistemas++;
+      else if (val === "datos") puntajes.datos++;
+      else if (val === "ambos") {
+        puntajes.sistemas += 0.5;
+        puntajes.datos += 0.5;
+      } else if (val === "ninguno") {
+        ningunoCount++;
       }
-    }
-
-    const orden = Object.entries(puntajes)
-      .sort((a, b) => b[1] - a[1])
-      .filter((entry) => entry[1] > 0);
-
-    if (orden.length === 0) {
-      textoResultado.textContent =
-        "No pudimos determinar tu afinidad. Por favor, intentá nuevamente.";
-    } else {
-      const maxPuntaje = orden[0][1];
-      const carrerasAfinidad = orden
-        .filter((entry) => entry[1] === maxPuntaje)
-        .map((entry) => {
-          switch (entry[0]) {
-            case "sistemas":
-              return "Licenciatura en Sistemas de Información";
-            case "comunicacion":
-              return "Carreras de Comunicación y Diseño";
-            case "trabajosocial":
-              return "Licenciatura en Trabajo Social o Psicopedagogía";
-            case "agronomia":
-              return "Carreras de Ingeniería Agronómica o afines";
-            default:
-              return "Otras opciones";
-          }
-        });
-
-      textoResultado.textContent = `Según tus respuestas, podés tener afinidad con: ${carrerasAfinidad.join(
-        ", "
-      )}.`;
     }
 
     analizando.remove();
     resultado.style.display = "block";
 
-    fetch("TU_URL_AQUI", {
-      method: "POST",
-      body: JSON.stringify({
-        email: data.get("email"),
-        respuestas: Object.fromEntries(data.entries()),
-        sugerencia: textoResultado.textContent,
-        timestamp: new Date().toISOString(),
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-  }, 4500); // Tiempo extendido a 4.5 segundos
-});
+    if (ningunoCount === 10) {
+      textoResultado.innerHTML = `
+        <p>🤔 Parece que ninguna de estas opciones te convenció.</p>
+        <p>¡Te invitamos a explorar la Expo y descubrir tu talento oculto! 🔍✨</p>
+      `;
+      return;
+    }
 
+    // Normalizar puntajes a porcentaje
+    const maxPuntaje = 10; // max puntos por carrera si todas respuestas fueran 10 'sistemas' o 10 'datos'
+
+    const porcSistemas = Math.round((puntajes.sistemas / maxPuntaje) * 100);
+    const porcDatos = Math.round((puntajes.datos / maxPuntaje) * 100);
+
+    // Función para mostrar corazones según porcentaje (1 corazón por 20%)
+    const hearts = (p) => {
+      const count = Math.round(p / 20);
+      return "❤️".repeat(count) + "🤍".repeat(5 - count);
+    };
+
+    textoResultado.innerHTML = `
+      <h3>Tu afinidad con las carreras es:</h3>
+      <p><strong>Licenciatura en Sistemas de Información:</strong> ${porcSistemas}% ${hearts(porcSistemas)}</p>
+      <p><strong>Ciencia de Datos:</strong> ${porcDatos}% ${hearts(porcDatos)}</p>
+      <p>¡Gracias por completar el test! Explora la Expo para seguir descubriendo tu talento.</p>
+    `;
+  }, 3500);
+});
+document.getElementById("btnIniciar").addEventListener("click", function () {
+  document.getElementById("inicio").style.display = "none"; // Oculta el bloque de inicio
+  document.querySelector(".paso[data-paso='1']").style.display = "block"; // Muestra la primera pregunta
+});
 function generarSVGProcesando() {
   return `
     <svg width="150" height="150" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -117,37 +108,29 @@ function generarSVGProcesando() {
           <stop offset="0%" stop-color="#00b3ff" />
           <stop offset="100%" stop-color="#003366" />
         </linearGradient>
-        <filter id="pulse" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="1.5">
-            <animate attributeName="stdDeviation" values="1.5;3;1.5" dur="1.5s" repeatCount="indefinite"/>
-          </feGaussianBlur>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
         </filter>
       </defs>
 
       <!-- Monitor -->
-      <rect x="40" y="40" width="120" height="80" rx="10" fill="url(#gradPC)" stroke="#fff" stroke-width="2" filter="url(#pulse)" />
+      <rect x="40" y="40" width="120" height="80" rx="10" fill="url(#gradPC)" stroke="#fff" stroke-width="2" filter="url(#glow)" />
 
       <!-- Base del monitor -->
       <rect x="85" y="125" width="30" height="10" fill="#003366" />
       <rect x="75" y="135" width="50" height="5" rx="2" fill="#555" />
 
-      <!-- Barras animadas (datos) centradas -->
-      <rect x="65" y="60" width="10" height="30" fill="#fff">
-        <animate attributeName="height" values="30;50;30" dur="1.2s" repeatCount="indefinite" />
-        <animate attributeName="y" values="60;40;60" dur="1.2s" repeatCount="indefinite" />
-      </rect>
-      <rect x="85" y="65" width="10" height="25" fill="#fff">
-        <animate attributeName="height" values="25;45;25" dur="1.4s" repeatCount="indefinite" />
-        <animate attributeName="y" values="65;45;65" dur="1.4s" repeatCount="indefinite" />
-      </rect>
-      <rect x="105" y="55" width="10" height="35" fill="#fff">
-        <animate attributeName="height" values="35;55;35" dur="1.3s" repeatCount="indefinite" />
-        <animate attributeName="y" values="55;35;55" dur="1.3s" repeatCount="indefinite" />
-      </rect>
-      <rect x="125" y="70" width="10" height="20" fill="#fff">
-        <animate attributeName="height" values="20;40;20" dur="1.5s" repeatCount="indefinite" />
-        <animate attributeName="y" values="70;50;70" dur="1.5s" repeatCount="indefinite" />
-      </rect>
+      <!-- Loader circular dentro del monitor -->
+      <g transform="translate(100,80)">
+        <circle r="18" fill="none" stroke="#ffffff33" stroke-width="4"/>
+        <circle r="18" fill="none" stroke="#ffffff" stroke-width="4" stroke-dasharray="90" stroke-dashoffset="0">
+          <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="1s" repeatCount="indefinite"/>
+        </circle>
+      </g>
     </svg>
   `;
 }

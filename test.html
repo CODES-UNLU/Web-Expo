@@ -10,168 +10,228 @@
     <header>
       <div class="header-row">
         <img src="logoLSIUNLu.svg" alt="Logo Sistemas" />
-        <h1>¿Qué camino vibra con vos?</h1>
+        <h1>¿Qué carrera vibra con vos?</h1>
         <img src="LogoCodes.png" alt="Logo CODES" />
       </div>
     </header>
 
     <div id="inicio">
-      <p>📱 Completalo y descubrí tus posibles afinidades universitarias</p>
+      <h2>¡Descubrí qué carrera hace match con vos!</h2>
+      <p>📱 Completá el test y conocé tus afinidades universitarias</p>
+      <p>📝 Es rápido, fácil y divertido</p>
+    
+    <div>
       <button id="btnIniciar" class="btn">Iniciar el cuestionario</button>
     </div>
-
-    <form id="testForm" style="display: none">
-      <!-- Preguntas -->
+    </div>
+    <form id="testForm">
       <div class="question paso" data-paso="1">
-        <h3>1. ¿Qué tipo de actividades disfrutás más?</h3>
+        <h3>1. ¿Qué disfrutás más hacer en la compu o el celu?</h3>
         <label
-          ><input type="radio" name="q1" value="sistemas" required /><span>
-            Resolver problemas matemáticos o lógicos
-          </span></label
+          ><input type="radio" name="q1" value="sistemas" required /> Jugar y
+          pensar cómo están hechos los juegos</label
         >
         <label
-          ><input type="radio" name="q1" value="comunicacion" /> Expresar ideas
-          mediante arte o escritura</label
+          ><input type="radio" name="q1" value="datos" /> Ver estadísticas o
+          gráficos de deportes, redes o economía</label
         >
         <label
-          ><input type="radio" name="q1" value="trabajosocial" /> Ayudar y
-          trabajar con personas</label
+          ><input type="radio" name="q1" value="ambos" /> Ver cómo funcionan las
+          apps y redes sociales</label
         >
         <label
-          ><input type="radio" name="q1" value="agronomia" /> Manipular objetos
-          o construir</label
+          ><input type="radio" name="q1" value="ninguno" /> Chatear, sacar fotos
+          o crear contenido</label
         >
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
       <div class="question paso" data-paso="2" style="display: none">
-        <h3>2. ¿En qué ambiente te sentís cómodo trabajando?</h3>
+        <h3>2. ¿Qué tipo de tareas preferís en clase?</h3>
         <label
-          ><input type="radio" name="q2" value="sistemas" required /> Oficina o
-          frente a una computadora</label
+          ><input type="radio" name="q2" value="sistemas" required /> Resolver
+          problemas lógicos o técnicos</label
         >
         <label
-          ><input type="radio" name="q2" value="agronomia" /> Al aire
-          libre</label
+          ><input type="radio" name="q2" value="datos" /> Trabajar con números,
+          datos o estadísticas</label
         >
         <label
-          ><input type="radio" name="q2" value="profesorado" /> En instituciones
-          educativas</label
+          ><input type="radio" name="q2" value="ambos" /> Hacer trabajos en
+          grupo donde todos aportan ideas</label
         >
         <label
-          ><input type="radio" name="q2" value="industrial" /> Laboratorios o
-          talleres</label
+          ><input type="radio" name="q2" value="ninguno" /> Exponer oralmente o
+          escribir textos creativos</label
         >
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
       <div class="question paso" data-paso="3" style="display: none">
-        <h3>3. ¿Qué te motiva a seguir aprendiendo?</h3>
+        <h3>3. ¿Qué te gustaría hacer en el futuro?</h3>
         <label
-          ><input type="radio" name="q3" value="sistemas" required /> Resolver
-          nuevos problemas</label
+          ><input type="radio" name="q3" value="sistemas" required /> Crear una
+          app o juego desde cero</label
         >
         <label
-          ><input type="radio" name="q3" value="comunicacion" /> Crear contenido
-          visual o textual</label
+          ><input type="radio" name="q3" value="datos" /> Analizar información
+          para entender cómo funciona algo</label
         >
         <label
-          ><input type="radio" name="q3" value="trabajosocial" /> Acompañar
-          procesos de otros</label
+          ><input type="radio" name="q3" value="ambos" /> Hacer un proyecto con
+          tecnología que ayude a otros</label
         >
         <label
-          ><input type="radio" name="q3" value="agronomia" /> Hacer cosas con
-          las manos</label
+          ><input type="radio" name="q3" value="ninguno" /> Ser influencer,
+          artista o trabajar con personas</label
         >
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
-      <!-- <div class="question paso" data-paso="4" style="display:none;">
-        <h3>4. ¿Qué asignaturas te gustan más?</h3>
-        <label><input type="radio" name="q4" value="sistemas" required> Matemática, lógica, informática</label>
-        <label><input type="radio" name="q4" value="comunicacion"> Literatura, historia, comunicación</label>
-        <label><input type="radio" name="q4" value="trabajosocial"> Psicología, sociología</label>
-        <label><input type="radio" name="q4" value="agronomia"> Biología, química, ecología</label>
+      <div class="question paso" data-paso="4" style="display: none">
+        <h3>4. ¿Cómo te gusta resolver un problema difícil?</h3>
+        <label
+          ><input type="radio" name="q4" value="sistemas" required /> Busco una
+          solución paso a paso y pruebo hasta que funcione</label
+        >
+        <label
+          ><input type="radio" name="q4" value="datos" /> Recojo información y
+          comparo antes de decidir</label
+        >
+        <label
+          ><input type="radio" name="q4" value="ambos" /> Hago un poco de todo:
+          investigar, probar, preguntar</label
+        >
+        <label
+          ><input type="radio" name="q4" value="ninguno" /> Me guío por mi
+          intuición o pido ayuda a alguien</label
+        >
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
-      <div class="question paso" data-paso="5" style="display:none;">
-        <h3>5. ¿Qué actividad preferirías en un proyecto?</h3>
-        <label><input type="radio" name="q5" value="sistemas" required> Programar una aplicación o software</label>
-        <label><input type="radio" name="q5" value="comunicacion"> Diseñar una campaña comunicacional</label>
-        <label><input type="radio" name="q5" value="trabajosocial"> Organizar actividades comunitarias</label>
-        <label><input type="radio" name="q5" value="agronomia"> Cuidar y manejar cultivos o animales</label>
+      <div class="question paso" data-paso="5" style="display: none">
+        <h3>5. ¿Qué materia te interesa más?</h3>
+        <label
+          ><input type="radio" name="q5" value="sistemas" required />
+          Informática o tecnología</label
+        >
+        <label
+          ><input type="radio" name="q5" value="datos" /> Matemática o geografía
+          con datos</label
+        >
+        <label
+          ><input type="radio" name="q5" value="ninguno" /> Ciencias naturales o
+          sociales</label
+        >
+        <label
+          ><input type="radio" name="q5" value="ambos" /> Me gustan varias,
+          depende de cómo la den</label
+        >
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
-      <div class="question paso" data-paso="6" style="display:none;">
-        <h3>6. ¿Cómo resolvés un problema?</h3>
-        <label><input type="radio" name="q6" value="sistemas" required> Analizo la información y busco soluciones lógicas</label>
-        <label><input type="radio" name="q6" value="comunicacion"> Busco nuevas formas de expresarlo</label>
-        <label><input type="radio" name="q6" value="trabajosocial"> Consulto con las personas involucradas</label>
-        <label><input type="radio" name="q6" value="agronomia"> Pruebo con acciones prácticas</label>
+      <div class="question paso" data-paso="6" style="display: none">
+        <h3>6. ¿Qué rol te gustaría tener en un proyecto escolar?</h3>
+        <label
+          ><input type="radio" name="q6" value="sistemas" required /> El que
+          hace funcionar el trabajo con lógica y tecnología</label
+        >
+        <label
+          ><input type="radio" name="q6" value="datos" /> El que investiga y
+          analiza la información</label
+        >
+        <label
+          ><input type="radio" name="q6" value="ambos" /> El que ayuda en todo
+          un poco</label
+        >
+        <label
+          ><input type="radio" name="q6" value="ninguno" /> El que organiza o
+          presenta el proyecto</label
+        >
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
-      <div class="question paso" data-paso="7" style="display:none;">
-        <h3>7. ¿Qué prefieres en un trabajo?</h3>
-        <label><input type="radio" name="q7" value="sistemas" required> Usar tecnología e innovar</label>
-        <label><input type="radio" name="q7" value="comunicacion"> Crear y comunicar mensajes</label>
-        <label><input type="radio" name="q7" value="trabajosocial"> Apoyar a personas en situaciones difíciles</label>
-        <label><input type="radio" name="q7" value="agronomia"> Trabajar en contacto con la naturaleza</label>
+      <div class="question paso" data-paso="7" style="display: none">
+        <h3>7. ¿Qué te parece más interesante?</h3>
+        <label
+          ><input type="radio" name="q7" value="sistemas" required /> Pensar
+          cómo se hacen las apps, juegos o robots</label
+        >
+        <label
+          ><input type="radio" name="q7" value="datos" /> Entender por qué pasan
+          las cosas con datos reales</label
+        >
+        <label
+          ><input type="radio" name="q7" value="ambos" /> Usar tecnología para
+          mejorar algo del día a día</label
+        >
+        <label
+          ><input type="radio" name="q7" value="ninguno" /> Hacer cosas
+          creativas como escribir o comunicar</label
+        >
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
-      <div class="question paso" data-paso="8" style="display:none;">
-        <h3>8. ¿Cuál de estos valores es más importante para vos?</h3>
-        <label><input type="radio" name="q8" value="trabajosocial" required> Solidaridad y empatía</label>
-        <label><input type="radio" name="q8" value="comunicacion"> Creatividad y expresión</label>
-        <label><input type="radio" name="q8" value="sistemas"> Razonamiento y precisión</label>
-        <label><input type="radio" name="q8" value="agronomia"> Sustentabilidad y cuidado ambiental</label>
+      <div class="question paso" data-paso="8" style="display: none">
+        <h3>8. ¿Con qué tipo de trabajo te sentirías más cómodo?</h3>
+        <label
+          ><input type="radio" name="q8" value="sistemas" required /> Frente a
+          una compu, resolviendo desafíos paso a paso</label
+        >
+        <label
+          ><input type="radio" name="q8" value="datos" /> Analizando información
+          y sacando conclusiones</label
+        >
+        <label
+          ><input type="radio" name="q8" value="ambos" /> Mezclando ideas,
+          tecnología y personas</label
+        >
+        <label
+          ><input type="radio" name="q8" value="ninguno" /> Haciendo algo
+          práctico o en contacto con la gente</label
+        >
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
-      <div class="question paso" data-paso="9" style="display:none;">
-        <h3>9. ¿Qué tipo de proyecto te gustaría desarrollar?</h3>
-        <label><input type="radio" name="q9" value="sistemas" required> Crear una aplicación móvil</label>
-        <label><input type="radio" name="q9" value="comunicacion"> Producir un documental o contenido multimedia</label>
-        <label><input type="radio" name="q9" value="trabajosocial"> Organizar un programa social</label>
-        <label><input type="radio" name="q9" value="agronomia"> Gestionar una finca o producción agrícola</label>
+      <div class="question paso" data-paso="9" style="display: none">
+        <h3>9. ¿Qué te da más satisfacción?</h3>
+        <label
+          ><input type="radio" name="q9" value="sistemas" required /> Lograr que
+          algo funcione luego de mucho intentar</label
+        >
+        <label
+          ><input type="radio" name="q9" value="datos" /> Descubrir una causa o
+          una relación entre cosas</label
+        >
+        <label
+          ><input type="radio" name="q9" value="ambos" /> Hacer algo útil para
+          otros con tecnología</label
+        >
+        <label
+          ><input type="radio" name="q9" value="ninguno" /> Compartir lo que
+          hago o comunicar ideas</label
+        >
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
-      <div class="question paso" data-paso="10" style="display:none;">
-        <h3>10. ¿Cómo te ves en 5 años?</h3>
-        <label><input type="radio" name="q10" value="sistemas" required> Trabajando en desarrollo tecnológico</label>
-        <label><input type="radio" name="q10" value="comunicacion"> Comunicando y creando contenido</label>
-        <label><input type="radio" name="q10" value="trabajosocial"> Ayudando a comunidades o personas</label>
-        <label><input type="radio" name="q10" value="agronomia"> Trabajando con el campo y recursos naturales</label>
-        <button type="button" class="btn siguiente">Siguiente</button>
-      </div>
-
-      <div class="question paso" data-paso="11" style="display:none;">
-        <h3>11. ¿Qué habilidad destacás en vos?</h3>
-        <label><input type="radio" name="q11" value="sistemas" required> Pensamiento analítico y orden</label>
-        <label><input type="radio" name="q11" value="comunicacion"> Comunicación oral y escrita</label>
-        <label><input type="radio" name="q11" value="trabajosocial"> Empatía y escucha activa</label>
-        <label><input type="radio" name="q11" value="agronomia"> Trabajo físico y conexión con la naturaleza</label>
-        <button type="button" class="btn siguiente">Siguiente</button>
-      </div>
-
-      <div class="question paso" data-paso="12" style="display:none;">
-        <h3>12. Para finalizar, ¿qué valoras más en una carrera?</h3>
-        <label><input type="radio" name="q12" value="sistemas" required> Innovación tecnológica y futuro laboral</label>
-        <label><input type="radio" name="q12" value="comunicacion"> Expresión cultural y artística</label>
-        <label><input type="radio" name="q12" value="trabajosocial"> Impacto social y ayuda comunitaria</label>
-        <label><input type="radio" name="q12" value="agronomia"> Cuidado ambiental y producción sostenible</label>
-        <button type="button" class="btn siguiente">Siguiente</button>
-      </div> -->
-
-      <!-- Email -->
-      <div class="question paso" data-paso="13" style="display: none">
-        <label for="email">Tu correo para enviarte el resultado:</label><br />
-        <input type="email" id="email" name="email" required />
-        <br /><br />
+      <div class="question paso" data-paso="10" style="display: none">
+        <h3>10. ¿Qué te motiva a aprender algo nuevo?</h3>
+        <label
+          ><input type="radio" name="q10" value="sistemas" required /> Saber
+          cómo se crean cosas tecnológicas</label
+        >
+        <label
+          ><input type="radio" name="q10" value="datos" /> Entender el mundo con
+          datos reales</label
+        >
+        <label
+          ><input type="radio" name="q10" value="ambos" /> Poder aplicar lo que
+          sé a la vida diaria</label
+        >
+        <label
+          ><input type="radio" name="q10" value="ninguno" /> Conocer nuevas
+          formas de expresarme o ayudar</label
+        >
         <button type="submit" class="btn">Enviar y ver resultado</button>
       </div>
     </form>
@@ -179,7 +239,7 @@
     <div id="resultado" style="display: none">
       <h2>¡Gracias por participar!</h2>
       <p id="textoResultado"></p>
-      <p>Revisá tu correo o acercate al stand del Centro de Estudiantes.</p>
+      <p>Para mas info, acercate al stand</p>
     </div>
 
     <script src="test.js"></script>
