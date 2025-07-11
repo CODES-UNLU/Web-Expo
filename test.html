@@ -17,220 +17,298 @@
 
     <div id="inicio">
       <h2>¿Te interesa la tecnología, la lógica, los datos?</h2>
-      <p>🧠 Este test compara tu perfil con dos grandes opciones universitarias</p>
+      <p>
+        🧠 Este test compara tu perfil con dos grandes opciones universitarias
+      </p>
       <p>✨ Respondé, conocé tu match y sorprendete con el resultado</p>
-    <div>
-      <button id="btnIniciar" class="btn">Iniciar el cuestionario</button>
-    </div>
+      <div>
+        <button id="btnIniciar" class="btn">Iniciar el cuestionario</button>
+      </div>
     </div>
     <form id="testForm">
+      <!-- Pregunta 1 -->
       <div class="question paso" data-paso="1">
         <h3>1. ¿Qué disfrutás más hacer en la compu o el celu?</h3>
-        <label
-          ><input type="radio" name="q1" value="sistemas" required /> Jugar y
-          pensar cómo están hechos los juegos</label
+        <input
+          type="radio"
+          id="q1-sistemas"
+          name="q1"
+          value="sistemas"
+          required
+        />
+        <label for="q1-sistemas"
+          >Jugar y pensar cómo están hechos los juegos</label
         >
-        <label
-          ><input type="radio" name="q1" value="datos" /> Ver estadísticas o
-          gráficos de deportes, redes o economía</label
+
+        <input type="radio" id="q1-datos" name="q1" value="datos" />
+        <label for="q1-datos"
+          >Ver estadísticas o gráficos de deportes, redes o economía</label
         >
-        <label
-          ><input type="radio" name="q1" value="ambos" /> Ver cómo funcionan las
-          apps y redes sociales</label
+
+        <input type="radio" id="q1-ambos" name="q1" value="ambos" />
+        <label for="q1-ambos"
+          >Ver cómo funcionan las apps y redes sociales</label
         >
-        <label
-          ><input type="radio" name="q1" value="ninguno" /> Chatear, sacar fotos
-          o crear contenido</label
-        >
+
+        <input type="radio" id="q1-ninguno" name="q1" value="ninguno" />
+        <label for="q1-ninguno">Chatear, sacar fotos o crear contenido</label>
+
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
+      <!-- Pregunta 2 -->
       <div class="question paso" data-paso="2" style="display: none">
         <h3>2. ¿Qué tipo de tareas preferís en clase?</h3>
-        <label
-          ><input type="radio" name="q2" value="sistemas" required /> Resolver
-          problemas lógicos o técnicos</label
+        <input
+          type="radio"
+          id="q2-sistemas"
+          name="q2"
+          value="sistemas"
+          required
+        />
+        <label for="q2-sistemas">Resolver problemas lógicos o técnicos</label>
+
+        <input type="radio" id="q2-datos" name="q2" value="datos" />
+        <label for="q2-datos">Trabajar con números, datos o estadísticas</label>
+
+        <input type="radio" id="q2-ambos" name="q2" value="ambos" />
+        <label for="q2-ambos"
+          >Hacer trabajos en grupo donde todos aportan ideas</label
         >
-        <label
-          ><input type="radio" name="q2" value="datos" /> Trabajar con números,
-          datos o estadísticas</label
+
+        <input type="radio" id="q2-ninguno" name="q2" value="ninguno" />
+        <label for="q2-ninguno"
+          >Exponer oralmente o escribir textos creativos</label
         >
-        <label
-          ><input type="radio" name="q2" value="ambos" /> Hacer trabajos en
-          grupo donde todos aportan ideas</label
-        >
-        <label
-          ><input type="radio" name="q2" value="ninguno" /> Exponer oralmente o
-          escribir textos creativos</label
-        >
+
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
+      <!-- Pregunta 3 -->
       <div class="question paso" data-paso="3" style="display: none">
         <h3>3. ¿Qué te gustaría hacer en el futuro?</h3>
-        <label
-          ><input type="radio" name="q3" value="sistemas" required /> Crear una
-          app o juego desde cero</label
+        <input
+          type="radio"
+          id="q3-sistemas"
+          name="q3"
+          value="sistemas"
+          required
+        />
+        <label for="q3-sistemas">Crear una app o juego desde cero</label>
+
+        <input type="radio" id="q3-datos" name="q3" value="datos" />
+        <label for="q3-datos"
+          >Analizar información para entender cómo funciona algo</label
         >
-        <label
-          ><input type="radio" name="q3" value="datos" /> Analizar información
-          para entender cómo funciona algo</label
+
+        <input type="radio" id="q3-ambos" name="q3" value="ambos" />
+        <label for="q3-ambos"
+          >Hacer un proyecto con tecnología que ayude a otros</label
         >
-        <label
-          ><input type="radio" name="q3" value="ambos" /> Hacer un proyecto con
-          tecnología que ayude a otros</label
+
+        <input type="radio" id="q3-ninguno" name="q3" value="ninguno" />
+        <label for="q3-ninguno"
+          >Ser influencer, artista o trabajar con personas</label
         >
-        <label
-          ><input type="radio" name="q3" value="ninguno" /> Ser influencer,
-          artista o trabajar con personas</label
-        >
+
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
+      <!-- Pregunta 4 -->
       <div class="question paso" data-paso="4" style="display: none">
         <h3>4. ¿Cómo te gusta resolver un problema difícil?</h3>
-        <label
-          ><input type="radio" name="q4" value="sistemas" required /> Busco una
-          solución paso a paso y pruebo hasta que funcione</label
+        <input
+          type="radio"
+          id="q4-sistemas"
+          name="q4"
+          value="sistemas"
+          required
+        />
+        <label for="q4-sistemas"
+          >Busco una solución paso a paso y pruebo hasta que funcione</label
         >
-        <label
-          ><input type="radio" name="q4" value="datos" /> Recojo información y
-          comparo antes de decidir</label
+
+        <input type="radio" id="q4-datos" name="q4" value="datos" />
+        <label for="q4-datos"
+          >Recojo información y comparo antes de decidir</label
         >
-        <label
-          ><input type="radio" name="q4" value="ambos" /> Hago un poco de todo:
-          investigar, probar, preguntar</label
+
+        <input type="radio" id="q4-ambos" name="q4" value="ambos" />
+        <label for="q4-ambos"
+          >Hago un poco de todo: investigar, probar, preguntar</label
         >
-        <label
-          ><input type="radio" name="q4" value="ninguno" /> Me guío por mi
-          intuición o pido ayuda a alguien</label
+
+        <input type="radio" id="q4-ninguno" name="q4" value="ninguno" />
+        <label for="q4-ninguno"
+          >Me guío por mi intuición o pido ayuda a alguien</label
         >
+
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
+      <!-- Pregunta 5 -->
       <div class="question paso" data-paso="5" style="display: none">
         <h3>5. ¿Qué materia te interesa más?</h3>
-        <label
-          ><input type="radio" name="q5" value="sistemas" required />
-          Informática o tecnología</label
-        >
-        <label
-          ><input type="radio" name="q5" value="datos" /> Matemática o geografía
-          con datos</label
-        >
-        <label
-          ><input type="radio" name="q5" value="ninguno" /> Ciencias naturales o
-          sociales</label
-        >
-        <label
-          ><input type="radio" name="q5" value="ambos" /> Me gustan varias,
-          depende de cómo la den</label
-        >
+        <input
+          type="radio"
+          id="q5-sistemas"
+          name="q5"
+          value="sistemas"
+          required
+        />
+        <label for="q5-sistemas">Informática o tecnología</label>
+
+        <input type="radio" id="q5-datos" name="q5" value="datos" />
+        <label for="q5-datos">Matemática o geografía con datos</label>
+
+        <input type="radio" id="q5-ninguno" name="q5" value="ninguno" />
+        <label for="q5-ninguno">Ciencias naturales o sociales</label>
+
+        <input type="radio" id="q5-ambos" name="q5" value="ambos" />
+        <label for="q5-ambos">Me gustan varias, depende de cómo la den</label>
+
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
+      <!-- Pregunta 6 -->
       <div class="question paso" data-paso="6" style="display: none">
         <h3>6. ¿Qué rol te gustaría tener en un proyecto escolar?</h3>
-        <label
-          ><input type="radio" name="q6" value="sistemas" required /> El que
-          hace funcionar el trabajo con lógica y tecnología</label
+        <input
+          type="radio"
+          id="q6-sistemas"
+          name="q6"
+          value="sistemas"
+          required
+        />
+        <label for="q6-sistemas"
+          >El que hace funcionar el trabajo con lógica y tecnología</label
         >
-        <label
-          ><input type="radio" name="q6" value="datos" /> El que investiga y
-          analiza la información</label
-        >
-        <label
-          ><input type="radio" name="q6" value="ambos" /> El que ayuda en todo
-          un poco</label
-        >
-        <label
-          ><input type="radio" name="q6" value="ninguno" /> El que organiza o
-          presenta el proyecto</label
-        >
+
+        <input type="radio" id="q6-datos" name="q6" value="datos" />
+        <label for="q6-datos">El que investiga y analiza la información</label>
+
+        <input type="radio" id="q6-ambos" name="q6" value="ambos" />
+        <label for="q6-ambos">El que ayuda en todo un poco</label>
+
+        <input type="radio" id="q6-ninguno" name="q6" value="ninguno" />
+        <label for="q6-ninguno">El que organiza o presenta el proyecto</label>
+
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
+      <!-- Pregunta 7 -->
       <div class="question paso" data-paso="7" style="display: none">
         <h3>7. ¿Qué te parece más interesante?</h3>
-        <label
-          ><input type="radio" name="q7" value="sistemas" required /> Pensar
-          cómo se hacen las apps, juegos o robots</label
+        <input
+          type="radio"
+          id="q7-sistemas"
+          name="q7"
+          value="sistemas"
+          required
+        />
+        <label for="q7-sistemas"
+          >Pensar cómo se hacen las apps, juegos o robots</label
         >
-        <label
-          ><input type="radio" name="q7" value="datos" /> Entender por qué pasan
-          las cosas con datos reales</label
+
+        <input type="radio" id="q7-datos" name="q7" value="datos" />
+        <label for="q7-datos"
+          >Entender por qué pasan las cosas con datos reales</label
         >
-        <label
-          ><input type="radio" name="q7" value="ambos" /> Usar tecnología para
-          mejorar algo del día a día</label
+
+        <input type="radio" id="q7-ambos" name="q7" value="ambos" />
+        <label for="q7-ambos"
+          >Usar tecnología para mejorar algo del día a día</label
         >
-        <label
-          ><input type="radio" name="q7" value="ninguno" /> Hacer cosas
-          creativas como escribir o comunicar</label
+
+        <input type="radio" id="q7-ninguno" name="q7" value="ninguno" />
+        <label for="q7-ninguno"
+          >Hacer cosas creativas como escribir o comunicar</label
         >
+
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
+      <!-- Pregunta 8 -->
       <div class="question paso" data-paso="8" style="display: none">
         <h3>8. ¿Con qué tipo de trabajo te sentirías más cómodo?</h3>
-        <label
-          ><input type="radio" name="q8" value="sistemas" required /> Frente a
-          una compu, resolviendo desafíos paso a paso</label
+        <input
+          type="radio"
+          id="q8-sistemas"
+          name="q8"
+          value="sistemas"
+          required
+        />
+        <label for="q8-sistemas"
+          >Frente a una compu, resolviendo desafíos paso a paso</label
         >
-        <label
-          ><input type="radio" name="q8" value="datos" /> Analizando información
-          y sacando conclusiones</label
+
+        <input type="radio" id="q8-datos" name="q8" value="datos" />
+        <label for="q8-datos"
+          >Analizando información y sacando conclusiones</label
         >
-        <label
-          ><input type="radio" name="q8" value="ambos" /> Mezclando ideas,
-          tecnología y personas</label
+
+        <input type="radio" id="q8-ambos" name="q8" value="ambos" />
+        <label for="q8-ambos">Mezclando ideas, tecnología y personas</label>
+
+        <input type="radio" id="q8-ninguno" name="q8" value="ninguno" />
+        <label for="q8-ninguno"
+          >Haciendo algo práctico o en contacto con la gente</label
         >
-        <label
-          ><input type="radio" name="q8" value="ninguno" /> Haciendo algo
-          práctico o en contacto con la gente</label
-        >
+
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
+      <!-- Pregunta 9 -->
       <div class="question paso" data-paso="9" style="display: none">
         <h3>9. ¿Qué te da más satisfacción?</h3>
-        <label
-          ><input type="radio" name="q9" value="sistemas" required /> Lograr que
-          algo funcione luego de mucho intentar</label
+        <input
+          type="radio"
+          id="q9-sistemas"
+          name="q9"
+          value="sistemas"
+          required
+        />
+        <label for="q9-sistemas"
+          >Lograr que algo funcione luego de mucho intentar</label
         >
-        <label
-          ><input type="radio" name="q9" value="datos" /> Descubrir una causa o
-          una relación entre cosas</label
+
+        <input type="radio" id="q9-datos" name="q9" value="datos" />
+        <label for="q9-datos"
+          >Descubrir una causa o una relación entre cosas</label
         >
-        <label
-          ><input type="radio" name="q9" value="ambos" /> Hacer algo útil para
-          otros con tecnología</label
-        >
-        <label
-          ><input type="radio" name="q9" value="ninguno" /> Compartir lo que
-          hago o comunicar ideas</label
-        >
+
+        <input type="radio" id="q9-ambos" name="q9" value="ambos" />
+        <label for="q9-ambos">Hacer algo útil para otros con tecnología</label>
+
+        <input type="radio" id="q9-ninguno" name="q9" value="ninguno" />
+        <label for="q9-ninguno">Compartir lo que hago o comunicar ideas</label>
+
         <button type="button" class="btn siguiente">Siguiente</button>
       </div>
 
+      <!-- Pregunta 10 -->
       <div class="question paso" data-paso="10" style="display: none">
         <h3>10. ¿Qué te motiva a aprender algo nuevo?</h3>
-        <label
-          ><input type="radio" name="q10" value="sistemas" required /> Saber
-          cómo se crean cosas tecnológicas</label
+        <input
+          type="radio"
+          id="q10-sistemas"
+          name="q10"
+          value="sistemas"
+          required
+        />
+        <label for="q10-sistemas">Saber cómo se crean cosas tecnológicas</label>
+
+        <input type="radio" id="q10-datos" name="q10" value="datos" />
+        <label for="q10-datos">Entender el mundo con datos reales</label>
+
+        <input type="radio" id="q10-ambos" name="q10" value="ambos" />
+        <label for="q10-ambos">Poder aplicar lo que sé a la vida diaria</label>
+
+        <input type="radio" id="q10-ninguno" name="q10" value="ninguno" />
+        <label for="q10-ninguno"
+          >Conocer nuevas formas de expresarme o ayudar</label
         >
-        <label
-          ><input type="radio" name="q10" value="datos" /> Entender el mundo con
-          datos reales</label
-        >
-        <label
-          ><input type="radio" name="q10" value="ambos" /> Poder aplicar lo que
-          sé a la vida diaria</label
-        >
-        <label
-          ><input type="radio" name="q10" value="ninguno" /> Conocer nuevas
-          formas de expresarme o ayudar</label
-        >
+
         <button type="submit" class="btn">Enviar y ver resultado</button>
       </div>
     </form>
@@ -239,6 +317,10 @@
       <h2>¡Gracias por participar!</h2>
       <p id="textoResultado"></p>
       <p>Para mas info, acercate al stand</p>
+
+      <div>
+        <a href="index.html" class="btn">Volver al inicio</a>
+      </div>
     </div>
 
     <script src="test.js"></script>
