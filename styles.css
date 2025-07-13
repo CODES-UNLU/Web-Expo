@@ -1011,25 +1011,7 @@ button:hover {
   display: none;
 }
 
-.question label::before {
-  content: '';
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  border: 2px solid #cbd5e0;
-  border-radius: 50%;
-  background: white;
-  transition: all 0.3s ease;
-}
 
-.question input[type="radio"]:checked + label::before {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  border-color: #667eea;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
-}
 
 .question input[type="radio"]:checked + label {
   background: linear-gradient(135deg, #f0f4ff, #e6f3ff);
