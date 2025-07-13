@@ -5,45 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UNLuWords</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
+    <!-- Navegación moderna -->
+    <nav>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+            <img src="logoLSIUNLu.svg" alt="Logo Sistemas" height="40" />
+          </a>
+        </div>
+        <ul class="menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+          <li><a href="index.html#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
+          <li><a href="test.html"><i class="fas fa-brain"></i> Test</a></li>
+          <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+        </ul>
+        <div class="nav-right">
+          <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+            <img src="LogoCodes.png" alt="Logo CODES" height="40" />
+          </a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
     <header>
       <div class="header-row">
-        <img src="logoLSIUNLu.svg" alt="Logo Sistemas" height="50" />
-        <h1>UNLuWords</h1>
-        <img src="LogoCodes.png" alt="Logo CODES" height="50" />
+        <h1><i class="fas fa-puzzle-piece"></i> UNLuWords</h1>
       </div>
     </header>
 
     <!-- Pantalla de bienvenida -->
     <div id="unluwords-bienvenida" class="unluwords-container">
-      <h2>¡Bienvenido a UNLuWords!</h2>
-      <p>Antes de comenzar, conocé las reglas:</p>
-      <p>
-        <strong>💡 Pista:</strong> todas las palabras están relacionadas con la
-        universidad o la carrera de Licenciatura en Sistemas de Información.
-      </p>
+      <div class="game-hero">
+        <h2><i class="fas fa-gamepad"></i> ¡Bienvenido a UNLuWords!</h2>
+        <p class="game-description">
+          Antes de comenzar, conocé las reglas del juego más divertido de la UNLu
+        </p>
+        <div class="game-stats">
+          <div class="stat">
+            <i class="fas fa-clock"></i>
+            <span class="stat-number">6</span>
+            <span class="stat-label">Intentos por nivel</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-layer-group"></i>
+            <span class="stat-number">3</span>
+            <span class="stat-label">Niveles</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-trophy"></i>
+            <span class="stat-number">10</span>
+            <span class="stat-label">Premios para los mejores tiempos</span>
+          </div>
+        </div>
+      </div>
 
-      <ul class="unluwords-reglas">
-        <li>🔤 Adiviná la palabra secreta letra por letra.</li>
-        <li>⏱ Tenés 6 intentos por nivel.</li>
-        <li>🟩 Verde: letra correcta y bien ubicada.</li>
-        <li>🟨 Amarillo: letra correcta pero mal ubicada.</li>
-        <li>⬜ Gris: letra incorrecta.</li>
-        <li>📈 Vas avanzando con cada palabra correcta.</li>
-        <li>🎉 Al finalizar, podés ingresar tu mail para un sorteo.</li>
-      </ul>
-      <button onclick="iniciarJuego()">Comenzar</button>
+      <div class="game-info">
+        <div class="info-card">
+          <i class="fas fa-lightbulb"></i>
+          <h4>💡 Pista importante</h4>
+          <p>Todas las palabras están relacionadas con la tecnología, programación y la carrera de Licenciatura en Sistemas de Información.</p>
+        </div>
+      </div>
+
+      <div class="rules-section">
+        <h3><i class="fas fa-book"></i> Reglas del juego</h3>
+        <ul class="unluwords-reglas">
+          <li><i class="fas fa-keyboard"></i> Adiviná la palabra secreta letra por letra</li>
+          <li><i class="fas fa-stopwatch"></i> Tenés 6 intentos por nivel</li>
+          <li><i class="fas fa-square" style="color: #48bb78;"></i> Verde: letra correcta y bien ubicada</li>
+          <li><i class="fas fa-square" style="color: #ed8936;"></i> Amarillo: letra correcta pero mal ubicada</li>
+          <li><i class="fas fa-square" style="color: #a0aec0;"></i> Gris: letra incorrecta</li>
+          <li><i class="fas fa-chart-line"></i> Vas avanzando con cada palabra correcta</li>
+          <li><i class="fas fa-code"></i> Las palabras son de tecnología y programación</li>
+          <li><i class="fas fa-gift"></i> Al finalizar, podés ingresar tu mail para un sorteo</li>
+        </ul>
+      </div>
+
+      <button onclick="iniciarJuego()" class="btn game-start-btn">
+        <i class="fas fa-play"></i>
+        <span>Comenzar juego</span>
+      </button>
     </div>
 
     <!-- Juego -->
     <div id="unluwords-game-area" class="unluwords-container unluwords-oculto">
-      <p id="unluwords-nivel-texto"></p>
-      <div id="unluwords-grid-container"></div>
-      <!-- <button onclick="verificarIntento()">Probar</button> -->
-      <p id="unluwords-mensaje"></p>
+      <div class="game-header">
+        <div class="game-info-bar">
+          <div class="attempts-info">
+            <i class="fas fa-heart"></i>
+            <span id="attempts-counter">6 intentos restantes</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="unluwords-grid-container" class="game-grid"></div>
+      
+      <div class="game-messages">
+        <p id="unluwords-mensaje"></p>
+      </div>
+
+      <div class="game-actions">
+        <button onclick="reiniciarJuego()" class="btn game-action-btn secondary">
+          <i class="fas fa-redo"></i>
+          <span>Reiniciar</span>
+        </button>
+      </div>
     </div>
 
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4><i class="fas fa-university"></i> UNLu - Sistemas</h4>
+          <p>Universidad Nacional de Luján</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-users"></i> CODES++</h4>
+          <p>Centro de Estudiantes</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-envelope"></i> Contacto</h4>
+          <p>codes.unlu@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
+        de informacion UNLu. Todos los derechos reservados.
+      </div>
+    </footer>
+
     <script src="juego.js"></script>
+    <script>
+      function toggleMenu() {
+        const menu = document.querySelector('.menu');
+        menu.classList.toggle('show');
+      }
+    </script>
   </body>
 </html>

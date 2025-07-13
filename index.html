@@ -5,56 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Expo UNLu - Sistemas</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
+    <nav>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+            <img src="logoLSIUNLu.svg" alt="Logo Sistemas" height="40" />
+          </a>
+        </div>
+        <ul class="menu">
+          <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+          <li><a href="#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
+          <li><a href="#info"><i class="fas fa-info-circle"></i> Información</a></li>
+          <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+        </ul>
+        <div class="nav-right">
+          <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+            <img src="LogoCodes.png" alt="Logo CODES" height="40" />
+          </a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
     <header>
       <div class="header-row">
-        <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
-          <img src="logoLSIUNLu.svg" alt="Logo Sistemas" />
-        </a>
         <h1>Bienvenidos al Stand de Sistemas de la Expo UNLu</h1>
-        <a href="https://codes-unlu.github.io/Web-Codes/"
-          ><img src="LogoCodes.png" alt="Logo CODES"
-        /></a>
       </div>
     </header>
 
-    <div class="container">
-      <h2>Explorá tu futuro universitario</h2>
-      <p>
-        Desde el Centro de Estudiantes te invitamos a participar de nuestras
-        actividades interactivas.
-      </p>
-
-      <div class="botonera">
-        <a class="btn" href="test.html">🧠 ¿Qué carrera va con vos?</a>
-        <span class="subtexto">Actividad de Ciencia de Datos</span>
-
-        <a class="btn" href="juego.html">🎮 Juego Interactivo Wordle</a>
-        <span class="subtexto">Propuesta de Lic. en Sistemas</span>
-
-        <a class="btn" href="explora.html">🌟 Explorá la Expo UNLu</a>
-        <span class="subtexto">Recorrido general por la Expo</span>
-
-        <a class="btn" href="faq.html">❓ Preguntas Frecuentes</a>
-        <span class="subtexto">Consultas comunes</span>
+    <div class="container" id="inicio">
+      <div class="hero-section">
+        <h2>Explorá tu futuro universitario</h2>
+        <p class="hero-text">
+          Desde el Centro de Estudiantes te invitamos a participar de nuestras
+          actividades interactivas y descubrir el apasionante mundo de la tecnología.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <i class="fas fa-users"></i>
+            <span class="stat-number">1000+</span>
+            <span class="stat-label">Estudiantes</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-laptop-code"></i>
+            <span class="stat-number">4</span>
+            <span class="stat-label">Actividades</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-trophy"></i>
+            <span class="stat-number">10</span>
+            <span class="stat-label">Premios</span>
+          </div>
+        </div>
       </div>
 
-      <div class="highlight">
-        <strong>🎁 Sorteo especial:</strong> ¡Jugá y participá del sorteo! Los
-        10 estudiantes que completen el juego interactivo en el menor tiempo
-        serán premiados con un premio sorpresa.
+      <div class="botonera" id="actividades">
+        <a class="btn" href="test.html">
+          <i class="fas fa-brain"></i>
+          <span class="btn-text">¿Qué carrera va con vos?</span>
+          <span class="subtexto">Actividad de Ciencia de Datos</span>
+        </a>
+
+        <a class="btn" href="juego.html">
+          <i class="fas fa-gamepad"></i>
+          <span class="btn-text">Juego Interactivo Wordle</span>
+          <span class="subtexto">Propuesta de Lic. en Sistemas</span>
+        </a>
+
+        <a class="btn" href="explora.html">
+          <i class="fas fa-compass"></i>
+          <span class="btn-text">Explorá la Expo UNLu</span>
+          <span class="subtexto">Recorrido general por la Expo</span>
+        </a>
+
+        <a class="btn" href="faq.html">
+          <i class="fas fa-question-circle"></i>
+          <span class="btn-text">Preguntas Frecuentes</span>
+          <span class="subtexto">Consultas comunes</span>
+        </a>
       </div>
 
-      <p>
-        Podés acercarte a nuestro stand para conocer más sobre la carrera,
-        recibir asesoramiento y hablar con estudiantes avanzados.
-      </p>
+      <div class="highlight" id="info">
+        <div class="highlight-icon">
+          <i class="fas fa-gift"></i>
+        </div>
+        <div class="highlight-content">
+          <strong>🎁 Sorteo especial:</strong> ¡Jugá y participá del sorteo! Los
+          10 estudiantes que completen el juego interactivo en el menor tiempo
+          serán premiados con un premio sorpresa.
+        </div>
+      </div>
+
+      <!-- Carrusel de logos eliminado -->
+
+      <div class="info-section">
+        <h3><i class="fas fa-handshake"></i> Acercate a nuestro stand</h3>
+        <p>
+          Podés acercarte a nuestro stand para conocer más sobre la carrera,
+          recibir asesoramiento y hablar con estudiantes avanzados.
+        </p>
+        <div class="features">
+          <div class="feature">
+            <i class="fas fa-graduation-cap"></i>
+            <h4>Asesoramiento</h4>
+            <p>Charlá con estudiantes y docentes</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-code"></i>
+            <h4>Demostraciones</h4>
+            <p>Viví la tecnología en acción</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-users"></i>
+            <h4>Networking</h4>
+            <p>Conectá con futuros colegas</p>
+          </div>
+          
+        </div>
+      </div>
     </div>
 
     <footer>
-      &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
-      de informacion UNLu. Todos los derechos reservados.
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4><i class="fas fa-university"></i> UNLu - Sistemas</h4>
+          <p>Universidad Nacional de Luján</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-users"></i> CODES++</h4>
+          <p>Centro de Estudiantes</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-envelope"></i> Contacto</h4>
+          <p>codes.unlu@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
+        de informacion UNLu. Todos los derechos reservados.
+      </div>
     </footer>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.querySelector('.menu');
+        menu.classList.toggle('show');
+      }
+
+      // Smooth scroll para enlaces internos
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+          // Cierra el menú hamburguesa si está abierto (en móvil)
+          const menu = document.querySelector('.menu');
+          if (menu.classList.contains('show')) {
+            menu.classList.remove('show');
+          }
+        });
+      });
+
+      // Animación de entrada para elementos
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observar elementos para animación
+      document.querySelectorAll('.btn, .feature, .stat').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+    </script>
   </body>
 </html>

@@ -5,125 +5,308 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Explorá la Expo UNLu</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-  body {
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #f5f5f5;
-  }
+    .charlas-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 3rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeInUp 0.8s ease-out;
+    }
 
-  .charlas-container {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
+    .charlas-container h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
 
-  .charlas-container h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
+    .charlas-container h2 i {
+      color: #667eea;
+      -webkit-text-fill-color: #667eea;
+    }
 
-  .grilla-charlas {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  .grilla-charlas div {
-    padding: 1rem;
-    background-color: #f0f4f8;
-    border-radius: 6px;
-  }
-
-  .grilla-charlas .encabezado {
-    font-weight: bold;
-    background-color: #006837;
-    color: white;
-  }
-
-  /* Responsive para pantallas chicas */
-  @media screen and (max-width: 700px) {
     .grilla-charlas {
-      display: block;
-    }
-
-    .grilla-charlas .encabezado {
-      display: none;
-    }
-
-    .grilla-charlas div:nth-child(n+4) {
-      background-color: white;
-      border: 1px solid #ccc;
-      margin-bottom: 0.5rem;
-      text-align: left;
-    }
-
-    .grilla-charlas div:nth-child(3n+1)::before {
-      content: "Charla: ";
-      font-weight: bold;
-      color: #006837;
-    }
-
-    .grilla-charlas div:nth-child(3n+2)::before {
-      content: "Aula: ";
-      font-weight: bold;
-      color: #006837;
-    }
-
-    .grilla-charlas div:nth-child(3n+3)::before {
-      content: "Horario: ";
-      font-weight: bold;
-      color: #006837;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      text-align: center;
     }
 
     .grilla-charlas div {
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
     }
-  }
-</style>
 
+    .grilla-charlas div:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .grilla-charlas .encabezado {
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .charla-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .charla-item i {
+      color: #667eea;
+      font-size: 1.2rem;
+    }
+
+    .expo-hero {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .expo-hero p {
+      font-size: 1.2rem;
+      color: #4a5568;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .expo-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .expo-stats .stat {
+      min-width: 100px;
+      padding: 1rem;
+    }
+
+    .expo-stats .stat i {
+      font-size: 1.5rem;
+    }
+
+    .expo-stats .stat-number {
+      font-size: 1.5rem;
+    }
+
+    /* Responsive para pantallas chicas */
+    @media screen and (max-width: 700px) {
+      .charlas-container {
+        padding: 2rem 1.5rem;
+        margin: 1.5rem;
+      }
+
+      .charlas-container h2 {
+        font-size: 2rem;
+      }
+
+      .grilla-charlas {
+        display: block;
+      }
+
+      .grilla-charlas .encabezado {
+        display: none;
+      }
+
+      .grilla-charlas div:nth-child(n+4) {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #e2e8f0;
+        margin-bottom: 0.5rem;
+        text-align: left;
+        padding: 1rem;
+      }
+
+      .grilla-charlas div:nth-child(3n+1)::before {
+        content: "🎓 Charla: ";
+        font-weight: 700;
+        color: #667eea;
+      }
+
+      .grilla-charlas div:nth-child(3n+2)::before {
+        content: "🏢 Aula: ";
+        font-weight: 700;
+        color: #667eea;
+      }
+
+      .grilla-charlas div:nth-child(3n+3)::before {
+        content: "⏰ Horario: ";
+        font-weight: 700;
+        color: #667eea;
+      }
+
+      .grilla-charlas div {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- Navegación moderna -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+          <img src="logoLSIUNLu.svg" alt="Logo Sistemas" height="40" />
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="index.html#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
+        <li><a href="test.html"><i class="fas fa-brain"></i> Test</a></li>
+        <li><a href="juego.html"><i class="fas fa-puzzle-piece"></i> Juego</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+          <img src="LogoCodes.png" alt="Logo CODES" height="40" />
+        </a>
+      </div>
+      <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
   <header>
     <div class="header-row">
-      <img src="logoLSIUNLu.svg" alt="Logo UNLu" />
-      <h1>Explorá la Expo UNLu</h1>
-      <img src="LogoCodes.png" alt="Logo CODES" />
+      <h1><i class="fas fa-compass"></i> Explorá la Expo UNLu</h1>
     </div>
   </header>
 
   <div class="charlas-container">
-    <h2>Charlas Informativas</h2>
-    <div class="grilla-charlas">
-      <div class="encabezado">Charla</div>
-      <div class="encabezado">Aula</div>
-      <div class="encabezado">Horario</div>
+    <div class="expo-hero">
+      <h2><i class="fas fa-calendar-alt"></i> Charlas Informativas</h2>
+      <p>Descubrí todas las carreras que ofrece la Universidad Nacional de Luján en nuestras charlas informativas</p>
+      <div class="expo-stats">
+        <div class="stat">
+          <i class="fas fa-users"></i>
+          <span class="stat-number">5</span>
+          <span class="stat-label">Charlas</span>
+        </div>
+        <div class="stat">
+          <i class="fas fa-clock"></i>
+          <span class="stat-number">30</span>
+          <span class="stat-label">Minutos</span>
+        </div>
+        <div class="stat">
+          <i class="fas fa-map-marker-alt"></i>
+          <span class="stat-number">4</span>
+          <span class="stat-label">Aulas</span>
+        </div>
+      </div>
+    </div>
 
-      <div>Lic. en Sistemas</div>
+    <div class="grilla-charlas">
+      <div class="encabezado">
+        <i class="fas fa-graduation-cap"></i> Carrera
+      </div>
+      <div class="encabezado">
+        <i class="fas fa-building"></i> Aula
+      </div>
+      <div class="encabezado">
+        <i class="fas fa-clock"></i> Horario
+      </div>
+
+      <div class="charla-item">
+        <i class="fas fa-laptop-code"></i>
+        <span>Lic. en Sistemas</span>
+      </div>
       <div>Aula 2</div>
       <div>10:00 hs</div>
 
-      <div>Enfermería</div>
+      <div class="charla-item">
+        <i class="fas fa-heartbeat"></i>
+        <span>Enfermería</span>
+      </div>
       <div>Aula 4</div>
       <div>10:30 hs</div>
 
-      <div>Educación Física</div>
+      <div class="charla-item">
+        <i class="fas fa-running"></i>
+        <span>Educación Física</span>
+      </div>
       <div>Aula 1</div>
       <div>11:00 hs</div>
 
-      <div>Biología</div>
+      <div class="charla-item">
+        <i class="fas fa-dna"></i>
+        <span>Biología</span>
+      </div>
       <div>Aula 3</div>
       <div>11:30 hs</div>
 
-      <div>Turismo</div>
+      <div class="charla-item">
+        <i class="fas fa-plane"></i>
+        <span>Turismo</span>
+      </div>
       <div>Aula 2</div>
       <div>12:00 hs</div>
     </div>
+
+    <div class="expo-info" style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%); border-radius: 16px; border: 2px solid #81e6d9;">
+      <h3 style="text-align: center; margin-bottom: 1rem; color: #2c7a7b; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+        <i class="fas fa-info-circle"></i> Información importante
+      </h3>
+      <p style="text-align: center; color: #4a5568; margin: 0; line-height: 1.6;">
+        Todas las charlas son gratuitas y abiertas al público. No es necesario inscribirse previamente. 
+        ¡Acercate y conocé tu futura carrera!
+      </p>
+    </div>
   </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4><i class="fas fa-university"></i> UNLu - Sistemas</h4>
+        <p>Universidad Nacional de Luján</p>
+      </div>
+      <div class="footer-section">
+        <h4><i class="fas fa-users"></i> CODES++</h4>
+        <p>Centro de Estudiantes</p>
+      </div>
+      <div class="footer-section">
+        <h4><i class="fas fa-envelope"></i> Contacto</h4>
+        <p>codes.unlu@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
+      de informacion UNLu. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.querySelector('.menu');
+      menu.classList.toggle('show');
+    }
+  </script>
 </body>
 </html>

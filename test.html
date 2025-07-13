@@ -5,340 +5,467 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Matchea con la Unlu!</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
+    <!-- Navegación moderna -->
+    <nav>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+            <img src="logoLSIUNLu.svg" alt="Logo Sistemas" height="40" />
+          </a>
+        </div>
+        <ul class="menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+          <li><a href="index.html#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
+          <li><a href="juego.html"><i class="fas fa-puzzle-piece"></i> Juego</a></li>
+          <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+        </ul>
+        <div class="nav-right">
+          <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+            <img src="LogoCodes.png" alt="Logo CODES" height="40" />
+          </a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
     <header>
       <div class="header-row">
-        <img src="logoLSIUNLu.svg" alt="Logo Sistemas" />
-        <h1>¿Qué carrera vibra con vos?</h1>
-        <img src="LogoCodes.png" alt="Logo CODES" />
+        <h1>¿Qué carrera va con vos?</h1>
       </div>
     </header>
 
     <div id="inicio">
-      <h2>¿Te interesa la tecnología?, ¿la lógica?, ¿los datos?</h2>
-      <p>
-        🧠 Este test compara tu perfil con dos grandes opciones universitarias
-      </p>
-      <p>✨ Respondé, conocé tu match y sorprendete con el resultado</p>
-      <div>
-        <button id="btnIniciar" class="btn">Iniciar el cuestionario</button>
+      <div class="hero-section">
+        <h2><i class="fas fa-brain"></i> ¿Te interesa la tecnología?, ¿la lógica?, ¿los datos?</h2>
+        <p class="hero-text">
+          🧠 Este test compara tu perfil con dos grandes opciones universitarias
+        </p>
+        <p class="hero-text">
+          ✨ Respondé, conocé tu match y sorprendete con el resultado
+        </p>
+        <div class="test-stats">
+          <div class="stat">
+            <i class="fas fa-clock"></i>
+            <span class="stat-number">3</span>
+            <span class="stat-label">Minutos</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-question-circle"></i>
+            <span class="stat-number">10</span>
+            <span class="stat-label">Preguntas</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-chart-line"></i>
+            <span class="stat-number">2</span>
+            <span class="stat-label">Carreras</span>
+          </div>
+        </div>
+        <div>
+          <button id="btnIniciar" class="btn">
+            <i class="fas fa-play"></i>
+            <span>Iniciar el cuestionario</span>
+          </button>
+        </div>
       </div>
     </div>
+
     <form id="testForm">
       <!-- Pregunta 1 -->
       <div class="question paso" data-paso="1">
-        <h3>1. ¿Qué disfrutás más hacer en la compu o el celu?</h3>
-        <input
-          type="radio"
-          id="q1-sistemas"
-          name="q1"
-          value="sistemas"
-          required
-        />
-        <label for="q1-sistemas"
-          >Jugar y pensar cómo están hechos los juegos</label
-        >
+        <div class="question-header">
+          <div class="question-number">1</div>
+          <h3>¿Qué disfrutás más hacer en la compu o el celu?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q1-sistemas" name="q1" value="sistemas" required />
+          <label for="q1-sistemas">
+            <i class="fas fa-gamepad"></i>
+            <span>Jugar y pensar cómo están hechos los juegos</span>
+          </label>
 
-        <input type="radio" id="q1-datos" name="q1" value="datos" />
-        <label for="q1-datos"
-          >Ver estadísticas o gráficos de deportes, redes o economía</label
-        >
+          <input type="radio" id="q1-datos" name="q1" value="datos" />
+          <label for="q1-datos">
+            <i class="fas fa-chart-bar"></i>
+            <span>Ver estadísticas o gráficos de deportes, redes o economía</span>
+          </label>
 
-        <input type="radio" id="q1-ambos" name="q1" value="ambos" />
-        <label for="q1-ambos"
-          >Ver cómo funcionan las apps y redes sociales</label
-        >
+          <input type="radio" id="q1-ambos" name="q1" value="ambos" />
+          <label for="q1-ambos">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Ver cómo funcionan las apps y redes sociales</span>
+          </label>
 
-        <input type="radio" id="q1-ninguno" name="q1" value="ninguno" />
-        <label for="q1-ninguno">Chatear, sacar fotos o crear contenido</label>
-
-        <button type="button" class="btn siguiente">Siguiente</button>
+          <input type="radio" id="q1-ninguno" name="q1" value="ninguno" />
+          <label for="q1-ninguno">
+            <i class="fas fa-camera"></i>
+            <span>Chatear, sacar fotos o crear contenido</span>
+          </label>
+        </div>
       </div>
 
       <!-- Pregunta 2 -->
       <div class="question paso" data-paso="2" style="display: none">
-        <h3>2. ¿Qué tipo de tareas preferís en clase?</h3>
-        <input
-          type="radio"
-          id="q2-sistemas"
-          name="q2"
-          value="sistemas"
-          required
-        />
-        <label for="q2-sistemas">Resolver problemas lógicos o técnicos</label>
+        <div class="question-header">
+          <div class="question-number">2</div>
+          <h3>¿Qué tipo de tareas preferís en clase?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q2-sistemas" name="q2" value="sistemas" required />
+          <label for="q2-sistemas">
+            <i class="fas fa-cogs"></i>
+            <span>Resolver problemas lógicos o técnicos</span>
+          </label>
 
-        <input type="radio" id="q2-datos" name="q2" value="datos" />
-        <label for="q2-datos">Trabajar con números, datos o estadísticas</label>
+          <input type="radio" id="q2-datos" name="q2" value="datos" />
+          <label for="q2-datos">
+            <i class="fas fa-calculator"></i>
+            <span>Trabajar con números, datos o estadísticas</span>
+          </label>
 
-        <input type="radio" id="q2-ambos" name="q2" value="ambos" />
-        <label for="q2-ambos"
-          >Hacer trabajos en grupo donde todos aportan ideas</label
-        >
+          <input type="radio" id="q2-ambos" name="q2" value="ambos" />
+          <label for="q2-ambos">
+            <i class="fas fa-users"></i>
+            <span>Hacer trabajos en grupo donde todos aportan ideas</span>
+          </label>
 
-        <input type="radio" id="q2-ninguno" name="q2" value="ninguno" />
-        <label for="q2-ninguno"
-          >Exponer oralmente o escribir textos creativos</label
-        >
-
-        <button type="button" class="btn siguiente">Siguiente</button>
+          <input type="radio" id="q2-ninguno" name="q2" value="ninguno" />
+          <label for="q2-ninguno">
+            <i class="fas fa-microphone"></i>
+            <span>Exponer oralmente o escribir textos creativos</span>
+          </label>
+        </div>
       </div>
 
       <!-- Pregunta 3 -->
       <div class="question paso" data-paso="3" style="display: none">
-        <h3>3. ¿Qué te gustaría hacer en el futuro?</h3>
-        <input
-          type="radio"
-          id="q3-sistemas"
-          name="q3"
-          value="sistemas"
-          required
-        />
-        <label for="q3-sistemas">Crear una app o juego desde cero</label>
+        <div class="question-header">
+          <div class="question-number">3</div>
+          <h3>¿Qué te gustaría hacer en el futuro?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q3-sistemas" name="q3" value="sistemas" required />
+          <label for="q3-sistemas">
+            <i class="fas fa-code"></i>
+            <span>Crear una app o juego desde cero</span>
+          </label>
 
-        <input type="radio" id="q3-datos" name="q3" value="datos" />
-        <label for="q3-datos"
-          >Analizar información para entender cómo funciona algo</label
-        >
+          <input type="radio" id="q3-datos" name="q3" value="datos" />
+          <label for="q3-datos">
+            <i class="fas fa-search"></i>
+            <span>Analizar información para entender cómo funciona algo</span>
+          </label>
 
-        <input type="radio" id="q3-ambos" name="q3" value="ambos" />
-        <label for="q3-ambos"
-          >Hacer un proyecto con tecnología que ayude a otros</label
-        >
+          <input type="radio" id="q3-ambos" name="q3" value="ambos" />
+          <label for="q3-ambos">
+            <i class="fas fa-heart"></i>
+            <span>Hacer un proyecto con tecnología que ayude a otros</span>
+          </label>
 
-        <input type="radio" id="q3-ninguno" name="q3" value="ninguno" />
-        <label for="q3-ninguno"
-          >Ser influencer, artista o trabajar con personas</label
-        >
-
-        <button type="button" class="btn siguiente">Siguiente</button>
+          <input type="radio" id="q3-ninguno" name="q3" value="ninguno" />
+          <label for="q3-ninguno">
+            <i class="fas fa-star"></i>
+            <span>Ser influencer, artista o trabajar con personas</span>
+          </label>
+        </div>
       </div>
 
       <!-- Pregunta 4 -->
       <div class="question paso" data-paso="4" style="display: none">
-        <h3>4. ¿Cómo te gusta resolver un problema difícil?</h3>
-        <input
-          type="radio"
-          id="q4-sistemas"
-          name="q4"
-          value="sistemas"
-          required
-        />
-        <label for="q4-sistemas"
-          >Busco una solución paso a paso y pruebo hasta que funcione</label
-        >
+        <div class="question-header">
+          <div class="question-number">4</div>
+          <h3>¿Cómo te gusta resolver un problema difícil?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q4-sistemas" name="q4" value="sistemas" required />
+          <label for="q4-sistemas">
+            <i class="fas fa-puzzle-piece"></i>
+            <span>Busco una solución paso a paso y pruebo hasta que funcione</span>
+          </label>
 
-        <input type="radio" id="q4-datos" name="q4" value="datos" />
-        <label for="q4-datos"
-          >Recojo información y comparo antes de decidir</label
-        >
+          <input type="radio" id="q4-datos" name="q4" value="datos" />
+          <label for="q4-datos">
+            <i class="fas fa-search-plus"></i>
+            <span>Recojo información y comparo antes de decidir</span>
+          </label>
 
-        <input type="radio" id="q4-ambos" name="q4" value="ambos" />
-        <label for="q4-ambos"
-          >Hago un poco de todo: investigar, probar, preguntar</label
-        >
+          <input type="radio" id="q4-ambos" name="q4" value="ambos" />
+          <label for="q4-ambos">
+            <i class="fas fa-lightbulb"></i>
+            <span>Hago un poco de todo: investigar, probar, preguntar</span>
+          </label>
 
-        <input type="radio" id="q4-ninguno" name="q4" value="ninguno" />
-        <label for="q4-ninguno"
-          >Me guío por mi intuición o pido ayuda a alguien</label
-        >
-
-        <button type="button" class="btn siguiente">Siguiente</button>
+          <input type="radio" id="q4-ninguno" name="q4" value="ninguno" />
+          <label for="q4-ninguno">
+            <i class="fas fa-magic"></i>
+            <span>Me guío por mi intuición o pido ayuda a alguien</span>
+          </label>
+        </div>
       </div>
 
       <!-- Pregunta 5 -->
       <div class="question paso" data-paso="5" style="display: none">
-        <h3>5. ¿Qué materia te interesa más?</h3>
-        <input
-          type="radio"
-          id="q5-sistemas"
-          name="q5"
-          value="sistemas"
-          required
-        />
-        <label for="q5-sistemas">Informática o tecnología</label>
+        <div class="question-header">
+          <div class="question-number">5</div>
+          <h3>¿Qué materia te interesa más?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q5-sistemas" name="q5" value="sistemas" required />
+          <label for="q5-sistemas">
+            <i class="fas fa-laptop-code"></i>
+            <span>Informática o tecnología</span>
+          </label>
 
-        <input type="radio" id="q5-datos" name="q5" value="datos" />
-        <label for="q5-datos">Matemática o geografía con datos</label>
+          <input type="radio" id="q5-datos" name="q5" value="datos" />
+          <label for="q5-datos">
+            <i class="fas fa-chart-line"></i>
+            <span>Matemática o geografía con datos</span>
+          </label>
 
-        <input type="radio" id="q5-ninguno" name="q5" value="ninguno" />
-        <label for="q5-ninguno">Ciencias naturales o sociales</label>
+          <input type="radio" id="q5-ninguno" name="q5" value="ninguno" />
+          <label for="q5-ninguno">
+            <i class="fas fa-flask"></i>
+            <span>Ciencias naturales o sociales</span>
+          </label>
 
-        <input type="radio" id="q5-ambos" name="q5" value="ambos" />
-        <label for="q5-ambos">Me gustan varias, depende de cómo la den</label>
-
-        <button type="button" class="btn siguiente">Siguiente</button>
+          <input type="radio" id="q5-ambos" name="q5" value="ambos" />
+          <label for="q5-ambos">
+            <i class="fas fa-thumbs-up"></i>
+            <span>Me gustan varias, depende de cómo la den</span>
+          </label>
+        </div>
       </div>
 
       <!-- Pregunta 6 -->
       <div class="question paso" data-paso="6" style="display: none">
-        <h3>6. ¿Qué rol te gustaría tener en un proyecto escolar?</h3>
-        <input
-          type="radio"
-          id="q6-sistemas"
-          name="q6"
-          value="sistemas"
-          required
-        />
-        <label for="q6-sistemas"
-          >El que hace funcionar el trabajo con lógica y tecnología</label
-        >
+        <div class="question-header">
+          <div class="question-number">6</div>
+          <h3>¿Qué rol te gustaría tener en un proyecto escolar?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q6-sistemas" name="q6" value="sistemas" required />
+          <label for="q6-sistemas">
+            <i class="fas fa-cog"></i>
+            <span>El que hace funcionar el trabajo con lógica y tecnología</span>
+          </label>
 
-        <input type="radio" id="q6-datos" name="q6" value="datos" />
-        <label for="q6-datos">El que investiga y analiza la información</label>
+          <input type="radio" id="q6-datos" name="q6" value="datos" />
+          <label for="q6-datos">
+            <i class="fas fa-search"></i>
+            <span>El que investiga y analiza la información</span>
+          </label>
 
-        <input type="radio" id="q6-ambos" name="q6" value="ambos" />
-        <label for="q6-ambos">El que ayuda en todo un poco</label>
+          <input type="radio" id="q6-ambos" name="q6" value="ambos" />
+          <label for="q6-ambos">
+            <i class="fas fa-hands-helping"></i>
+            <span>El que ayuda en todo un poco</span>
+          </label>
 
-        <input type="radio" id="q6-ninguno" name="q6" value="ninguno" />
-        <label for="q6-ninguno">El que organiza o presenta el proyecto</label>
-
-        <button type="button" class="btn siguiente">Siguiente</button>
+          <input type="radio" id="q6-ninguno" name="q6" value="ninguno" />
+          <label for="q6-ninguno">
+            <i class="fas fa-presentation"></i>
+            <span>El que organiza o presenta el proyecto</span>
+          </label>
+        </div>
       </div>
 
       <!-- Pregunta 7 -->
       <div class="question paso" data-paso="7" style="display: none">
-        <h3>7. ¿Qué te parece más interesante?</h3>
-        <input
-          type="radio"
-          id="q7-sistemas"
-          name="q7"
-          value="sistemas"
-          required
-        />
-        <label for="q7-sistemas"
-          >Pensar cómo se hacen las apps, juegos o robots</label
-        >
+        <div class="question-header">
+          <div class="question-number">7</div>
+          <h3>¿Qué te parece más interesante?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q7-sistemas" name="q7" value="sistemas" required />
+          <label for="q7-sistemas">
+            <i class="fas fa-robot"></i>
+            <span>Pensar cómo se hacen las apps, juegos o robots</span>
+          </label>
 
-        <input type="radio" id="q7-datos" name="q7" value="datos" />
-        <label for="q7-datos"
-          >Entender por qué pasan las cosas con datos reales</label
-        >
+          <input type="radio" id="q7-datos" name="q7" value="datos" />
+          <label for="q7-datos">
+            <i class="fas fa-lightbulb"></i>
+            <span>Entender por qué pasan las cosas con datos reales</span>
+          </label>
 
-        <input type="radio" id="q7-ambos" name="q7" value="ambos" />
-        <label for="q7-ambos"
-          >Usar tecnología para mejorar algo del día a día</label
-        >
+          <input type="radio" id="q7-ambos" name="q7" value="ambos" />
+          <label for="q7-ambos">
+            <i class="fas fa-tools"></i>
+            <span>Usar tecnología para mejorar algo del día a día</span>
+          </label>
 
-        <input type="radio" id="q7-ninguno" name="q7" value="ninguno" />
-        <label for="q7-ninguno"
-          >Hacer cosas creativas como escribir o comunicar</label
-        >
-
-        <button type="button" class="btn siguiente">Siguiente</button>
+          <input type="radio" id="q7-ninguno" name="q7" value="ninguno" />
+          <label for="q7-ninguno">
+            <i class="fas fa-palette"></i>
+            <span>Hacer cosas creativas como escribir o comunicar</span>
+          </label>
+        </div>
       </div>
 
       <!-- Pregunta 8 -->
       <div class="question paso" data-paso="8" style="display: none">
-        <h3>8. ¿Con qué tipo de trabajo te sentirías más cómodo?</h3>
-        <input
-          type="radio"
-          id="q8-sistemas"
-          name="q8"
-          value="sistemas"
-          required
-        />
-        <label for="q8-sistemas"
-          >Frente a una compu, resolviendo desafíos paso a paso</label
-        >
+        <div class="question-header">
+          <div class="question-number">8</div>
+          <h3>¿Con qué tipo de trabajo te sentirías más cómodo?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q8-sistemas" name="q8" value="sistemas" required />
+          <label for="q8-sistemas">
+            <i class="fas fa-desktop"></i>
+            <span>Frente a una compu, resolviendo desafíos paso a paso</span>
+          </label>
 
-        <input type="radio" id="q8-datos" name="q8" value="datos" />
-        <label for="q8-datos"
-          >Analizando información y sacando conclusiones</label
-        >
+          <input type="radio" id="q8-datos" name="q8" value="datos" />
+          <label for="q8-datos">
+            <i class="fas fa-chart-pie"></i>
+            <span>Analizando información y sacando conclusiones</span>
+          </label>
 
-        <input type="radio" id="q8-ambos" name="q8" value="ambos" />
-        <label for="q8-ambos">Mezclando ideas, tecnología y personas</label>
+          <input type="radio" id="q8-ambos" name="q8" value="ambos" />
+          <label for="q8-ambos">
+            <i class="fas fa-balance-scale"></i>
+            <span>Un poco de todo: analizar, programar, trabajar en equipo</span>
+          </label>
 
-        <input type="radio" id="q8-ninguno" name="q8" value="ninguno" />
-        <label for="q8-ninguno"
-          >Haciendo algo práctico o en contacto con la gente</label
-        >
-
-        <button type="button" class="btn siguiente">Siguiente</button>
+          <input type="radio" id="q8-ninguno" name="q8" value="ninguno" />
+          <label for="q8-ninguno">
+            <i class="fas fa-comments"></i>
+            <span>Trabajando con personas, comunicando o enseñando</span>
+          </label>
+        </div>
       </div>
 
       <!-- Pregunta 9 -->
       <div class="question paso" data-paso="9" style="display: none">
-        <h3>9. ¿Qué te da más satisfacción?</h3>
-        <input
-          type="radio"
-          id="q9-sistemas"
-          name="q9"
-          value="sistemas"
-          required
-        />
-        <label for="q9-sistemas"
-          >Lograr que algo funcione luego de mucho intentar</label
-        >
+        <div class="question-header">
+          <div class="question-number">9</div>
+          <h3>¿Qué te da más satisfacción?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q9-sistemas" name="q9" value="sistemas" required />
+          <label for="q9-sistemas">
+            <i class="fas fa-trophy"></i>
+            <span>Lograr que algo funcione luego de mucho intentar</span>
+          </label>
 
-        <input type="radio" id="q9-datos" name="q9" value="datos" />
-        <label for="q9-datos"
-          >Descubrir una causa o una relación entre cosas</label
-        >
+          <input type="radio" id="q9-datos" name="q9" value="datos" />
+          <label for="q9-datos">
+            <i class="fas fa-search"></i>
+            <span>Descubrir una causa o una relación entre cosas</span>
+          </label>
 
-        <input type="radio" id="q9-ambos" name="q9" value="ambos" />
-        <label for="q9-ambos">Hacer algo útil para otros con tecnología</label>
+          <input type="radio" id="q9-ambos" name="q9" value="ambos" />
+          <label for="q9-ambos">
+            <i class="fas fa-heart"></i>
+            <span>Hacer algo útil para otros con tecnología</span>
+          </label>
 
-        <input type="radio" id="q9-ninguno" name="q9" value="ninguno" />
-        <label for="q9-ninguno">Compartir lo que hago o comunicar ideas</label>
-
-        <button type="button" class="btn siguiente">Siguiente</button>
+          <input type="radio" id="q9-ninguno" name="q9" value="ninguno" />
+          <label for="q9-ninguno">
+            <i class="fas fa-bullhorn"></i>
+            <span>Compartir lo que hago o comunicar ideas</span>
+          </label>
+        </div>
       </div>
 
       <!-- Pregunta 10 -->
       <div class="question paso" data-paso="10" style="display: none">
-        <h3>10. ¿Qué te motiva a aprender algo nuevo?</h3>
-        <input
-          type="radio"
-          id="q10-sistemas"
-          name="q10"
-          value="sistemas"
-          required
-        />
-        <label for="q10-sistemas">Saber cómo se crean cosas tecnológicas</label>
+        <div class="question-header">
+          <div class="question-number">10</div>
+          <h3>¿Qué te motiva a aprender algo nuevo?</h3>
+        </div>
+        <div class="options-container">
+          <input type="radio" id="q10-sistemas" name="q10" value="sistemas" required />
+          <label for="q10-sistemas">
+            <i class="fas fa-cogs"></i>
+            <span>Saber cómo se crean cosas tecnológicas</span>
+          </label>
 
-        <input type="radio" id="q10-datos" name="q10" value="datos" />
-        <label for="q10-datos">Entender el mundo con datos reales</label>
+          <input type="radio" id="q10-datos" name="q10" value="datos" />
+          <label for="q10-datos">
+            <i class="fas fa-globe"></i>
+            <span>Entender el mundo con datos reales</span>
+          </label>
 
-        <input type="radio" id="q10-ambos" name="q10" value="ambos" />
-        <label for="q10-ambos">Poder aplicar lo que sé a la vida diaria</label>
+          <input type="radio" id="q10-ambos" name="q10" value="ambos" />
+          <label for="q10-ambos">
+            <i class="fas fa-lightbulb"></i>
+            <span>Poder aplicar lo que sé a la vida diaria</span>
+          </label>
 
-        <input type="radio" id="q10-ninguno" name="q10" value="ninguno" />
-        <label for="q10-ninguno"
-          >Conocer nuevas formas de expresarme o ayudar</label
-        >
-
-        <button type="submit" class="btn">Enviar y ver resultado</button>
+          <input type="radio" id="q10-ninguno" name="q10" value="ninguno" />
+          <label for="q10-ninguno">
+            <i class="fas fa-star"></i>
+            <span>Conocer nuevas formas de expresarme o ayudar</span>
+          </label>
+        </div>
       </div>
     </form>
 
-    <div id="resultado" style="display: none">
-      <h2>¡Gracias por participar!</h2>
-      <p id="textoResultado"></p>
-      <p>Para más info, acercate al stand</p>
-
-      <div style="margin-top: 1rem">
-        <a href="index.html" class="btn">Volver al inicio</a>
+    <div id="procesando" style="display: none;">
+      <h3><i class="fas fa-cogs"></i> Procesando tus respuestas...</h3>
+      <div class="loading-animation">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" stroke="#667eea" stroke-width="8" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2">
+            <animate attributeName="stroke-dashoffset" values="251.2;0;251.2" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="50" cy="50" r="25" stroke="#764ba2" stroke-width="6" fill="none" stroke-dasharray="157" stroke-dashoffset="157">
+            <animate attributeName="stroke-dashoffset" values="157;0;157" dur="1.5s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
       </div>
+      <p>Analizando tu perfil para encontrar tu carrera ideal...</p>
+    </div>
 
-      <div style="margin-top: 1rem">
-        <p><strong>¿Querés saber más?</strong></p>
-        <ul>
-          <li>
-            <a href="https://www.unlu.edu.ar/carg-sistemas.html" target="_blank"
-              >📘 Ver plan de estudios de Licenciatura en Sistemas</a
-            >
-          </li>
-          <li>
-            <a href="https://www.unlu.edu.ar/carpre-analistaciedatos.html" target="_blank"
-              >📊 Ver plan de estudios de Ciencia de Datos</a
-            >
-          </li>
-        </ul>
+    <div id="resultado" style="display: none;">
+      <h3><i class="fas fa-star"></i> ¡Tu resultado está listo!</h3>
+      <div id="resultado-contenido"></div>
+      <div class="result-actions">
+        <a href="index.html" class="btn">
+          <i class="fas fa-home"></i>
+          <span>Volver al inicio</span>
+        </a>
+        <a href="juego.html" class="btn">
+          <i class="fas fa-gamepad"></i>
+          <span>Jugar UNLuWords</span>
+        </a>
       </div>
     </div>
 
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4><i class="fas fa-university"></i> UNLu - Sistemas</h4>
+          <p>Universidad Nacional de Luján</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-users"></i> CODES++</h4>
+          <p>Centro de Estudiantes</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-envelope"></i> Contacto</h4>
+          <p>codes.unlu@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
+        de informacion UNLu. Todos los derechos reservados.
+      </div>
+    </footer>
+
     <script src="test.js"></script>
+    <script>
+      function toggleMenu() {
+        const menu = document.querySelector('.menu');
+        menu.classList.toggle('show');
+      }
+    </script>
   </body>
 </html>
