@@ -362,77 +362,77 @@
   </div>
 
   <script>
+    const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
+  
+    // Enviar resultado al servidor
+    function enviarResultado(email, tiempo) {
+      fetch(scriptURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, tiempo })
+      })
+      .then(response => response.text())
+      .then(result => console.log('Datos enviados:', result))
+      .catch(error => console.error('Error al enviar datos:', error));
+    }
+  
+    // Cargar y actualizar ranking
     function updateRanking() {
-      fetch('https://script.google.com/macros/s/AKfycbz2XIqDM5ux2IlTs9ZDFP-bNMqucBZb7jZ-sljE6m5S-rMHFsIuJR6kC4Xw4tTjGjY_2A/exec')
+      fetch(scriptURL)
         .then(response => response.json())
         .then(data => {
           const tbody = document.getElementById('rankingBody');
-          
+  
           if (!data || data.length === 0) {
             tbody.innerHTML = `
               <tr>
                 <td colspan="3" class="no-data">
-                  <i class="fas fa-users"></i>
-                  <br>
-                  Aún no hay jugadores registrados
+                  <i class="fas fa-users"></i><br>Aún no hay jugadores registrados
                 </td>
-              </tr>
-            `;
+              </tr>`;
             return;
           }
-
+  
           tbody.innerHTML = '';
-          
           data.forEach((jugador, index) => {
             const position = index + 1;
             const positionClass = position <= 3 ? `position-${position}` : '';
             const trophyIcon = position <= 3 ? `<i class="fas fa-trophy trophy-icon"></i>` : '';
-            
+  
             const row = document.createElement('tr');
             row.innerHTML = `
-              <td class="position ${positionClass}">
-                ${trophyIcon}${position}º
-              </td>
+              <td class="position ${positionClass}">${trophyIcon}${position}º</td>
               <td class="player-email">${jugador.email}</td>
-              <td class="player-time">${jugador.tiempo}s</td>
-            `;
-            
-            // Agregar animación para los primeros 3 puestos
-            if (position <= 3) {
-              row.classList.add('pulse');
-            }
-            
+              <td class="player-time">${jugador.tiempo}s</td>`;
+            if (position <= 3) row.classList.add('pulse');
             tbody.appendChild(row);
           });
         })
         .catch(error => {
           console.error('Error cargando ranking:', error);
-          const tbody = document.getElementById('rankingBody');
-          tbody.innerHTML = `
+          document.getElementById('rankingBody').innerHTML = `
             <tr>
               <td colspan="3" class="no-data">
-                <i class="fas fa-exclamation-triangle"></i>
-                <br>
-                Error al cargar el ranking
+                <i class="fas fa-exclamation-triangle"></i><br>Error al cargar el ranking
               </td>
-            </tr>
-          `;
+            </tr>`;
         });
     }
-
-    // Cargar ranking inicial
-    updateRanking();
-
+  
     // Actualizar cada 15 segundos
+    updateRanking();
     setInterval(updateRanking, 15000);
-
-    // Agregar efecto de parpadeo suave para el título
+  
+    // Efecto título
     setInterval(() => {
       const title = document.querySelector('.header-tv h1');
       title.style.textShadow = title.style.textShadow.includes('rgba(255, 215, 0, 0.8)') 
         ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
         : '0 4px 20px rgba(255, 215, 0, 0.8)';
     }, 3000);
+  
+    // Ejemplo de uso: enviarResultado('test@unlu.edu.ar', 37);
   </script>
+  
 </body>
 </html>
