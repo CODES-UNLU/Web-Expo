@@ -210,71 +210,16 @@ function mostrarFinal() {
       ${resumen}
     </div>
     <p>Dejanos tu correo para participar del sorteo:</p>
-    <input type="email" id="email" placeholder="tucorreo@ejemplo.com">
-    <button onclick="enviarEmail()">Enviar</button>
+    <form class="unluwords-email-form" onsubmit="event.preventDefault(); enviarEmail();">
+      <div class="unluwords-email-input-wrapper">
+        <span class="unluwords-email-icon">
+          <svg width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.75 6.5A2.25 2.25 0 0 1 5 4.25h12A2.25 2.25 0 0 1 19.25 6.5v9a2.25 2.25 0 0 1-2.25 2.25H5A2.25 2.25 0 0 1 2.75 15.5v-9Zm1.5.19v8.31c0 .414.336.75.75.75h12a.75.75 0 0 0 .75-.75V6.69l-6.75 4.5-6.75-4.5Zm1.13-1.19 6.12 4.08a.75.75 0 0 0 .84 0l6.12-4.08A.75.75 0 0 0 17 5.75H5a.75.75 0 0 0-.62.31Z" fill="#667eea"/></svg>
+        </span>
+        <input type="email" id="email" class="unluwords-email-input" placeholder="tucorreo@ejemplo.com" autocomplete="off">
+      </div>
+      <button class="unluwords-email-btn" id="unluwords-email-btn" type="submit">Enviar</button>
+    </form>
     <p id="emailMensaje"></p>
   `;
   lanzarConfeti();
-}
-
-// Confeti animado
-function lanzarConfeti() {
-  const colors = ["#48bb78", "#667eea", "#ed8936", "#38a169", "#764ba2", "#f6e05e", "#29C5F4"];
-  const confetti = document.createElement("div");
-  confetti.className = "confetti";
-  for (let i = 0; i < 80; i++) {
-    const piece = document.createElement("div");
-    piece.className = "confetti-piece";
-    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-    piece.style.left = Math.random() * 100 + "vw";
-    piece.style.top = (Math.random() * 10 - 10) + "vh";
-    piece.style.transform = `rotate(${Math.random()*360}deg)`;
-    piece.style.animation = `confetti-fall 1.8s ${Math.random()*0.7}s cubic-bezier(.6,1.5,.6,1) forwards`;
-    confetti.appendChild(piece);
-  }
-  document.body.appendChild(confetti);
-  setTimeout(() => confetti.remove(), 2500);
-}
-
-// Confeti keyframes
-const style = document.createElement('style');
-style.innerHTML = `@keyframes confetti-fall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0.7;
-  }
-}`;
-document.head.appendChild(style);
-
-function reiniciarJuego() {
-  nivelActual = 4;
-  intentos = [];
-  inicioTiempo = null;
-  document.getElementById("unluwords-bienvenida").classList.remove("unluwords-oculto");
-  document.getElementById("unluwords-game-area").classList.add("unluwords-oculto");
-}
-
-function enviarEmail() {
-  const email = document.getElementById("email").value;
-  const mensaje = document.getElementById("emailMensaje");
-  const segundos = Math.floor((new Date() - inicioTiempo) / 1000);
-
-  if (email && email.includes("@")) {
-    fetch(
-      "https://script.google.com/macros/s/AKfycbz2XIqDM5ux2IlTs9ZDFP-bNMqucBZb7jZ-sljE6m5S-rMHFsIuJR6kC4Xw4tTjGjY_2A/exec",
-      {
-        method: "POST",
-        body: JSON.stringify({ email, tiempo: segundos }),
-        contentType: "application/json",
-      }
-    )
-      .then(() => {
-        mensaje.textContent = "¡Gracias por participar! Te contactaremos si ganás.";
-      })
-      .catch(() => {
-        mensaje.textContent = "Ocurrió un error al enviar los datos.";
-      });
-  } else {
-    mensaje.textContent = "Por favor ingresá un correo válido.";
-  }
 }
