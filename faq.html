@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Preguntas frecuentes sobre el ingreso a la UNLu. Información sobre inscripción, documentación, fechas y proceso de admisión." />
+  <meta name="keywords" content="ingreso UNLu, preguntas frecuentes, inscripción universitaria, documentación, admisión" />
+  <meta name="author" content="CODES++ - Centro de Estudiantes de Sistemas UNLu" />
+  <meta property="og:title" content="Preguntas Frecuentes - Ingreso UNLu" />
+  <meta property="og:description" content="Resolvé tus dudas sobre el ingreso a la Universidad Nacional de Luján" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/x-icon" href="LogoCodes.png" />
   <title>Preguntas Frecuentes - Ingreso UNLu</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,7 +122,7 @@
     <div class="nav-container">
       <div class="nav-logo">
         <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
-          <img src="logoLSIUNLu.svg" alt="Logo Sistemas" height="40" />
+          <img src="logoLSIUNLu.svg" alt="Logo Licenciatura en Sistemas de Información UNLu" height="40" />
         </a>
       </div>
       <ul class="menu">
@@ -126,10 +133,10 @@
       </ul>
       <div class="nav-right">
         <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
-          <img src="LogoCodes.png" alt="Logo CODES" height="40" />
+          <img src="LogoCodes.png" alt="Logo CODES++ Centro de Estudiantes" height="40" />
         </a>
       </div>
-      <button class="menu-toggle" onclick="toggleMenu()">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
         <i class="fas fa-bars"></i>
       </button>
     </div>
@@ -190,30 +197,43 @@
 
   <footer>
     <div class="footer-content">
-      <div class="footer-section">
-        <h4><i class="fas fa-university"></i> UNLu - Sistemas</h4>
-        <p>Universidad Nacional de Luján</p>
-      </div>
-      <div class="footer-section">
-        <h4><i class="fas fa-users"></i> CODES++</h4>
-        <p>Centro de Estudiantes</p>
-      </div>
-      <div class="footer-section">
-        <h4><i class="fas fa-envelope"></i> Contacto</h4>
-        <p>codes.unlu@gmail.com</p>
-      </div>
+              <div class="footer-section">
+          <h4><i class="fas fa-university"></i> <a href="https://www.unlu.edu.ar/" target="_blank" style="color: inherit; text-decoration: none;">UNLu - Sistemas</a></h4>
+          <p>Universidad Nacional de Luján</p>
+        </div>
+              <div class="footer-section">
+          <h4><i class="fas fa-users"></i> <a href="https://codes-unlu.github.io/Web-Codes/" target="_blank" style="color: inherit; text-decoration: none;">CODES++</a></h4>
+          <p>Centro de Estudiantes</p>
+        </div>
+              <div class="footer-section">
+          <h4><i class="fas fa-envelope"></i> Contacto</h4>
+          <p><a href="mailto:codes.unlu@gmail.com" style="color: inherit; text-decoration: none;">codes.unlu@gmail.com</a></p>
+        </div>
     </div>
     <div class="footer-bottom">
       &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
-      de informacion UNLu. Todos los derechos reservados.
+      de información UNLu. Todos los derechos reservados.
     </div>
   </footer>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.querySelector('.menu');
-      menu.classList.toggle('show');
-    }
-  </script>
+      <script>
+      function toggleMenu() {
+        const menu = document.querySelector('.menu');
+        menu.classList.toggle('show');
+      }
+
+      // Cerrar menú al hacer clic fuera de él
+      document.addEventListener('click', function(event) {
+        const menu = document.querySelector('.menu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        // Si el menú está abierto y el clic no es en el menú ni en el botón toggle
+        if (menu.classList.contains('show') && 
+            !menu.contains(event.target) && 
+            !menuToggle.contains(event.target)) {
+          menu.classList.remove('show');
+        }
+      });
+    </script>
 </body>
 </html>

@@ -20,12 +20,12 @@ body {
 
 /* ===== NAVEGACIÓN MEJORADA ===== */
 nav {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
@@ -154,12 +154,14 @@ header::before {
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   background: linear-gradient(45deg, #fff, #f0f0f0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  position: relative;
 }
+
+
 
 /* ===== CONTENEDOR PRINCIPAL ===== */
 .container {
@@ -185,6 +187,8 @@ header::before {
     transform: translateY(0);
   }
 }
+
+
 
 /* ===== HERO SECTION ===== */
 .hero-section {
@@ -1339,6 +1343,10 @@ button:hover {
 
   .nav-right {
     display: none;
+  }
+
+  .nav-logo img {
+    height: 48px;
   }
 
   .unluwords-container {
