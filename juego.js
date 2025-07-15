@@ -1,8 +1,8 @@
 const palabras = {
   
-    4: ["code", "dato", "aula", "chat", "wifi", "test", "base"],
-    5: ["email", "tarea", "grupo", "clave", "libro", "disco", "input", "query", "login"],
-    6: ["backup", "editor", "correo", "acceso", "buscar", "clases", "pagina", "python", "visual", "script", "docker", "modulo", "metric"]
+    4: ["dato", "aula", "wifi", "test", "byte", "user", "apps", "mail", "nota"],
+    5: ["tarea", "grupo", "clave", "libro", "disco", "redes", "clase", "curso", "login", "error"],
+    6: ["editor", "correo", "acceso", "buscar", "clases", "pagina","modulo", "titulo", "teoria"]
   
   
 };
