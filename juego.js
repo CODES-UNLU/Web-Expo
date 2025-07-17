@@ -36,6 +36,15 @@ function iniciarJuego() {
   iniciarNivel();
 }
 
+function reiniciarJuego() {
+  nivelActual = 4;
+  inicioTiempo = null;
+  intentosPorNivel = [];
+  document.getElementById("unluwords-game-area").classList.remove("unluwords-oculto");
+  document.getElementById("unluwords-bienvenida").classList.add("unluwords-oculto");
+  iniciarNivel();
+}
+
 function iniciarNivel() {
   if (!inicioTiempo) inicioTiempo = new Date();
   const lista = palabras[nivelActual].filter((p) => p.length === nivelActual);
