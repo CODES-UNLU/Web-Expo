@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UTEC San Miguel - Galería</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #232526 0%, #0f2027 100%);
+      font-family: 'Inter', Arial, sans-serif;
+      color: #222;
+      position: relative;
+      overflow-x: hidden;
+    }
+    #matrix-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.20;
+    }
+    .utec-header, .utec-info, .utec-categorias, .utec-gallery, .back-link {
+      position: relative;
+      z-index: 1;
+    }
+    .utec-header {
+      text-align: center;
+      margin-top: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .utec-header h1 {
+      font-size: 2.7rem;
+      font-weight: 800;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+    }
+    .utec-header p {
+      color: #444;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .utec-header p.utec-destacado {
+      color: #fff;
+      background: rgba(102,126,234,0.85);
+      font-size: 1.25rem;
+      font-weight: 800;
+      padding: 0.7rem 1.5rem;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 12px rgba(102,126,234,0.13);
+      letter-spacing: 0.5px;
+    }
+    .utec-categorias {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 1.5rem 0 2.5rem 0;
+    }
+    .utec-cat {
+      background: #f7fafc;
+      border: 1.5px solid #667eea;
+      color: #333;
+      border-radius: 12px;
+      padding: 0.7rem 1.4rem;
+      font-size: 1.08rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.07);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .utec-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto 2.5rem auto;
+      padding: 0 1rem;
+    }
+    .utec-card {
+      background: rgba(255,255,255,0.97);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(102,126,234,0.10);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.2rem 1rem 1.5rem 1rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .utec-card:hover {
+      box-shadow: 0 8px 32px rgba(102,126,234,0.18);
+      transform: translateY(-4px) scale(1.02);
+    }
+    .utec-card img, .utec-card video {
+      width: 100%;
+      max-width: 340px;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      background: #e2e8f0;
+      object-fit: cover;
+    }
+    .utec-card video {
+      min-height: 180px;
+    }
+    .utec-card .caption {
+      font-size: 1.05rem;
+      color: #555;
+      text-align: center;
+      margin-top: 0.2rem;
+    }
+    .utec-info {
+      max-width: 700px;
+      margin: 0 auto 2.5rem auto;
+      background: rgba(255,255,255,0.97);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(102,126,234,0.08);
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      font-size: 1.13rem;
+      color: #333;
+      text-align: center;
+    }
+    .utec-ubicacion {
+      margin: 1.2rem 0 0.5rem 0;
+      color: #667eea;
+      font-weight: 700;
+      font-size: 1.08rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .utec-link {
+      display: inline-block;
+      margin: 1.2rem auto 0.5rem auto;
+      padding: 0.6rem 1.5rem;
+      background: #667eea;
+      color: #fff;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+      transition: background 0.2s;
+    }
+    .utec-link:hover { background: #764ba2; }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin: 2.5rem auto 1.5rem auto;
+      background: #667eea;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.13rem;
+      border-radius: 10px;
+      padding: 0.7rem 2.2rem;
+      text-decoration: none;
+      max-width: 320px;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+      transition: background 0.2s;
+    }
+    .back-link:hover {
+      background: #764ba2;
+      color: #fff;
+    }
+    @media (max-width: 600px) {
+      .utec-header h1 { font-size: 2rem; }
+      .utec-gallery { gap: 1.2rem; }
+      .utec-card img, .utec-card video { max-width: 100%; }
+      .utec-categorias {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        align-items: stretch;
+      }
+      .utec-cat {
+        width: 100%;
+        font-size: 1rem;
+        text-align: center;
+        justify-content: center;
+        padding: 0.6rem 0.2rem;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix-bg"></canvas>
+  <div class="utec-header">
+    <h1><i class="fas fa-university"></i> UTEC San Miguel</h1>
+    <p class="utec-destacado">Espacio de formación, innovación y tecnología en San Miguel</p>
+    <div style="width:100%;text-align:center;margin-top:1.2rem;">
+      <a class="utec-link" href="https://decti.msm.gov.ar/utec" target="_blank"><i class="fas fa-external-link-alt"></i> Sitio oficial UTEC San Miguel</a>
+    </div>
+  </div>
+  <div class="utec-info">
+    La <b>UTEC</b> es un espacio físico y virtual provisto por la Municipalidad de San Miguel, desde el cual se brindan oportunidades de formación de talento IT, networking, incubación de startups, transformación productiva e I+D+i. Su objetivo es crear un ecosistema innovador que potencie el desarrollo económico y la inserción laboral en la ciudad.<br><br>
+    <span style="color:#667eea;font-weight:600;">Servicios disponibles para toda la comunidad: hackers, emprendedores, diseñadores, comerciantes, industriales y más.</span>
+    <div class="utec-ubicacion"><i class="fas fa-map-marker-alt"></i> Sarmiento 1551, San Miguel, Buenos Aires, Argentina</div>
+  </div>
+  <div class="utec-categorias">
+    <div class="utec-cat"><i class="fas fa-code"></i> Programación</div>
+    <div class="utec-cat"><i class="fas fa-robot"></i> Robótica</div>
+    <div class="utec-cat"><i class="fas fa-gamepad"></i> Videojuegos</div>
+    <div class="utec-cat"><i class="fas fa-music"></i> Música</div>
+    <div class="utec-cat"><i class="fas fa-laptop"></i> Soporte Informático</div>
+    <div class="utec-cat"><i class="fas fa-chalkboard-teacher"></i> Alfabetización Digital</div>
+    <div class="utec-cat"><i class="fas fa-video"></i> Videos</div>
+  </div>
+  <div class="utec-gallery">
+    <div class="utec-card">
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80" alt="Coworking moderno">
+      <div class="caption">Coworking moderno</div>
+    </div>
+    <div class="utec-card">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="Equipo de trabajo">
+      <div class="caption">Equipo de trabajo</div>
+    </div>
+    <div class="utec-card">
+      <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=800&q=80" alt="Aula tecnológica">
+      <div class="caption">Aula tecnológica</div>
+    </div>
+    <div class="utec-card">
+      <video controls poster="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+      </video>
+      <div class="caption">Video de ejemplo</div>
+    </div>
+    <div class="utec-card">
+      <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80" alt="Espacio creativo">
+      <div class="caption">Espacio creativo</div>
+    </div>
+    <div class="utec-card">
+      <video controls poster="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80">
+        <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+      </video>
+      <div class="caption">Video inspirador</div>
+    </div>
+  </div>
+  <a href="index.html" class="back-link">&larr; Volver a la página principal</a>
+  <script>
+    // Matrix background effect
+    const canvas = document.getElementById('matrix-bg');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const fontSize = 18;
+    const columns = Math.floor(width / fontSize);
+    const drops = Array(columns).fill(1);
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = '#39ff14';
+      ctx.font = fontSize + 'px monospace';
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 50);
+    window.addEventListener('resize', () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    });
+  </script>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4><i class="fas fa-university"></i> <a href="https://www.unlu.edu.ar/" target="_blank" style="color: inherit; text-decoration: none;">UNLu - Sistemas</a></h4>
+        <p>Universidad Nacional de Luján</p>
+      </div>
+      <div class="footer-section">
+        <h4><i class="fas fa-users"></i> <a href="https://codes-unlu.github.io/Web-Codes/" target="_blank" style="color: inherit; text-decoration: none;">CODES++</a></h4>
+        <p>Centro de Estudiantes</p>
+      </div>
+      <div class="footer-section">
+        <h4><i class="fas fa-envelope"></i> Contacto</h4>
+        <p><a href="mailto:codes.unlu@gmail.com" style="color: inherit; text-decoration: none;">codes.unlu@gmail.com</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas de información UNLu. Todos los derechos reservados.
+    </div>
+    <div class="footer-author" style="text-align:center; color:#667eea; font-size:1rem; margin-top:0.5rem;">
+      Desarrollada por
+      <a href="https://www.linkedin.com/in/federico-s-rizzo/" target="_blank" style="color:#667eea; text-decoration:underline; font-weight:600;">
+        <i class="fab fa-linkedin" style="margin-right:4px;"></i>Federico Rizzo
+      </a>
+    </div>
+  </footer>
+</body>
+</html> 
