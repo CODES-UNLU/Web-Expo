@@ -77,7 +77,8 @@ function generarGrid() {
       input.inputMode = "latin";
 
       input.addEventListener("input", (e) => {
-        e.target.value = e.target.value.toUpperCase().slice(0, 1);
+        let val = e.target.value.toUpperCase().replace(/[^A-ZÁÉÍÓÚÜÑ]/g, "");
+        e.target.value = val.slice(0, 1);
         if (e.target.value && j < nivelActual - 1) {
           const nextInput = document.getElementById(`cell-${i}-${j + 1}`);
           if (nextInput) nextInput.focus();
