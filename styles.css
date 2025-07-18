@@ -117,6 +117,21 @@ nav {
   font-size: 1rem;
 }
 
+.menu li .disabled-link {
+  color: #aaa !important;
+  background: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+  transition: none;
+}
+
 /* ===== HEADER SIMPLIFICADO ===== */
 header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
