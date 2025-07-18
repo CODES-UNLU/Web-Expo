@@ -3,41 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Stand de Sistemas de la Expo UNLu 2025. Descubrí tu futuro universitario con actividades interactivas, test vocacional y juego UNLuWords." />
-    <meta name="keywords" content="UNLu, Sistemas, Expo, Universidad, Luján, CODES, Centro de Estudiantes, tecnología, programación" />
-    <meta name="author" content="CODES++ - Centro de Estudiantes de Sistemas UNLu" />
+    <meta
+      name="description"
+      content="Stand de Sistemas de la Expo UNLu 2025. Descubrí tu futuro universitario con actividades interactivas, test vocacional y juego UNLuWords."
+    />
+    <meta
+      name="keywords"
+      content="UNLu, Sistemas, Expo, Universidad, Luján, CODES, Centro de Estudiantes, tecnología, programación"
+    />
+    <meta
+      name="author"
+      content="CODES++ - Centro de Estudiantes de Sistemas UNLu"
+    />
     <meta property="og:title" content="Expo UNLu - Stand de Sistemas" />
-    <meta property="og:description" content="Descubrí tu futuro universitario con actividades interactivas en el stand de Sistemas" />
+    <meta
+      property="og:description"
+      content="Descubrí tu futuro universitario con actividades interactivas en el stand de Sistemas"
+    />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/x-icon" href="LogoCodes.png" />
     <title>Expo UNLu - Sistemas</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
   </head>
   <body>
     <nav>
       <div class="nav-container">
         <div class="nav-logo">
           <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
-            <img src="logoLSIUNLu.svg" alt="Logo Licenciatura en Sistemas de Información UNLu" height="40" />
+            <img
+              src="logoLSIUNLu.svg"
+              alt="Logo Licenciatura en Sistemas de Información UNLu"
+              height="40"
+            />
           </a>
         </div>
         <ul class="menu">
-          <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-          <li><a href="index.html#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
-          <li><span class="disabled-link"><i class='fas fa-flask'></i> Demostraciones</span></li>
-          <li><a href="utec.html"><i class="fas fa-university"></i> UTEC</a></li>
-          <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+          <li>
+            <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+          </li>
+          <li>
+            <a href="index.html#actividades"
+              ><i class="fas fa-gamepad"></i> Actividades</a
+            >
+          </li>
+          <li>
+            <a href="Demos/demostraciones.html"
+              ><i class="fas fa-flask"></i> Demostraciones</a
+            >
+          </li>
+          <li>
+            <a href="utec.html"><i class="fas fa-university"></i> UTEC</a>
+          </li>
+          <li>
+            <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+          </li>
         </ul>
         <div class="nav-right">
           <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
-            <img src="LogoCodes.png" alt="Logo CODES++ Centro de Estudiantes" height="40" />
+            <img
+              src="LogoCodes.png"
+              alt="Logo CODES++ Centro de Estudiantes"
+              height="40"
+            />
           </a>
         </div>
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
+        <button
+          class="menu-toggle"
+          onclick="toggleMenu()"
+          aria-label="Abrir menú de navegación"
+        >
           <i class="fas fa-bars"></i>
         </button>
       </div>
@@ -54,7 +98,8 @@
         <h2>Explorá tu futuro universitario</h2>
         <p class="hero-text">
           Desde el Centro de Estudiantes te invitamos a participar de nuestras
-          actividades interactivas y descubrir el apasionante mundo de la tecnología.
+          actividades interactivas y descubrir el apasionante mundo de la
+          tecnología.
         </p>
         <div class="hero-stats">
           <div class="stat">
@@ -99,8 +144,6 @@
           <span class="btn-text">Preguntas Frecuentes</span>
           <span class="subtexto">Consultas comunes</span>
         </a>
-
-
       </div>
 
       <div class="highlight" id="info">
@@ -114,31 +157,142 @@
         </div>
       </div>
 
-      <section id="demostraciones" style="max-width:900px;margin:2.5rem auto 2rem auto;padding:2.5rem 2rem;background:rgba(255,255,255,0.97);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.08);">
-        <h2 style="font-size:2rem;font-weight:800;color:#667eea;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem;"><i class="fas fa-flask"></i> Demostraciones Interactivas</h2>
-        <p style="font-size:1.13rem;color:#444;margin-bottom:1.5rem;">Experimentá con las tecnologías del futuro: editor de código, chat con IA, realidad virtual y más. ¡Tocá, probá y descubrí el mundo de la programación y la tecnología de manera práctica y divertida!</p>
-        <div style="display:flex;gap:2.5rem;justify-content:center;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;">
-          <div style="text-align:center;min-width:90px;">
-            <div style="font-size:2.2rem;font-weight:900;color:#667eea;">4</div>
-            <div style="font-size:1.05rem;color:#444;">Experiencias<br>Interactivas</div>
+      <section
+        id="demostraciones"
+        style="
+          max-width: 900px;
+          margin: 3rem auto 2rem auto;
+          padding: 2.5rem 2rem;
+          background: rgba(255, 255, 255, 0.97);
+          border-radius: 20px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 2rem;
+        "
+      >
+        <div style="flex: 1 1 100%; min-width: 220px">
+          <h2
+            style="
+              font-size: 2.2rem;
+              font-weight: 800;
+              color: #667eea;
+              margin-bottom: 1rem;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+            "
+          >
+            <i class="fas fa-flask"></i> Demostraciones Interactivas
+          </h2>
+          <p style="font-size: 1.15rem; color: #444; margin-bottom: 1.2rem">
+            Experimentá con las tecnologías del futuro: editor de código, chat
+            con IA, realidad virtual y más. ¡Sumergite en el mundo de la
+            programación y la tecnología de manera práctica y divertida!
+          </p>
+
+          <div
+            style="
+              display: flex;
+              gap: 2.5rem;
+              justify-content: center;
+              align-items: center;
+              margin: 2rem 0;
+              flex-wrap: wrap;
+            "
+          >
+            <div style="text-align: center; min-width: 90px">
+              <div style="font-size: 2.2rem; font-weight: 900; color: #667eea">
+                4
+              </div>
+              <div style="font-size: 1.05rem; color: #444">
+                Experiencias<br />Interactivas
+              </div>
+            </div>
+            <div style="text-align: center; min-width: 90px">
+              <div style="font-size: 2.2rem; font-weight: 900; color: #38a169">
+                100%
+              </div>
+              <div style="font-size: 1.05rem; color: #444">Gratuitas</div>
+            </div>
+            <div style="text-align: center; min-width: 90px">
+              <div style="font-size: 2.2rem; font-weight: 900; color: #764ba2">
+                ∞
+              </div>
+              <div style="font-size: 1.05rem; color: #444">Posibilidades</div>
+            </div>
           </div>
-          <div style="text-align:center;min-width:90px;">
-            <div style="font-size:2.2rem;font-weight:900;color:#38a169;">100%</div>
-            <div style="font-size:1.05rem;color:#444;">Gratuitas</div>
-          </div>
-          <div style="text-align:center;min-width:90px;">
-            <div style="font-size:2.2rem;font-weight:900;color:#764ba2;">∞</div>
-            <div style="font-size:1.05rem;color:#444;">Posibilidades</div>
-          </div>
+
+          <a
+            href="Demos/demostraciones.html"
+            style="
+              display: inline-block;
+              padding: 0.7rem 2rem;
+              background: #667eea;
+              color: #fff;
+              font-weight: 700;
+              border-radius: 12px;
+              text-decoration: none;
+              font-size: 1.1rem;
+              box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+              transition: background 0.2s;
+            "
+            >Ver demostraciones</a
+          >
         </div>
-        <button style="display:inline-block;padding:0.8rem 2.2rem;background:#e2e8f0;color:#aaa;font-weight:700;border-radius:12px;font-size:1.13rem;box-shadow:0 2px 8px rgba(102,126,234,0.10);border:none;cursor:not-allowed;opacity:0.7;" disabled>En desarrollo</button>
       </section>
 
-      <section id="utec-destacada" style="max-width:900px;margin:3rem auto 2rem auto;padding:2.5rem 2rem;background:rgba(255,255,255,0.97);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.08);display:flex;flex-wrap:wrap;align-items:center;gap:2rem;">
-        <div style="flex:1 1 100%;min-width:220px;">
-          <h2 style="font-size:2.2rem;font-weight:800;color:#667eea;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;"><i class="fas fa-university"></i> UTEC</h2>
-          <p style="font-size:1.15rem;color:#444;margin-bottom:1.2rem;">Descubrí la Universidad Tecnológica de San Miguel: formación IT, coworking, innovación y más. Mirá fotos y videos para conocer el ambiente y las oportunidades que ofrece.</p>
-          <a href="utec.html" style="display:inline-block;padding:0.7rem 2rem;background:#667eea;color:#fff;font-weight:700;border-radius:12px;text-decoration:none;font-size:1.1rem;box-shadow:0 2px 8px rgba(102,126,234,0.10);transition:background 0.2s;">Ver galería UTEC</a>
+      <section
+        id="utec-destacada"
+        style="
+          max-width: 900px;
+          margin: 3rem auto 2rem auto;
+          padding: 2.5rem 2rem;
+          background: rgba(255, 255, 255, 0.97);
+          border-radius: 20px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 2rem;
+        "
+      >
+        <div style="flex: 1 1 100%; min-width: 220px">
+          <h2
+            style="
+              font-size: 2.2rem;
+              font-weight: 800;
+              color: #667eea;
+              margin-bottom: 1rem;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+            "
+          >
+            <i class="fas fa-university"></i> UTEC
+          </h2>
+          <p style="font-size: 1.15rem; color: #444; margin-bottom: 1.2rem">
+            Descubrí la Universidad Tecnológica de San Miguel: formación IT,
+            coworking, innovación y más. Mirá fotos y videos para conocer el
+            ambiente y las oportunidades que ofrece.
+          </p>
+          <a
+            href="utec.html"
+            style="
+              display: inline-block;
+              padding: 0.7rem 2rem;
+              background: #667eea;
+              color: #fff;
+              font-weight: 700;
+              border-radius: 12px;
+              text-decoration: none;
+              font-size: 1.1rem;
+              box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+              transition: background 0.2s;
+            "
+            >Ver galería UTEC</a
+          >
         </div>
       </section>
 
@@ -176,71 +330,108 @@
     <footer>
       <div class="footer-content">
         <div class="footer-section">
-          <h4><i class="fas fa-university"></i> <a href="https://www.unlu.edu.ar/" target="_blank" style="color: inherit; text-decoration: none;">UNLu - Sistemas</a></h4>
+          <h4>
+            <i class="fas fa-university"></i>
+            <a
+              href="https://www.unlu.edu.ar/"
+              target="_blank"
+              style="color: inherit; text-decoration: none"
+              >UNLu - Sistemas</a
+            >
+          </h4>
           <p>Universidad Nacional de Luján</p>
         </div>
         <div class="footer-section">
-          <h4><i class="fas fa-users"></i> <a href="https://codes-unlu.github.io/Web-Codes/" target="_blank" style="color: inherit; text-decoration: none;">CODES++</a></h4>
+          <h4>
+            <i class="fas fa-users"></i>
+            <a
+              href="https://codes-unlu.github.io/Web-Codes/"
+              target="_blank"
+              style="color: inherit; text-decoration: none"
+              >CODES++</a
+            >
+          </h4>
           <p>Centro de Estudiantes</p>
         </div>
         <div class="footer-section">
           <h4><i class="fas fa-envelope"></i> Contacto</h4>
-          <p><a href="mailto:codes.unlu@gmail.com" style="color: inherit; text-decoration: none;">codes.unlu@gmail.com</a></p>
+          <p>
+            <a
+              href="mailto:codes.unlu@gmail.com"
+              style="color: inherit; text-decoration: none"
+              >codes.unlu@gmail.com</a
+            >
+          </p>
         </div>
       </div>
       <div class="footer-bottom">
         &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
         de información UNLu. Todos los derechos reservados.
       </div>
-      <div class="footer-author" style="text-align:center; color:#667eea; font-size:1rem; margin-top:0.5rem;">
+      <div
+        class="footer-author"
+        style="
+          text-align: center;
+          color: #667eea;
+          font-size: 1rem;
+          margin-top: 0.5rem;
+        "
+      >
         Desarrollada por
-        <a href="https://www.linkedin.com/in/federico-s-rizzo/" target="_blank" style="color:#667eea; text-decoration:underline; font-weight:600;">
-          <i class="fab fa-linkedin" style="margin-right:4px;"></i>Federico Rizzo
+        <a
+          href="https://www.linkedin.com/in/federico-s-rizzo/"
+          target="_blank"
+          style="color: #667eea; text-decoration: underline; font-weight: 600"
+        >
+          <i class="fab fa-linkedin" style="margin-right: 4px"></i>Federico
+          Rizzo
         </a>
       </div>
     </footer>
 
     <script>
       function toggleMenu() {
-        const menu = document.querySelector('.menu');
-        menu.classList.toggle('show');
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
       }
 
       // Cerrar menú al hacer clic en cualquier enlace del menú
-      document.querySelectorAll('.menu a').forEach(link => {
-        link.addEventListener('click', function() {
-          const menu = document.querySelector('.menu');
-          if (menu.classList.contains('show')) {
-            menu.classList.remove('show');
+      document.querySelectorAll(".menu a").forEach((link) => {
+        link.addEventListener("click", function () {
+          const menu = document.querySelector(".menu");
+          if (menu.classList.contains("show")) {
+            menu.classList.remove("show");
           }
         });
       });
 
       // Cerrar menú al hacer clic fuera de él
-      document.addEventListener('click', function(event) {
-        const menu = document.querySelector('.menu');
-        const menuToggle = document.querySelector('.menu-toggle');
-        
+      document.addEventListener("click", function (event) {
+        const menu = document.querySelector(".menu");
+        const menuToggle = document.querySelector(".menu-toggle");
+
         // Si el menú está abierto y el clic no es en el menú ni en el botón toggle
-        if (menu.classList.contains('show') && 
-            !menu.contains(event.target) && 
-            !menuToggle.contains(event.target)) {
-          menu.classList.remove('show');
+        if (
+          menu.classList.contains("show") &&
+          !menu.contains(event.target) &&
+          !menuToggle.contains(event.target)
+        ) {
+          menu.classList.remove("show");
         }
       });
 
       // Smooth scroll para enlaces internos
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
           e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
+          const target = document.querySelector(this.getAttribute("href"));
           if (target) {
-            const navbarHeight = document.querySelector('nav').offsetHeight;
+            const navbarHeight = document.querySelector("nav").offsetHeight;
             const targetPosition = target.offsetTop - navbarHeight - 50; // 50px de margen para la botonera
-            
+
             window.scrollTo({
               top: targetPosition,
-              behavior: 'smooth'
+              behavior: "smooth",
             });
           }
         });
@@ -249,8 +440,8 @@
       // Efecto de escritura para el título principal
       function typeWriter(element, text, speed = 100) {
         let i = 0;
-        element.innerHTML = '';
-        
+        element.innerHTML = "";
+
         function type() {
           if (i < text.length) {
             element.innerHTML += text.charAt(i);
@@ -258,45 +449,44 @@
             setTimeout(type, speed);
           }
         }
-        
+
         type();
       }
-      
+
       // Iniciar el efecto de escritura solo una vez
-      const typewriterElement = document.getElementById('typewriter-text');
-      const textToType = 'Bienvenidos al Stand de Sistemas de la Expo UNLu';
-      
+      const typewriterElement = document.getElementById("typewriter-text");
+      const textToType = "Bienvenidos al Stand de Sistemas de la Expo UNLu";
+
       // Esperar a que el DOM esté listo
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
           typeWriter(typewriterElement, textToType, 80);
         });
       } else {
         typeWriter(typewriterElement, textToType, 80);
       }
-      
+
       // Animación de entrada para elementos
-      
 
       const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: "0px 0px -50px 0px",
       };
 
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
           }
         });
       }, observerOptions);
 
       // Observar elementos para animación
-      document.querySelectorAll('.btn, .feature, .stat').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      document.querySelectorAll(".btn, .feature, .stat").forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
         observer.observe(el);
       });
     </script>

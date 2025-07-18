@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tu Primer Cuatrimestre - Juego de Historia</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    body { font-family: 'Inter', Arial, sans-serif; background: #f7fafc; }
+    .historia-container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #0001; padding: 2rem; }
+    .historia-text { font-size: 1.2rem; margin-bottom: 2rem; }
+    .opciones { display: flex; flex-direction: column; gap: 1rem; }
+    .opcion-btn { background: #667eea; color: #fff; border: none; border-radius: 8px; padding: 1rem; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+    .opcion-btn:hover { background: #5a67d8; }
+  </style>
+</head>
+<body>
+  <div class="historia-container">
+    <div id="historia" class="historia-text">
+      Es tu primer día en la universidad. Caminás por los pasillos con la mochila cargada de sueños. La clase comienza, pero no entendés el tema que explica el profesor.<br><br>
+      ¿Qué hacés?
+    </div>
+    <div id="opciones" class="opciones">
+      <button class="opcion-btn" onclick="elegirOpcion(1)">Preguntar al profesor</button>
+      <button class="opcion-btn" onclick="elegirOpcion(2)">Preguntar a un compañero</button>
+      <button class="opcion-btn" onclick="elegirOpcion(3)">Preguntar al centro de estudiantes</button>
+    </div>
+  </div>
+
+  <script>
+    let paso = 1;
+    function elegirOpcion(opcion) {
+      const historia = document.getElementById('historia');
+      const opciones = document.getElementById('opciones');
+
+      if (paso === 1) {
+        historia.innerHTML = opcion === 1
+          ? `El profesor te explica con más detalle y te recomienda material extra. ¡Bien hecho!`
+          : opcion === 2
+          ? `Repasás con un compañero y logran entenderlo juntos. ¡Trabajo en equipo!`
+          : `El centro de estudiantes te orienta y te sentís acompañado.`;
+
+        setTimeout(() => {
+          historia.innerHTML += `<br><br>Llega el primer trabajo práctico. ¿Cómo lo enfrentás?`;
+          opciones.innerHTML = `
+            <button class='opcion-btn' onclick='elegirOpcion(4)'>Formás grupo vos mismo</button>
+            <button class='opcion-btn' onclick='elegirOpcion(5)'>Esperás que te asignen</button>
+            <button class='opcion-btn' onclick='elegirOpcion(6)'>Lo hacés solo</button>
+          `;
+          paso = 2;
+        }, 500);
+      }
+      else if (paso === 2) {
+        historia.innerHTML = opcion === 4
+          ? `Te animás a proponer grupo y encontrás compañeros con tu misma onda.`
+          : opcion === 5
+          ? `Te asignan a un grupo y aprendés a trabajar con distintos perfiles.`
+          : `Lo hacés solo y aunque es más desafiante, te sentís orgulloso.`;
+
+        setTimeout(() => {
+          historia.innerHTML += `<br><br>Se acumulan parciales y trabajos. ¿Cómo te organizás?`;
+          opciones.innerHTML = `
+            <button class='opcion-btn' onclick='elegirOpcion(7)'>Usás una app</button>
+            <button class='opcion-btn' onclick='elegirOpcion(8)'>Dividís tareas con tu grupo</button>
+            <button class='opcion-btn' onclick='elegirOpcion(9)'>Buscás ayuda en tutorías</button>
+          `;
+          paso = 3;
+        }, 500);
+      }
+      else if (paso === 3) {
+        historia.innerHTML = opcion === 7
+          ? `Organizás todo con una app y tu productividad mejora.`
+          : opcion === 8
+          ? `El grupo se organiza y logran repartirse bien las tareas.`
+          : `Las tutorías te dan herramientas y sentís más control.`;
+
+        setTimeout(() => {
+          historia.innerHTML += `<br><br>Es el día del primer parcial. Hay una pregunta dudosa. ¿Qué hacés?`;
+          opciones.innerHTML = `
+            <button class='opcion-btn' onclick='elegirOpcion(10)'>Usás lógica</button>
+            <button class='opcion-btn' onclick='elegirOpcion(11)'>La dejás en blanco</button>
+            <button class='opcion-btn' onclick='elegirOpcion(12)'>Probás con lo que recordás</button>
+          `;
+          paso = 4;
+        }, 500);
+      }
+      else if (paso === 4) {
+        historia.innerHTML = opcion === 10
+          ? `Te la jugás con lógica y ¡acertás!`
+          : opcion === 11
+          ? `La dejás en blanco y evitás errores, aunque te quedás con la duda.`
+          : `Respondés con lo que recordás y te das cuenta que estabas cerca.`;
+
+        setTimeout(() => {
+          historia.innerHTML += `<br><br>Finaliza el cuatrimestre. ¿Cómo continuás?`;
+          opciones.innerHTML = `
+            <button class='opcion-btn' onclick='elegirOpcion(13)'>Te sumás al centro de estudiantes</button>
+            <button class='opcion-btn' onclick='elegirOpcion(14)'>Proponés un espacio de apoyo</button>
+            <button class='opcion-btn' onclick='elegirOpcion(15)'>Seguís enfocado en tus materias</button>
+          `;
+          paso = 5;
+        }, 500);
+      }
+      else if (paso === 5) {
+        historia.innerHTML = opcion === 13
+          ? `Tu experiencia te motiva y ahora ayudás a otros desde el centro de estudiantes.`
+          : opcion === 14
+          ? `Creás un espacio de apoyo y muchos te agradecen la iniciativa.`
+          : `Te enfocás en seguir aprendiendo a tu ritmo y te sentís más seguro.`;
+
+        opciones.innerHTML = `<button class='opcion-btn' onclick='reiniciar()'>Volver a empezar</button>`;
+      }
+    }
+
+    function reiniciar() {
+      const historia = document.getElementById('historia');
+      const opciones = document.getElementById('opciones');
+      historia.innerHTML = `Es tu primer día en la universidad. Caminás por los pasillos con la mochila cargada de sueños. La clase comienza, pero no entendés el tema que explica el profesor.<br><br>¿Qué hacés?`;
+      opciones.innerHTML = `
+        <button class='opcion-btn' onclick='elegirOpcion(1)'>Preguntar al profesor</button>
+        <button class='opcion-btn' onclick='elegirOpcion(2)'>Preguntar a un compañero</button>
+        <button class='opcion-btn' onclick='elegirOpcion(3)'>Preguntar al centro de estudiantes</button>
+      `;
+      paso = 1;
+    }
+  </script>
+</body>
+</html>
