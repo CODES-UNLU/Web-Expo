@@ -1358,8 +1358,17 @@ button:hover {
     color: #667eea;
   }
 
+  .nav-container {
+    position: relative;
+    justify-content: space-between;
+  }
+
   .nav-right {
-    display: none;
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
   }
 
   .nav-logo img {
