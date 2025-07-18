@@ -17,323 +17,258 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-      .step-container {
-        max-width: 800px;
-        margin: 2rem auto;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      }
-      
-      .step {
-        display: none;
-        animation: fadeIn 0.5s ease-in;
-      }
-      
-      .step.active {
-        display: block;
-      }
-      
-      .step-header {
-        text-align: center;
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        border-bottom: 2px solid #e2e8f0;
-      }
-      
-      .step-number {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        border-radius: 50%;
-        line-height: 40px;
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
-      
-      .step-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #2d3748;
-        margin-bottom: 0.5rem;
-      }
-      
-      .step-description {
-        color: #718096;
-        font-size: 1.1rem;
-      }
-      
-      .control-group {
-        margin-bottom: 1.5rem;
-      }
-      
-      .control-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: #4a5568;
-        font-size: 1.1rem;
-      }
-      
-      .control-group input, .control-group select {
-        width: 100%;
-        padding: 1rem;
-        border: 2px solid #e2e8f0;
-        border-radius: 12px;
-        font-size: 1rem;
-        transition: all 0.3s;
-        background: #f7fafc;
-      }
-      
-      .control-group input:focus, .control-group select:focus {
-        outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        background: white;
-      }
-      
-      .color-picker {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-      }
-      
-      .color-picker input[type="color"] {
-        width: 80px;
-        height: 50px;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-      
-      .color-picker input[type="text"] {
-        flex: 1;
-      }
-      
-      .range-group {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      .range-group input[type="range"] {
-        flex: 1;
-      }
-      
-      .range-group span {
-        min-width: 60px;
-        font-weight: 600;
-        color: #667eea;
-      }
-      
-      .button-group {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        margin-top: 2rem;
-      }
-      
-      .btn-step {
-        padding: 1rem 2rem;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 1.1rem;
-        cursor: pointer;
-        transition: all 0.3s;
-        min-width: 150px;
-      }
-      
-      .btn-step:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-      }
-      
-      .btn-step.secondary {
-        background: #e2e8f0;
-        color: #4a5568;
-      }
-      
-      .btn-step.secondary:hover {
-        background: #cbd5e0;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      }
-      
-      .preview-section {
-        text-align: center;
-        margin: 2rem 0;
-        padding: 2rem;
-        background: #f7fafc;
-        border-radius: 16px;
-        border: 2px dashed #e2e8f0;
-      }
-      
-      .preview-frame {
-        width: 100%;
-        min-height: 300px;
-        background: white;
-        border-radius: 12px;
-        padding: 2rem;
-        margin: 1rem 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-      
-      .code-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1000;
-        animation: fadeIn 0.3s ease;
-      }
-      
-      .code-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        border-radius: 16px;
-        padding: 2rem;
-        max-width: 90%;
-        max-height: 80%;
-        overflow-y: auto;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      }
-      
-      .code-display {
-        background: #1a202c;
-        color: #e2e8f0;
-        padding: 1.5rem;
-        border-radius: 12px;
-        font-family: 'Courier New', monospace;
-        font-size: 0.9rem;
-        overflow-x: auto;
-        margin: 1rem 0;
-      }
-      
-      .code-display h4 {
-        color: #667eea;
-        margin-bottom: 1rem;
-        font-size: 1.1rem;
-      }
-      
-      .close-modal {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        color: #718096;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 50%;
-        transition: all 0.3s;
-      }
-      
-      .close-modal:hover {
-        background: #f7fafc;
-        color: #4a5568;
-      }
-      
-      .shape-preview {
-        width: 100px;
-        height: 100px;
-        margin: 1rem auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px dashed #e2e8f0;
-        border-radius: 12px;
-        background: #f7fafc;
-      }
-      
-      .animation-preview {
-        padding: 1rem;
-        text-align: center;
-        background: white;
-        border-radius: 12px;
-        margin: 1rem 0;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-      
-      @media (max-width: 768px) {
-        .step-container {
-          margin: 1rem;
-          padding: 1.5rem;
-        }
-        
-        .button-group {
-          flex-direction: column;
-        }
-        
-        .btn-step {
-          width: 100%;
-        }
-        
-        .color-picker {
-          flex-direction: column;
-          align-items: stretch;
-        }
-        
-        .color-picker input[type="color"] {
-          width: 100%;
-          height: 60px;
-        }
-      }
-      
-      /* Animaciones CSS */
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      
-      @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-        40% { transform: translateY(-10px); }
-        60% { transform: translateY(-5px); }
-      }
-      
-      @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-      }
-      
-      @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
-      
-      @keyframes slide {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
-      }
-      
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      
-      @keyframes glow {
-        0%, 100% { box-shadow: 0 0 5px currentColor; }
-        50% { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
-      }
-    </style>
+.step { display: none; }
+.step.active { display: block; }
+/***** Moderno y responsive *****/
+.container {
+  max-width: 600px;
+  margin: 2.5rem auto;
+  padding: 2.2rem 1.2rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(102,126,234,0.10);
+  background: rgba(255,255,255,0.97);
+}
+.step-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+.step-number {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-radius: 50%;
+  line-height: 38px;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+  font-size: 1.2rem;
+}
+.step-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.3rem;
+}
+.step-description {
+  color: #718096;
+  font-size: 1.05rem;
+}
+.control-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+.control-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 1.05rem;
+}
+.control-group input, .control-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #f7fafc;
+  margin-bottom: 0.2rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.control-group input:focus, .control-group select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px #667eea33;
+  background: #fff;
+}
+.color-picker {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+.color-picker input[type="color"] {
+  width: 48px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+}
+.color-picker input[type="text"] {
+  flex: 1;
+}
+.range-group {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.range-group input[type="range"] {
+  flex: 1;
+}
+.range-group span {
+  min-width: 48px;
+  font-weight: 600;
+  color: #667eea;
+}
+.button-group {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.btn-step, .btn-step.secondary {
+  padding: 0.9rem 1.7rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 120px;
+  box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+  margin-bottom: 0.5rem;
+}
+.btn-step.secondary {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+.btn-step:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.18);
+}
+.preview-section {
+  text-align: center;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: #f7fafc;
+  border-radius: 14px;
+  border: 2px dashed #e2e8f0;
+}
+.preview-frame {
+  width: 100%;
+  min-height: 220px;
+  max-height: 350px;
+  background: white;
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+  overflow: auto;
+}
+.code-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+.code-modal.show {
+  display: flex;
+}
+.code-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 1.2rem;
+  max-width: 95vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  margin: auto;
+  text-align: left;
+}
+.code-display {
+  background: #1a202c;
+  color: #e2e8f0;
+  padding: 1.2rem;
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.98rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+.code-display h4 {
+  color: #667eea;
+  margin-bottom: 0.7rem;
+  font-size: 1.05rem;
+}
+.close-modal {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: #718096;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.close-modal:hover {
+  background: #f7fafc;
+  color: #4a5568;
+}
+@media (max-width: 700px) {
+  .container {
+    padding: 1.1rem 0.3rem;
+    margin: 1.2rem 0.2rem;
+    border-radius: 12px;
+  }
+  .step-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+  }
+  .button-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .btn-step, .btn-step.secondary {
+    width: 100%;
+    min-width: unset;
+    font-size: 1rem;
+    padding: 0.8rem 0.5rem;
+  }
+  .preview-section {
+    padding: 0.7rem;
+    border-radius: 8px;
+  }
+  .preview-frame {
+    min-height: 120px;
+    max-height: 180px;
+    padding: 0.5rem;
+    border-radius: 7px;
+  }
+  .step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    line-height: 30px;
+  }
+  .code-content {
+    padding: 1rem 0.3rem;
+    border-radius: 8px;
+    max-width: 99vw;
+    max-height: 90vh;
+  }
+  .code-display {
+    font-size: 0.92rem;
+    padding: 0.7rem;
+  }
+}
+</style>
   </head>
   <body>
     <nav>
@@ -368,16 +303,10 @@
     </header>
 
     <div class="container">
-      <div class="hero-section">
-        <h2>Creá tu primera página web</h2>
-        <p class="hero-text">
-          Te vamos a guiar paso a paso para crear texto, figuras y animaciones. 
-          Al final verás el resultado y el código que se generó automáticamente.
-        </p>
-      </div>
-
+      <div style="text-align:center; margin-top: 30px; font-size: 2em; color: #b22222; font-weight: bold;">En desarrollo</div>
+      <!-- Eliminar la pantalla de bienvenida y el botón Comenzar -->
       <!-- Paso 1: Texto -->
-      <div class="step-container">
+      <div class="step-container" id="stepsContainer" style="min-height:60vh;">
         <div id="step1" class="step active">
           <div class="step-header">
             <div class="step-number">1</div>
@@ -399,11 +328,14 @@
           </div>
           
           <div class="control-group">
-            <label for="textColor">Color del texto</label>
-            <div class="color-picker">
-              <input type="color" id="textColor" value="#667eea">
-              <input type="text" id="textColorHex" value="#667eea" placeholder="#667eea">
-            </div>
+            <label for="textPosition">Posición del texto</label>
+            <select id="textPosition">
+              <option value="top">Arriba</option>
+              <option value="center">Centro</option>
+              <option value="bottom">Abajo</option>
+              <option value="left">Izquierda</option>
+              <option value="right">Derecha</option>
+            </select>
           </div>
           
           <div class="control-group">
@@ -422,6 +354,7 @@
               <i class="fas fa-arrow-right"></i> Siguiente
             </button>
           </div>
+        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Escribí un mensaje claro y divertido. Podés cambiar el tamaño, la fuente y la posición del texto.</div></div>
         </div>
 
         <!-- Paso 2: Figura -->
@@ -431,7 +364,6 @@
             <h3 class="step-title">Agregá una figura</h3>
             <p class="step-description">Elegí una figura para acompañar tu texto</p>
           </div>
-          
           <div class="control-group">
             <label for="shapeType">¿Qué figura querés?</label>
             <select id="shapeType">
@@ -443,7 +375,6 @@
               <option value="none">No quiero figura</option>
             </select>
           </div>
-          
           <div class="control-group">
             <label for="shapeSize">Tamaño de la figura</label>
             <div class="range-group">
@@ -451,7 +382,6 @@
               <span id="shapeSizeValue">80px</span>
             </div>
           </div>
-          
           <div class="control-group">
             <label for="shapeColor">Color de la figura</label>
             <div class="color-picker">
@@ -459,16 +389,25 @@
               <input type="text" id="shapeColorHex" value="#48bb78" placeholder="#48bb78">
             </div>
           </div>
-          
+          <div class="control-group">
+            <label for="shapePosition">Posición de la figura</label>
+            <select id="shapePosition">
+              <option value="top">Arriba</option>
+              <option value="center">Centro</option>
+              <option value="bottom">Abajo</option>
+              <option value="left">Izquierda</option>
+              <option value="right">Derecha</option>
+            </select>
+          </div>
           <div class="shape-preview" id="shapePreview">
             <div id="previewShape"></div>
           </div>
-          
           <div class="button-group">
             <button class="btn-step" onclick="nextStep(3)">
               <i class="fas fa-arrow-right"></i> Siguiente
             </button>
           </div>
+        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Las figuras hacen tu diseño más atractivo. Elegí la que más te guste, experimentá con tamaños, colores y posición.</div></div>
         </div>
 
         <!-- Paso 3: Animaciones -->
@@ -560,6 +499,7 @@
               <i class="fas fa-arrow-right"></i> Siguiente
             </button>
           </div>
+        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Las animaciones le dan vida a tu creación. Probá diferentes efectos y velocidades.</div></div>
         </div>
 
         <!-- Paso 4: Fondo -->
@@ -636,46 +576,26 @@
               <i class="fas fa-arrow-right"></i> Siguiente
             </button>
           </div>
+        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> El fondo puede cambiar completamente el aspecto de tu página. ¡Probá colores sólidos y gradientes!</div></div>
         </div>
 
-        <!-- Paso 5: Vista Previa -->
-        <div id="step5" class="step">
-          <div class="step-header">
-            <div class="step-number">5</div>
-            <h3 class="step-title">¡Tu creación está lista!</h3>
-            <p class="step-description">Mirá el resultado y el código que se generó</p>
-          </div>
-          
-          <div class="preview-section">
-            <h4>Vista previa de tu página web:</h4>
-            <div class="preview-frame" id="finalPreview">
-              <!-- Aquí se mostrará el resultado final -->
-            </div>
-          </div>
-          
-          <div class="button-group">
-            <button class="btn-step" onclick="showCode()">
-              <i class="fas fa-code"></i> Ver Código
-            </button>
-            <button class="btn-step" onclick="restart()">
-              <i class="fas fa-redo"></i> Crear Otro
-            </button>
-            <a class="btn-step" href="demostraciones.html" style="text-decoration:none;display:inline-block;">
-              <i class="fas fa-arrow-left"></i> Volver a las demostraciones
-            </a>
-          </div>
+        <!-- Mover los botones de acción (Ver página, Ver Código, Crear Otro, Volver) al final del paso 4, después del tip -->
+        <div class="button-group" style="margin-top: 1.5rem;">
+          <button class="btn-step" onclick="showPreview()">
+            <i class="fas fa-eye"></i> Ver página
+          </button>
+          <button class="btn-step" onclick="showCode()">
+            <i class="fas fa-code"></i> Ver Código
+          </button>
+          <button class="btn-step" onclick="restart()">
+            <i class="fas fa-redo"></i> Crear Otro
+          </button>
+          <a class="btn-step" href="demostraciones.html" style="text-decoration:none;display:inline-block;">
+            <i class="fas fa-arrow-left"></i> Volver a las demostraciones
+          </a>
         </div>
       </div>
-
-      <div class="highlight" id="stepHint">
-        <div class="highlight-icon">
-          <i class="fas fa-lightbulb"></i>
-        </div>
-        <div class="highlight-content" id="stepHintText">
-          <!-- Mensaje educativo dinámico -->
-        </div>
-      </div>
-    </div>
+      <!-- El recuadro de tips ahora está debajo de cada paso -->
 
     <!-- Modal para mostrar código -->
     <div id="codeModal" class="code-modal">
@@ -702,644 +622,89 @@
       </div>
     </div>
 
-    <footer>
-      <div class="footer-content">
-        <div class="footer-section">
-          <h4><i class="fas fa-university"></i> <a href="https://www.unlu.edu.ar/" target="_blank" style="color: inherit; text-decoration: none;">UNLu - Sistemas</a></h4>
-          <p>Universidad Nacional de Luján</p>
-        </div>
-        <div class="footer-section">
-          <h4><i class="fas fa-users"></i> <a href="https://codes-unlu.github.io/Web-Codes/" target="_blank" style="color: inherit; text-decoration: none;">CODES++</a></h4>
-          <p>Centro de Estudiantes</p>
-        </div>
-        <div class="footer-section">
-          <h4><i class="fas fa-envelope"></i> Contacto</h4>
-          <p><a href="mailto:codes.unlu@gmail.com" style="color: inherit; text-decoration: none;">codes.unlu@gmail.com</a></p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
-        de información UNLu. Todos los derechos reservados.
-      </div>
-      <div class="footer-author" style="text-align:center; color:#667eea; font-size:1rem; margin-top:0.5rem;">
-        Desarrollada por
-        <a href="https://www.linkedin.com/in/federico-s-rizzo/" target="_blank" style="color:#667eea; text-decoration:underline; font-weight:600;">
-          <i class="fab fa-linkedin" style="margin-right:4px;"></i>Federico Rizzo
-        </a>
-      </div>
-    </footer>
-
+    <!-- Mover el script aquí para asegurar que el DOM esté cargado -->
     <script>
-      function toggleMenu() {
-        const menu = document.querySelector('.menu');
-        menu.classList.toggle('show');
-      }
+// Paso actual global
+window.currentStep = 1;
 
-      // Cerrar menú al hacer clic en cualquier enlace del menú
-      document.querySelectorAll('.menu a').forEach(link => {
-        link.addEventListener('click', function() {
-          const menu = document.querySelector('.menu');
-          if (menu.classList.contains('show')) {
-            menu.classList.remove('show');
-          }
-        });
-      });
+// Avanzar de paso
+function nextStep(step) {
+  document.getElementById('step' + window.currentStep).classList.remove('active');
+  document.getElementById('step' + step).classList.add('active');
+  window.currentStep = step;
+  if (typeof syncAllControls === 'function') syncAllControls();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  if (typeof updateFullscreenBtn === 'function') updateFullscreenBtn();
+}
 
-      // Cerrar menú al hacer clic fuera de él
-      document.addEventListener('click', function(event) {
-        const menu = document.querySelector('.menu');
-        const menuToggle = document.querySelector('.menu-toggle');
-        
-        if (menu.classList.contains('show') && 
-            !menu.contains(event.target) && 
-            !menuToggle.contains(event.target)) {
-          menu.classList.remove('show');
-        }
-      });
+// Menú hamburguesa
+function toggleMenu() {
+  const menu = document.querySelector('.menu');
+  menu.classList.toggle('show');
+}
+document.addEventListener('DOMContentLoaded', function() {
+  // Menú
+  document.querySelector('.menu-toggle').onclick = toggleMenu;
+  document.querySelectorAll('.menu a').forEach(link => {
+    link.addEventListener('click', function() {
+      const menu = document.querySelector('.menu');
+      if (menu.classList.contains('show')) menu.classList.remove('show');
+    });
+  });
+  document.addEventListener('click', function(event) {
+    const menu = document.querySelector('.menu');
+    const menuToggle = document.querySelector('.menu-toggle');
+    if (menu.classList.contains('show') && !menu.contains(event.target) && !menuToggle.contains(event.target)) {
+      menu.classList.remove('show');
+    }
+  });
+});
 
-      // Variables globales
-      let currentStep = 1;
-      let projectData = {
-        text: '¡Hola Mundo!',
-        fontSize: 32,
-        textColor: '#667eea',
-        fontFamily: 'Arial, sans-serif',
-        shapeType: 'circle',
-        shapeSize: 80,
-        shapeColor: '#48bb78',
-        animationTarget: 'text',
-        animationTypeText: 'none',
-        animationDurationText: 1,
-        animationRepeatText: 1,
-        animationTypeShape: 'none',
-        animationDurationShape: 1,
-        animationRepeatShape: 1,
-        bgMode: 'solid',
-        bgColor: '#ffffff',
-        bgGradient: 'linear-gradient(45deg, #667eea, #764ba2)',
-        bgCustomColor1: '#667eea',
-        bgCustomColor2: '#764ba2',
-        bgCustomDir: '135deg'
-      };
-
-      // Elementos del DOM
-      const textInput = document.getElementById('textInput');
-      const fontSize = document.getElementById('fontSize');
-      const fontSizeValue = document.getElementById('fontSizeValue');
-      const textColor = document.getElementById('textColor');
-      const textColorHex = document.getElementById('textColorHex');
-      const fontFamily = document.getElementById('fontFamily');
-      const shapeType = document.getElementById('shapeType');
-      const shapeSize = document.getElementById('shapeSize');
-      const shapeSizeValue = document.getElementById('shapeSizeValue');
-      const shapeColor = document.getElementById('shapeColor');
-      const shapeColorHex = document.getElementById('shapeColorHex');
-      const animationTarget = document.getElementById('animationTarget');
-      const animationTypeText = document.getElementById('animationTypeText');
-      const animationDurationText = document.getElementById('animationDurationText');
-      const animationDurationValueText = document.getElementById('animationDurationValueText');
-      const animationRepeatText = document.getElementById('animationRepeatText');
-      const animationTypeShape = document.getElementById('animationTypeShape');
-      const animationDurationShape = document.getElementById('animationDurationShape');
-      const animationDurationValueShape = document.getElementById('animationDurationValueShape');
-      const animationRepeatShape = document.getElementById('animationRepeatShape');
-      const bgMode = document.getElementById('bgMode');
-      const bgColor = document.getElementById('bgColor');
-      const bgColorHex = document.getElementById('bgColorHex');
-      const bgGradient = document.getElementById('bgGradient');
-      const bgCustomColor1 = document.getElementById('bgCustomColor1');
-      const bgCustomColor2 = document.getElementById('bgCustomColor2');
-      const bgCustomDir = document.getElementById('bgCustomDir');
-      const bgSolidGroup = document.getElementById('bgSolidGroup');
-      const bgPresetGroup = document.getElementById('bgPresetGroup');
-      const bgCustomGroup = document.getElementById('bgCustomGroup');
-
-      // Event listeners
-      textInput.addEventListener('input', updateProjectData);
-      fontSize.addEventListener('input', updateProjectData);
-      fontFamily.addEventListener('change', updateProjectData);
-      shapeType.addEventListener('change', updateProjectData);
-      shapeSize.addEventListener('input', updateProjectData);
-      bgMode.addEventListener('change', updateProjectData);
-      bgColor.addEventListener('input', updateProjectData);
-      bgColorHex.addEventListener('input', updateProjectData);
-      bgGradient.addEventListener('change', updateProjectData);
-      bgCustomColor1.addEventListener('input', updateProjectData);
-      bgCustomColor2.addEventListener('input', updateProjectData);
-      bgCustomDir.addEventListener('change', updateProjectData);
-      animationTarget.addEventListener('change', updateProjectData);
-      animationTypeText.addEventListener('change', updateProjectData);
-      animationDurationText.addEventListener('input', updateProjectData);
-      animationRepeatText.addEventListener('change', updateProjectData);
-      animationTypeShape.addEventListener('change', updateProjectData);
-      animationDurationShape.addEventListener('input', updateProjectData);
-      animationRepeatShape.addEventListener('change', updateProjectData);
-
-      // Inicializar
-      syncColorPickers();
-      updateProjectData();
-
-      function updateProjectData() {
-        // Actualizar datos del proyecto
-        projectData.text = textInput.value;
-        projectData.fontSize = parseInt(fontSize.value);
-        projectData.textColor = textColor.value;
-        projectData.fontFamily = fontFamily.value;
-        projectData.shapeType = shapeType.value;
-        projectData.shapeSize = parseInt(shapeSize.value);
-        projectData.shapeColor = shapeColor.value;
-        projectData.animationTarget = animationTarget.value;
-        projectData.animationTypeText = animationTypeText.value;
-        projectData.animationDurationText = parseFloat(animationDurationText.value);
-        projectData.animationRepeatText = animationRepeatText.value;
-        projectData.animationTypeShape = animationTypeShape.value;
-        projectData.animationDurationShape = parseFloat(animationDurationShape.value);
-        projectData.animationRepeatShape = animationRepeatShape.value;
-        projectData.bgMode = bgMode.value;
-        projectData.bgColor = bgColor.value;
-        projectData.bgGradient = bgGradient.value;
-        projectData.bgCustomColor1 = bgCustomColor1.value;
-        projectData.bgCustomColor2 = bgCustomColor2.value;
-        projectData.bgCustomDir = bgCustomDir.value;
-        // Mostrar/ocultar controles de fondo
-        if (projectData.bgMode === 'solid') {
-          bgSolidGroup.style.display = 'block';
-          bgPresetGroup.style.display = 'none';
-          bgCustomGroup.style.display = 'none';
-        } else if (projectData.bgMode === 'preset') {
-          bgSolidGroup.style.display = 'none';
-          bgPresetGroup.style.display = 'block';
-          bgCustomGroup.style.display = 'none';
-        } else {
-          bgSolidGroup.style.display = 'none';
-          bgPresetGroup.style.display = 'none';
-          bgCustomGroup.style.display = 'block';
-        }
-
-        // Actualizar valores mostrados
-        fontSizeValue.textContent = projectData.fontSize + 'px';
-        textColorHex.value = projectData.textColor;
-        shapeSizeValue.textContent = projectData.shapeSize + 'px';
-        shapeColorHex.value = projectData.shapeColor;
-        animationDurationValueText.textContent = projectData.animationDurationText + 's';
-        animationDurationValueShape.textContent = projectData.animationDurationShape + 's';
-        bgColorHex.value = projectData.bgColor;
-
-        // Mostrar/ocultar controles según selección
-        if (projectData.animationTarget === 'text') {
-          document.getElementById('textAnimControls').style.display = 'block';
-          document.getElementById('shapeAnimControls').style.display = 'none';
-        } else if (projectData.animationTarget === 'shape') {
-          document.getElementById('textAnimControls').style.display = 'none';
-          document.getElementById('shapeAnimControls').style.display = 'block';
-        } else {
-          document.getElementById('textAnimControls').style.display = 'block';
-          document.getElementById('shapeAnimControls').style.display = 'block';
-        }
-        // Actualizar vistas previas
-        updateShapePreview();
-        updateAnimationPreview();
-      }
-
-      // Función específica para sincronizar colores
-      function syncColorPickers() {
-        // Sincronizar color de texto
-        textColor.addEventListener('input', function() {
-          textColorHex.value = this.value;
-          updateProjectData();
-        });
-        
-        textColorHex.addEventListener('input', function() {
-          textColor.value = this.value;
-          updateProjectData();
-        });
-
-        // Sincronizar color de figura
-        shapeColor.addEventListener('input', function() {
-          shapeColorHex.value = this.value;
-          updateProjectData();
-        });
-        
-        shapeColorHex.addEventListener('input', function() {
-          shapeColor.value = this.value;
-          updateProjectData();
-        });
-
-        // Sincronizar color de fondo
-        bgColor.addEventListener('input', function() {
-          bgColorHex.value = this.value;
-          updateProjectData();
-        });
-        
-        bgColorHex.addEventListener('input', function() {
-          bgColor.value = this.value;
-          updateProjectData();
-        });
-      }
-
-      function updateShapePreview() {
-        const previewShape = document.getElementById('previewShape');
-        const shapeColorGroup = document.querySelector('.control-group label[for="shapeColor"]').parentElement;
-        const shapeColorInput = document.getElementById('shapeColor');
-        const shapeColorHexInput = document.getElementById('shapeColorHex');
-        let colorMsg = document.getElementById('colorMsg');
-        if (!colorMsg) {
-          colorMsg = document.createElement('div');
-          colorMsg.id = 'colorMsg';
-          colorMsg.style.color = '#e53e3e';
-          colorMsg.style.fontSize = '0.95rem';
-          colorMsg.style.marginTop = '0.5rem';
-          shapeColorGroup.appendChild(colorMsg);
-        }
-        if (projectData.shapeType === 'none') {
-          previewShape.innerHTML = '<p style="color: #718096;">Sin figura</p>';
-          shapeColorInput.disabled = false;
-          shapeColorHexInput.disabled = false;
-          colorMsg.textContent = '';
-          return;
-        }
-        // Deshabilitar color para estrella/corazon
-        if (projectData.shapeType === 'star' || projectData.shapeType === 'heart') {
-          shapeColorInput.disabled = true;
-          shapeColorHexInput.disabled = true;
-          colorMsg.textContent = 'No se puede cambiar el color de la estrella o el corazón.';
-        } else {
-          shapeColorInput.disabled = false;
-          shapeColorHexInput.disabled = false;
-          colorMsg.textContent = '';
-        }
-        previewShape.innerHTML = '';
-        const shape = document.createElement('div');
-        shape.style.width = projectData.shapeSize + 'px';
-        shape.style.height = projectData.shapeSize + 'px';
-        shape.style.backgroundColor = projectData.shapeColor;
-        shape.style.margin = '0 auto';
-        shape.style.display = 'flex';
-        shape.style.alignItems = 'center';
-        shape.style.justifyContent = 'center';
-        switch(projectData.shapeType) {
-          case 'circle':
-            shape.style.borderRadius = '50%';
-            break;
-          case 'square':
-            shape.style.borderRadius = '0';
-            break;
-          case 'triangle':
-            shape.style.width = '0';
-            shape.style.height = '0';
-            shape.style.backgroundColor = 'transparent';
-            shape.style.borderLeft = (projectData.shapeSize/2) + 'px solid transparent';
-            shape.style.borderRight = (projectData.shapeSize/2) + 'px solid transparent';
-            shape.style.borderBottom = projectData.shapeSize + 'px solid ' + projectData.shapeColor;
-            break;
-          case 'star':
-            shape.innerHTML = '⭐';
-            shape.style.fontSize = projectData.shapeSize + 'px';
-            shape.style.backgroundColor = 'transparent';
-            break;
-          case 'heart':
-            shape.innerHTML = '❤️';
-            shape.style.fontSize = projectData.shapeSize + 'px';
-            shape.style.backgroundColor = 'transparent';
-            break;
-        }
-        previewShape.appendChild(shape);
-      }
-
-      function updateAnimationPreview() {
-        const previewAnimation = document.getElementById('previewAnimation');
-        previewAnimation.innerHTML = '';
-        // Texto
-        const textPrev = document.createElement('div');
-        textPrev.textContent = projectData.text;
-        textPrev.style.fontSize = projectData.fontSize + 'px';
-        textPrev.style.color = projectData.textColor;
-        textPrev.style.fontFamily = projectData.fontFamily;
-        textPrev.style.marginBottom = '1rem';
-        textPrev.style.textAlign = 'center';
-        if (projectData.animationTarget === 'text' || projectData.animationTarget === 'both') {
-          if (projectData.animationTypeText !== 'none') {
-            textPrev.style.animation = `${projectData.animationTypeText} ${projectData.animationDurationText}s ${projectData.animationRepeatText === 'infinite' ? 'infinite' : projectData.animationRepeatText} ease-in-out`;
-          }
-        }
-        previewAnimation.appendChild(textPrev);
-        // Figura
-        if (projectData.shapeType !== 'none') {
-          const shapePrev = document.createElement('div');
-          shapePrev.style.width = projectData.shapeSize + 'px';
-          shapePrev.style.height = projectData.shapeSize + 'px';
-          shapePrev.style.backgroundColor = projectData.shapeColor;
-          shapePrev.style.margin = '0 auto';
-          shapePrev.style.display = 'block';
-          shapePrev.style.textAlign = 'center';
-          shapePrev.style.alignItems = 'center';
-          shapePrev.style.justifyContent = 'center';
-          switch(projectData.shapeType) {
-            case 'circle':
-              shapePrev.style.borderRadius = '50%';
-              break;
-            case 'square':
-              shapePrev.style.borderRadius = '0';
-              break;
-            case 'triangle':
-              shapePrev.style.width = '0';
-              shapePrev.style.height = '0';
-              shapePrev.style.backgroundColor = 'transparent';
-              shapePrev.style.borderLeft = (projectData.shapeSize/2) + 'px solid transparent';
-              shapePrev.style.borderRight = (projectData.shapeSize/2) + 'px solid transparent';
-              shapePrev.style.borderBottom = projectData.shapeSize + 'px solid ' + projectData.shapeColor;
-              break;
-            case 'star':
-              shapePrev.innerHTML = '⭐';
-              shapePrev.style.fontSize = projectData.shapeSize + 'px';
-              shapePrev.style.backgroundColor = 'transparent';
-              break;
-            case 'heart':
-              shapePrev.innerHTML = '❤️';
-              shapePrev.style.fontSize = projectData.shapeSize + 'px';
-              shapePrev.style.backgroundColor = 'transparent';
-              break;
-          }
-          if (projectData.animationTarget === 'shape' || projectData.animationTarget === 'both') {
-            if (projectData.animationTypeShape !== 'none') {
-              shapePrev.style.animation = `${projectData.animationTypeShape} ${projectData.animationDurationShape}s ${projectData.animationRepeatShape === 'infinite' ? 'infinite' : projectData.animationRepeatShape} ease-in-out`;
-            }
-          }
-          previewAnimation.appendChild(shapePrev);
-        }
-      }
-
-      // Mensajes educativos para cada paso
-      const stepHints = [
-        '',
-        '<strong>💡 Tip:</strong> El texto es la base de toda página web. ¡Probá diferentes fuentes y colores para ver cómo cambia la personalidad de tu mensaje!',
-        '<strong>💡 Tip:</strong> Las figuras hacen tu diseño más atractivo. Elegí la que más te guste y experimentá con tamaños y colores.',
-        '<strong>💡 Tip:</strong> Las animaciones le dan vida a tu creación. Probá diferentes efectos y velocidades.',
-        '<strong>💡 Tip:</strong> El fondo puede cambiar completamente el aspecto de tu página. ¡Probá colores sólidos y gradientes!',
-        '<strong>🎉 Listo:</strong> ¡Felicitaciones! Así se ve tu creación. Mirá el código generado y animate a seguir probando.'
-      ];
-      function updateStepHint() {
-        const hint = stepHints[currentStep] || '';
-        document.getElementById('stepHintText').innerHTML = hint;
-      }
-      // Llamar al cambiar de paso
-      function nextStep(step) {
-        document.getElementById('step' + currentStep).classList.remove('active');
-        document.getElementById('step' + step).classList.add('active');
-        currentStep = step;
-        updateStepHint();
-      }
-      function prevStep(step) {
-        document.getElementById('step' + currentStep).classList.remove('active');
-        document.getElementById('step' + step).classList.add('active');
-        currentStep = step;
-        updateStepHint();
-      }
-      // Inicializar hint al cargar
-      updateStepHint();
-
-      function showPreview() {
-        const finalPreview = document.getElementById('finalPreview');
-        finalPreview.innerHTML = '';
-        // Crear elemento de texto
-        const textElement = document.createElement('div');
-        textElement.style.fontSize = projectData.fontSize + 'px';
-        textElement.style.color = projectData.textColor;
-        textElement.style.fontFamily = projectData.fontFamily;
-        textElement.style.marginBottom = '1rem';
-        textElement.style.textAlign = 'center';
-        if (projectData.animationTarget === 'text' || projectData.animationTarget === 'both') {
-          if (projectData.animationTypeText !== 'none') {
-            textElement.style.animation = `${projectData.animationTypeText} ${projectData.animationDurationText}s ${projectData.animationRepeatText === 'infinite' ? 'infinite' : projectData.animationRepeatText} ease-in-out`;
-          }
-        }
-        textElement.textContent = projectData.text;
-        finalPreview.appendChild(textElement);
-        // Crear figura si se seleccionó
-        if (projectData.shapeType !== 'none') {
-          const shape = document.createElement('div');
-          shape.style.width = projectData.shapeSize + 'px';
-          shape.style.height = projectData.shapeSize + 'px';
-          shape.style.backgroundColor = projectData.shapeColor;
-          shape.style.margin = '0 auto';
-          shape.style.display = 'block';
-          switch(projectData.shapeType) {
-            case 'circle':
-              shape.style.borderRadius = '50%';
-              break;
-            case 'square':
-              shape.style.borderRadius = '0';
-              break;
-            case 'triangle':
-              shape.style.width = '0';
-              shape.style.height = '0';
-              shape.style.backgroundColor = 'transparent';
-              shape.style.borderLeft = (projectData.shapeSize/2) + 'px solid transparent';
-              shape.style.borderRight = (projectData.shapeSize/2) + 'px solid transparent';
-              shape.style.borderBottom = projectData.shapeSize + 'px solid ' + projectData.shapeColor;
-              break;
-            case 'star':
-              shape.innerHTML = '⭐';
-              shape.style.fontSize = projectData.shapeSize + 'px';
-              shape.style.backgroundColor = 'transparent';
-              break;
-            case 'heart':
-              shape.innerHTML = '❤️';
-              shape.style.fontSize = projectData.shapeSize + 'px';
-              shape.style.backgroundColor = 'transparent';
-              break;
-          }
-          if (projectData.animationTarget === 'shape' || projectData.animationTarget === 'both') {
-            if (projectData.animationTypeShape !== 'none') {
-              shape.style.animation = `${projectData.animationTypeShape} ${projectData.animationDurationShape}s ${projectData.animationRepeatShape === 'infinite' ? 'infinite' : projectData.animationRepeatShape} ease-in-out`;
-            }
-          }
-          finalPreview.appendChild(shape);
-        }
-        // Aplicar fondo
-        if (projectData.bgMode === 'solid') {
-          finalPreview.style.background = projectData.bgColor;
-        } else if (projectData.bgMode === 'preset') {
-          finalPreview.style.background = projectData.bgGradient;
-        } else {
-          finalPreview.style.background = `linear-gradient(${projectData.bgCustomDir}, ${projectData.bgCustomColor1}, ${projectData.bgCustomColor2})`;
-        }
-        nextStep(5);
-      }
-
-      function showCode() {
-        // Generar código HTML
-        let html = '&lt;div class="contenedor"&gt;\n';
-        html += '  &lt;div class="texto"&gt;\n';
-        html += `    ${projectData.text}\n`;
-        html += '  &lt;/div&gt;\n';
-        
-        if (projectData.shapeType !== 'none') {
-          html += '  &lt;div class="figura"&gt;&lt;/div&gt;\n';
-        }
-        
-        html += '&lt;/div&gt;';
-        // Generar código CSS
-        let css = '.contenedor {\n';
-        if (projectData.bgMode === 'solid') {
-          css += `  background-color: ${projectData.bgColor};\n`;
-        } else if (projectData.bgMode === 'preset') {
-          css += `  background: ${projectData.bgGradient};\n`;
-        } else {
-          css += `  background: linear-gradient(${projectData.bgCustomDir}, ${projectData.bgCustomColor1}, ${projectData.bgCustomColor2});\n`;
-        }
-        css += '  padding: 2rem;\n';
-        css += '  text-align: center;\n';
-        css += '}\n\n';
-        css += '.texto {\n';
-        css += `  font-size: ${projectData.fontSize}px;\n`;
-        css += `  color: ${projectData.textColor};\n`;
-        css += `  font-family: ${projectData.fontFamily};\n`;
-        css += '  margin-bottom: 1rem;\n';
-        if (projectData.animationTarget === 'text' || projectData.animationTarget === 'both') {
-          if (projectData.animationTypeText !== 'none') {
-            css += `  animation: ${projectData.animationTypeText} ${projectData.animationDurationText}s ${projectData.animationRepeatText === 'infinite' ? 'infinite' : projectData.animationRepeatText} ease-in-out;\n`;
-          }
-        }
-        css += '}\n';
-        if (projectData.shapeType !== 'none') {
-          css += '\n.figura {\n';
-          css += `  width: ${projectData.shapeSize}px;\n`;
-          css += `  height: ${projectData.shapeSize}px;\n`;
-          css += `  background-color: ${projectData.shapeColor};\n`;
-          css += '  margin: 0 auto;\n';
-          css += '  display: block;\n';
-          switch(projectData.shapeType) {
-            case 'circle':
-              css += '  border-radius: 50%;\n';
-              break;
-            case 'square':
-              css += '  border-radius: 0;\n';
-              break;
-            case 'triangle':
-              css = css.replace(`width: ${projectData.shapeSize}px;`, `width: 0;`);
-              css = css.replace(`height: ${projectData.shapeSize}px;`, `height: 0;`);
-              css = css.replace(`background-color: ${projectData.shapeColor};`, 'background-color: transparent;');
-              css += `  border-left: ${projectData.shapeSize/2}px solid transparent;\n`;
-              css += `  border-right: ${projectData.shapeSize/2}px solid transparent;\n`;
-              css += `  border-bottom: ${projectData.shapeSize}px solid ${projectData.shapeColor};\n`;
-              break;
-            case 'star':
-              css += `  font-size: ${projectData.shapeSize}px;\n`;
-              css += '  background-color: transparent;\n';
-              css += `  color: ${projectData.shapeColor};\n`;
-              css += '  content: "⭐";\n';
-              break;
-            case 'heart':
-              css += `  font-size: ${projectData.shapeSize}px;\n`;
-              css += '  background-color: transparent;\n';
-              css += `  color: ${projectData.shapeColor};\n`;
-              css += '  content: "❤️";\n';
-              break;
-          }
-          if (projectData.animationTarget === 'shape' || projectData.animationTarget === 'both') {
-            if (projectData.animationTypeShape !== 'none') {
-              css += `  animation: ${projectData.animationTypeShape} ${projectData.animationDurationShape}s ${projectData.animationRepeatShape === 'infinite' ? 'infinite' : projectData.animationRepeatShape} ease-in-out;\n`;
-            }
-          }
-          css += '}';
-        }
-
-        document.getElementById('htmlCode').textContent = html;
-        document.getElementById('cssCode').textContent = css;
-        document.getElementById('codeModal').style.display = 'block';
-      }
-
-      function closeCodeModal() {
-        document.getElementById('codeModal').style.display = 'none';
-      }
-
-      function restart() {
-        // Resetear datos
-        projectData = {
-          text: '¡Hola Mundo!',
-          fontSize: 32,
-          textColor: '#667eea',
-          fontFamily: 'Arial, sans-serif',
-          shapeType: 'circle',
-          shapeSize: 80,
-          shapeColor: '#48bb78',
-          animationTarget: 'text',
-          animationTypeText: 'none',
-          animationDurationText: 1,
-          animationRepeatText: 1,
-          animationTypeShape: 'none',
-          animationDurationShape: 1,
-          animationRepeatShape: 1,
-          bgMode: 'solid',
-          bgColor: '#ffffff',
-          bgGradient: 'linear-gradient(45deg, #667eea, #764ba2)',
-          bgCustomColor1: '#667eea',
-          bgCustomColor2: '#764ba2',
-          bgCustomDir: '135deg'
-        };
-
-        // Resetear controles
-        textInput.value = projectData.text;
-        fontSize.value = projectData.fontSize;
-        textColor.value = projectData.textColor;
-        fontFamily.value = projectData.fontFamily;
-        shapeType.value = projectData.shapeType;
-        shapeSize.value = projectData.shapeSize;
-        shapeColor.value = projectData.shapeColor;
-        animationTarget.value = projectData.animationTarget;
-        animationTypeText.value = projectData.animationTypeText;
-        animationDurationText.value = projectData.animationDurationText;
-        animationRepeatText.value = projectData.animationRepeatText;
-        animationTypeShape.value = projectData.animationTypeShape;
-        animationDurationShape.value = projectData.animationDurationShape;
-        animationRepeatShape.value = projectData.animationRepeatShape;
-        bgMode.value = projectData.bgMode;
-        bgColor.value = projectData.bgColor;
-        bgGradient.value = projectData.bgGradient;
-        bgCustomColor1.value = projectData.bgCustomColor1;
-        bgCustomColor2.value = projectData.bgCustomColor2;
-        bgCustomDir.value = projectData.bgCustomDir;
-
-        // Actualizar
-        updateProjectData();
-
-        // Volver al paso 1
-        document.getElementById('step5').classList.remove('active');
-        document.getElementById('step1').classList.add('active');
-        currentStep = 1;
-        updateStepHint();
-      }
-
-      // Cerrar modal al hacer clic fuera
-      document.getElementById('codeModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-          closeCodeModal();
-        }
-      });
-
-      // Animación de entrada para elementos
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
-        });
-      }, observerOptions);
-
-      // Observar elementos para animación
-      document.querySelectorAll('.btn, .feature, .stat').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-      });
+function showCode() {
+  // Generar HTML y CSS de la vista previa
+  var html = '<div class="contenedor">\n';
+  html += '  <div class="texto">' + (window.projectData?.text || '¡Hola Mundo!') + '</div>\n';
+  if (window.projectData?.shapeType && window.projectData.shapeType !== 'none') {
+    html += '  <div class="figura"></div>\n';
+  }
+  html += '</div>';
+  var css = '.contenedor {\n';
+  css += '  background: ' + (window.projectData?.bgColor || '#fff') + ';\n';
+  css += '  padding: 2rem;\n  text-align: center;\n}\n';
+  css += '.texto {\n  font-size: ' + (window.projectData?.fontSize || 32) + 'px;\n  color: ' + (window.projectData?.textColor || '#667eea') + ';\n  font-family: ' + (window.projectData?.fontFamily || 'Arial, sans-serif') + ';\n  margin-bottom: 1rem;\n}\n';
+  if (window.projectData?.shapeType && window.projectData.shapeType !== 'none') {
+    css += '.figura { width: ' + (window.projectData.shapeSize || 80) + 'px; height: ' + (window.projectData.shapeSize || 80) + 'px; background: ' + (window.projectData.shapeColor || '#48bb78') + '; margin: 0 auto; display: block; border-radius: ' + (window.projectData.shapeType === 'circle' ? '50%' : '0') + '; }\n';
+  }
+  document.getElementById('htmlCode').textContent = html;
+  document.getElementById('cssCode').textContent = css;
+  var modal = document.getElementById('codeModal');
+  if (modal) modal.classList.add('show');
+}
+function closeCodeModal() {
+  var modal = document.getElementById('codeModal');
+  if (modal) modal.classList.remove('show');
+}
+function showPreview() {
+  // Generar HTML y CSS completos
+  var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">';
+  html += '<title>Mi Página Generada</title>';
+  html += '<style>body{background:#f7fafc;margin:0;padding:0;display:flex;align-items:center;justify-content:center;min-height:100vh;} .contenedor{padding:2rem;text-align:center;background:#fff;border-radius:18px;box-shadow:0 8px 32px rgba(102,126,234,0.10);} .texto{font-size:' + (window.projectData?.fontSize||32) + 'px;color:' + (window.projectData?.textColor||'#667eea') + ';font-family:' + (window.projectData?.fontFamily||'Arial, sans-serif') + ';margin-bottom:1rem;} .figura{width:' + (window.projectData?.shapeSize||80) + 'px;height:' + (window.projectData?.shapeSize||80) + 'px;background:' + (window.projectData?.shapeColor||'#48bb78') + ';margin:0 auto;display:block;border-radius:' + (window.projectData?.shapeType==='circle'?'50%':'0') + ';}</style>';
+  html += '</head><body>';
+  html += '<div class="contenedor">';
+  html += '<div class="texto">' + (window.projectData?.text||'¡Hola Mundo!') + '</div>';
+  if(window.projectData?.shapeType && window.projectData.shapeType !== 'none') {
+    html += '<div class="figura"></div>';
+  }
+  html += '</div>';
+  html += '</body></html>';
+  var blob = new Blob([html], {type: 'text/html'});
+  var url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+}
+function restart() {
+  // Opcional: puedes resetear campos aquí si lo deseas
+  nextStep(1);
+}
     </script>
   </body>
 </html> 
