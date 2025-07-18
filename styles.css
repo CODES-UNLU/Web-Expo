@@ -1639,19 +1639,20 @@ button:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   background: #667eea;
   color: white;
   border-radius: 3px;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
   font-family: 'Inter', sans-serif;
-  margin-right: 4px;
+  margin-right: 6px;
   text-decoration: none;
   line-height: 1;
   box-shadow: 0 1px 3px rgba(102, 126, 234, 0.3);
   transition: all 0.2s ease;
+  vertical-align: middle;
 }
 
 .fab-fr:hover {

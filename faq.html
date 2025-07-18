@@ -1,253 +1,392 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Preguntas frecuentes sobre el ingreso a la UNLu. Información sobre inscripción, documentación, fechas y proceso de admisión." />
-  <meta name="keywords" content="ingreso UNLu, preguntas frecuentes, inscripción universitaria, documentación, admisión" />
-  <meta name="author" content="CODES++ - Centro de Estudiantes de Sistemas UNLu" />
-  <meta property="og:title" content="Preguntas Frecuentes - Ingreso UNLu" />
-  <meta property="og:description" content="Resolvé tus dudas sobre el ingreso a la Universidad Nacional de Luján" />
-  <meta property="og:type" content="website" />
-  <link rel="icon" type="image/x-icon" href="LogoCodes.png" />
-  <title>Preguntas Frecuentes - Ingreso UNLu</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    .faq-container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 3rem;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .faq-container h2 {
-      text-align: center;
-      margin-bottom: 3rem;
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    .faq-container h2 i {
-      color: #667eea;
-      -webkit-text-fill-color: #667eea;
-    }
-
-    .faq-item {
-      margin-bottom: 2rem;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 16px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .faq-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-    }
-
-    .faq-item h3 {
-      margin-bottom: 1rem;
-      color: #667eea;
-      font-size: 1.3rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .faq-item h3 i {
-      color: #667eea;
-      font-size: 1.2rem;
-    }
-
-    .faq-item p {
-      margin: 0;
-      color: #4a5568;
-      line-height: 1.6;
-      font-size: 1rem;
-    }
-
-    .faq-hero {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .faq-hero p {
-      font-size: 1.2rem;
-      color: #4a5568;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-
-    @media screen and (max-width: 600px) {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Preguntas frecuentes sobre el ingreso a la UNLu. Información sobre inscripción, documentación, fechas y proceso de admisión."
+    />
+    <meta
+      name="keywords"
+      content="ingreso UNLu, preguntas frecuentes, inscripción universitaria, documentación, admisión"
+    />
+    <meta
+      name="author"
+      content="CODES++ - Centro de Estudiantes de Sistemas UNLu"
+    />
+    <meta property="og:title" content="Preguntas Frecuentes - Ingreso UNLu" />
+    <meta
+      property="og:description"
+      content="Resolvé tus dudas sobre el ingreso a la Universidad Nacional de Luján"
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/x-icon" href="LogoCodes.png" />
+    <title>Preguntas Frecuentes - Ingreso UNLu</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
       .faq-container {
-        padding: 2rem 1.5rem;
-        margin: 1.5rem;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 3rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: fadeInUp 0.8s ease-out;
       }
 
       .faq-container h2 {
-        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .faq-container h2 i {
+        color: #667eea;
+        -webkit-text-fill-color: #667eea;
       }
 
       .faq-item {
-        padding: 1.5rem;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        cursor: pointer;
       }
-    }
-    body {
-      position: relative;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    .faq-container, header, footer {
-      position: relative;
-      z-index: 1;
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <div class="nav-container">
-      <div class="nav-logo">
-        <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
-          <img src="logoLSIUNLu.svg" alt="Logo Licenciatura en Sistemas de Información UNLu" height="40" />
-        </a>
+
+      .faq-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .faq-item h3 {
+        margin-bottom: 1rem;
+        color: #667eea;
+        font-size: 1.3rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .faq-item h3 i {
+        color: #667eea;
+        font-size: 1.2rem;
+      }
+
+      .faq-item p {
+        margin: 0;
+        color: #4a5568;
+        line-height: 1.6;
+        font-size: 1rem;
+      }
+
+      .faq-hero {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .faq-hero p {
+        font-size: 1.2rem;
+        color: #4a5568;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      @media screen and (max-width: 600px) {
+        .faq-container {
+          padding: 2rem 1.5rem;
+          margin: 1.5rem;
+        }
+
+        .faq-container h2 {
+          font-size: 2rem;
+        }
+
+        .faq-item {
+          padding: 1.5rem;
+        }
+      }
+      body {
+        position: relative;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      .faq-container,
+      header,
+      footer {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+            <img
+              src="logoLSIUNLu.svg"
+              alt="Logo Licenciatura en Sistemas de Información UNLu"
+              height="40"
+            />
+          </a>
+        </div>
+        <ul class="menu">
+          <li>
+            <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+          </li>
+          <li>
+            <a href="index.html#actividades"
+              ><i class="fas fa-gamepad"></i> Actividades</a
+            >
+          </li>
+          <li>
+            <a href="test.html"><i class="fas fa-brain"></i> Test</a>
+          </li>
+          <li>
+            <a href="juego.html"><i class="fas fa-puzzle-piece"></i> Juego</a>
+          </li>
+        </ul>
+        <div class="nav-right">
+          <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+            <img
+              src="LogoCodes.png"
+              alt="Logo CODES++ Centro de Estudiantes"
+              height="40"
+            />
+          </a>
+        </div>
+        <button
+          class="menu-toggle"
+          onclick="toggleMenu()"
+          aria-label="Abrir menú de navegación"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
-      <ul class="menu">
-        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-        <li><a href="index.html#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
-        <li><a href="test.html"><i class="fas fa-brain"></i> Test</a></li>
-        <li><a href="juego.html"><i class="fas fa-puzzle-piece"></i> Juego</a></li>
-      </ul>
-      <div class="nav-right">
-        <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
-          <img src="LogoCodes.png" alt="Logo CODES++ Centro de Estudiantes" height="40" />
-        </a>
+    </nav>
+
+    <header>
+      <div class="header-row">
+        <h1>
+          <i class="fas fa-question-circle"></i> Preguntas Frecuentes sobre el
+          Ingreso
+        </h1>
       </div>
-      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </nav>
+    </header>
 
-  <header>
-    <div class="header-row">
-      <h1><i class="fas fa-question-circle"></i> Preguntas Frecuentes sobre el Ingreso</h1>
-    </div>
-  </header>
+    <div class="faq-container">
+      <div class="faq-hero">
+        <h2>
+          <i class="fas fa-lightbulb"></i> Preguntas Frecuentes - Ingreso a la
+          UNLu
+        </h2>
+        <p>
+          Encontrá respuestas a las consultas más comunes sobre el proceso de
+          ingreso a la Universidad Nacional de Luján
+        </p>
+      </div>
 
-  <div class="faq-container">
-    <div class="faq-hero">
-      <h2><i class="fas fa-lightbulb"></i> Preguntas Frecuentes - Ingreso a la UNLu</h2>
-      <p>Encontrá respuestas a las consultas más comunes sobre el proceso de ingreso a la Universidad Nacional de Luján</p>
+      <div class="faq-item">
+        <h3>
+          <i class="fas fa-file-alt"></i> ¿Cómo me inscribo a una carrera?
+        </h3>
+        <p>
+          Debés completar el formulario de preinscripción online en la página
+          oficial de la UNLu, y luego presentar la documentación en la sede
+          correspondiente.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>
+          <i class="fas fa-calendar-alt"></i> ¿Cuándo comienza la inscripción?
+        </h3>
+        <p>
+          Generalmente se abre entre octubre y diciembre. Se recomienda revisar
+          el sitio web institucional para fechas exactas.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>
+          <i class="fas fa-folder-open"></i> ¿Qué documentación debo presentar?
+        </h3>
+        <p>
+          Fotocopia del DNI, partida de nacimiento, constancia de CUIL,
+          certificado de finalización de estudios secundarios (o constancia de
+          título en trámite) y el formulario de preinscripción impreso.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>
+          <i class="fas fa-graduation-cap"></i> ¿Es obligatorio el curso de
+          ingreso?
+        </h3>
+        <p>
+          En la UNLu no hay curso de ingreso eliminatorio. Algunas carreras
+          pueden ofrecer cursos de apoyo nivelatorio optativos.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3><i class="fas fa-dollar-sign"></i> ¿Las carreras son gratuitas?</h3>
+        <p>
+          Sí. La Universidad Nacional de Luján es una universidad pública y
+          gratuita.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>
+          <i class="fas fa-clock"></i> ¿Puedo anotarme si todavía no terminé el
+          secundario?
+        </h3>
+        <p>
+          Sí, podés preinscribirte y luego presentar la constancia de título en
+          trámite cuando egreses. Debés cumplir con los plazos establecidos.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>
+          <i class="fas fa-map-marker-alt"></i> ¿Dónde está ubicada la
+          universidad?
+        </h3>
+        <p>
+          La sede central de la UNLu se encuentra en la ciudad de Luján,
+          provincia de Buenos Aires. La dirección es Ruta 5 y Avenida
+          Constitución.
+        </p>
+      </div>
+      <div class="faq-item">
+        <h3>
+          <i class="fas fa-university"></i> ¿Dónde se dictan las carreras?
+        </h3>
+        <p>
+          Tanto la Licenciatura en Sistemas de Información como Analista
+          Universitario en Ciencias de Datos se dictan en la sede central de la
+          UNLu, en el Crch de Chivilcoy y en la Utec de San Miguel.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3><i class="fas fa-bus"></i> ¿Hay transporte público para llegar?</h3>
+        <p>
+          Sí, hay varias líneas de colectivos que llegan a la universidad desde
+          diferentes puntos de la región.
+        </p>
+      </div>
     </div>
 
-    <div class="faq-item">
-      <h3><i class="fas fa-file-alt"></i> ¿Cómo me inscribo a una carrera?</h3>
-      <p>Debés completar el formulario de preinscripción online en la página oficial de la UNLu, y luego presentar la documentación en la sede correspondiente.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3><i class="fas fa-calendar-alt"></i> ¿Cuándo comienza la inscripción?</h3>
-      <p>Generalmente se abre entre octubre y diciembre. Se recomienda revisar el sitio web institucional para fechas exactas.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3><i class="fas fa-folder-open"></i> ¿Qué documentación debo presentar?</h3>
-      <p>Fotocopia del DNI, partida de nacimiento, constancia de CUIL, certificado de finalización de estudios secundarios (o constancia de título en trámite) y el formulario de preinscripción impreso.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3><i class="fas fa-graduation-cap"></i> ¿Es obligatorio el curso de ingreso?</h3>
-      <p>En la UNLu no hay curso de ingreso eliminatorio. Algunas carreras pueden ofrecer cursos de apoyo nivelatorio optativos.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3><i class="fas fa-dollar-sign"></i> ¿Las carreras son gratuitas?</h3>
-      <p>Sí. La Universidad Nacional de Luján es una universidad pública y gratuita.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3><i class="fas fa-clock"></i> ¿Puedo anotarme si todavía no terminé el secundario?</h3>
-      <p>Sí, podés preinscribirte y luego presentar la constancia de título en trámite cuando egreses. Debés cumplir con los plazos establecidos.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3><i class="fas fa-map-marker-alt"></i> ¿Dónde está ubicada la universidad?</h3>
-      <p>La UNLu se encuentra en la ciudad de Luján, provincia de Buenos Aires. La dirección es Ruta 5 y Avenida Constitución.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3><i class="fas fa-bus"></i> ¿Hay transporte público para llegar?</h3>
-      <p>Sí, hay varias líneas de colectivos que llegan a la universidad desde diferentes puntos de la región.</p>
-    </div>
-  </div>
-
-  <footer>
-    <div class="footer-content">
-              <div class="footer-section">
-          <h4><i class="fas fa-university"></i> <a href="https://www.unlu.edu.ar/" target="_blank" style="color: inherit; text-decoration: none;">UNLu - Sistemas</a></h4>
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>
+            <i class="fas fa-university"></i>
+            <a
+              href="https://www.unlu.edu.ar/"
+              target="_blank"
+              style="color: inherit; text-decoration: none"
+              >UNLu - Sistemas</a
+            >
+          </h4>
           <p>Universidad Nacional de Luján</p>
         </div>
-              <div class="footer-section">
-          <h4><i class="fas fa-users"></i> <a href="https://codes-unlu.github.io/Web-Codes/" target="_blank" style="color: inherit; text-decoration: none;">CODES++</a></h4>
+        <div class="footer-section">
+          <h4>
+            <i class="fas fa-users"></i>
+            <a
+              href="https://codes-unlu.github.io/Web-Codes/"
+              target="_blank"
+              style="color: inherit; text-decoration: none"
+              >CODES++</a
+            >
+          </h4>
           <p>Centro de Estudiantes</p>
         </div>
-              <div class="footer-section">
+        <div class="footer-section">
           <h4><i class="fas fa-envelope"></i> Contacto</h4>
-          <p><a href="mailto:codes.unlu@gmail.com" style="color: inherit; text-decoration: none;">codes.unlu@gmail.com</a></p>
+          <p>
+            <a
+              href="mailto:codes.unlu@gmail.com"
+              style="color: inherit; text-decoration: none"
+              >codes.unlu@gmail.com</a
+            >
+          </p>
         </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
-      de información UNLu. Todos los derechos reservados.
-    </div>
-    <div class="footer-author" style="text-align:center; color:#667eea; font-size:1rem; margin-top:0.5rem;">
-      Desarrollada por
-      <a href="https://rizzofs.github.io/Mi-Porfolio2/" target="_blank" style="color:#667eea; text-decoration:underline; font-weight:600;">
-        <span class="fab-fr">FR</span>Federico Rizzo
-      </a>
-    </div>
-  </footer>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
+        de información UNLu. Todos los derechos reservados.
+      </div>
+      <div
+        class="footer-author"
+        style="
+          text-align: center;
+          color: #667eea;
+          font-size: 1rem;
+          margin-top: 0.5rem;
+        "
+      >
+        Desarrollada por
+        <a
+          href="https://rizzofs.github.io/Mi-Porfolio2/"
+          target="_blank"
+          style="color: #667eea; text-decoration: underline; font-weight: 600"
+        >
+          <span class="fab-fr">FR</span>Federico Rizzo
+        </a>
+      </div>
+    </footer>
 
-      <script>
+    <script>
       function toggleMenu() {
-        const menu = document.querySelector('.menu');
-        menu.classList.toggle('show');
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
       }
 
       // Cerrar menú al hacer clic fuera de él
-      document.addEventListener('click', function(event) {
-        const menu = document.querySelector('.menu');
-        const menuToggle = document.querySelector('.menu-toggle');
-        
+      document.addEventListener("click", function (event) {
+        const menu = document.querySelector(".menu");
+        const menuToggle = document.querySelector(".menu-toggle");
+
         // Si el menú está abierto y el clic no es en el menú ni en el botón toggle
-        if (menu.classList.contains('show') && 
-            !menu.contains(event.target) && 
-            !menuToggle.contains(event.target)) {
-          menu.classList.remove('show');
+        if (
+          menu.classList.contains("show") &&
+          !menu.contains(event.target) &&
+          !menuToggle.contains(event.target)
+        ) {
+          menu.classList.remove("show");
         }
       });
     </script>
-</body>
+  </body>
 </html>
