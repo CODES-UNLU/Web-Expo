@@ -253,6 +253,11 @@ header::before {
   font-weight: 800;
   color: #2d3748;
   margin-bottom: 0.25rem;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  min-width: 1.2em;
+  text-align: center;
+  display: inline-block;
 }
 
 .stat-label {
@@ -905,6 +910,11 @@ button:hover {
 
 .test-stats .stat-number {
   font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  min-width: 1.2em;
+  text-align: center;
+  display: inline-block;
 }
 
 /* ===== START BUTTON CONTAINER ===== */
@@ -951,15 +961,17 @@ button:hover {
 .question-number {
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  min-width: 50px;
+  flex-shrink: 0;
 }
 
 .question h3 {
@@ -1271,6 +1283,11 @@ button:hover {
 
   .stat-number {
     font-size: 1.5rem;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    min-width: 1.2em;
+    text-align: center;
+    display: inline-block;
   }
 
   .botonera {
@@ -1405,8 +1422,25 @@ button:hover {
   }
 
   .game-action-btn {
-    display: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    min-height: auto;
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
   }
+  .game-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    width: 100%;
+  }
+}
 
 @keyframes shake {
   10%, 90% { transform: translateX(-2px); }

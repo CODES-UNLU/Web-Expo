@@ -140,7 +140,7 @@ function inicializarTest() {
     const preguntaHTML = `
       <div class="question paso" data-paso="${index + 1}" style="display: none">
         <div class="question-header">
-          <div class="question-number">${index + 1}</div>
+          <div class="question-number">${String(index + 1).padStart(2, '0')}</div>
           <h3>${pregunta.pregunta}</h3>
         </div>
         <div class="options-container">
