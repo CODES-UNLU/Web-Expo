@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria - Jugar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo nav-logo-left">
+                <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+                    <img src="logoLSIUNLu.svg" alt="Logo Licenciatura en Sistemas de Información UNLu" height="44" />
+                </a>
+            </div>
+            <ul class="menu" id="mainMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="editor-codigo.html"><i class="fas fa-code"></i> Editor</a></li>
+                <li><a href="ia-chat.html"><i class="fas fa-robot"></i> Chat IA</a></li>
+                <li><a href="realidad-virtual.html"><i class="fas fa-cube"></i> Realidad Virtual</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+                    <img src="logo-sin-fondo.png" alt="Logo CODES++ Centro de Estudiantes" height="44" />
+                </a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="game-info">
+            <div class="info-item">
+                <div class="label">Movimientos</div>
+                <div class="value" id="moves">0</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Tiempo</div>
+                <div class="value" id="time">00:00</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Parejas Encontradas</div>
+                <div class="value" id="pairs">0/8</div>
+            </div>
+        </div>
+        <button class="fullscreen-btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i> Pantalla Completa</button>
+        <div class="message" id="message">
+            <p id="messageText"></p>
+        </div>
+        <div class="game-board">
+            <div class="cards-grid" id="cardsGrid"></div>
+        </div>
+        <div class="controls">
+            <button class="btn" onclick="startNewGame()"><i class="fas fa-play"></i> Nuevo Juego</button>
+            <button class="btn secondary" onclick="showHint()"><i class="fas fa-lightbulb"></i> Pista</button>
+            <button class="btn danger" onclick="resetGame()"><i class="fas fa-redo"></i> Reiniciar</button>
+        </div>
+    </div>
+    <script>
+        // --- Utilidades para dificultad ---
+        function getDificultad() {
+            const params = new URLSearchParams(window.location.search);
+            const dif = params.get('dificultad');
+            if (dif === 'facil') return {cols:4, rows:4, parejas:8};
+            if (dif === 'medio') return {cols:6, rows:4, parejas:12};
+            if (dif === 'dificil') return {cols:6, rows:6, parejas:18};
+            return {cols:4, rows:4, parejas:8};
+        }
+        // --- Pantalla completa ---
+        function toggleFullscreen() {
+            const elem = document.documentElement;
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        // --- Juego de memoria ---
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+        let gameStarted = false;
+        let gameTimer = null;
+        let startTime = null;
+        let dificultad = getDificultad();
+        const icons = [
+            'fas fa-code', 'fas fa-laptop', 'fas fa-mobile-alt', 'fas fa-tablet-alt',
+            'fas fa-wifi', 'fas fa-bluetooth', 'fas fa-satellite-dish', 'fas fa-microchip',
+            'fas fa-database', 'fas fa-cloud', 'fas fa-robot', 'fas fa-bug',
+            'fas fa-cogs', 'fas fa-server', 'fas fa-network-wired', 'fas fa-shield-alt',
+            'fas fa-code-branch', 'fas fa-terminal', 'fas fa-desktop', 'fas fa-keyboard',
+            'fas fa-mouse', 'fas fa-hdd', 'fas fa-memory', 'fas fa-microchip',
+            'fas fa-code', 'fas fa-laptop', 'fas fa-mobile-alt', 'fas fa-tablet-alt',
+            'fas fa-wifi', 'fas fa-bluetooth', 'fas fa-satellite-dish', 'fas fa-microchip',
+            'fas fa-database', 'fas fa-cloud', 'fas fa-robot', 'fas fa-bug',
+            'fas fa-cogs', 'fas fa-server', 'fas fa-network-wired', 'fas fa-shield-alt',
+            'fas fa-code-branch', 'fas fa-terminal', 'fas fa-desktop', 'fas fa-keyboard',
+            'fas fa-mouse', 'fas fa-hdd', 'fas fa-memory', 'fas fa-microchip'
+        ];
+        function initializeGame() {
+            cards = [];
+            flippedCards = [];
+            matchedPairs = 0;
+            moves = 0;
+            gameStarted = false;
+            // Mezclar iconos
+            const total = dificultad.parejas * 2;
+            const iconosUsar = icons.slice(0, dificultad.parejas);
+            const iconosDoble = [...iconosUsar, ...iconosUsar].sort(() => Math.random() - 0.5);
+            for (let i = 0; i < total; i++) {
+                cards.push({ id: i, icon: iconosDoble[i], isFlipped: false, isMatched: false });
+            }
+            renderCards();
+            updateStats();
+            hideMessage();
+        }
+        function renderCards() {
+            const grid = document.getElementById('cardsGrid');
+            grid.innerHTML = '';
+            grid.style.gridTemplateColumns = `repeat(${dificultad.cols}, 1fr)`;
+            grid.style.gridTemplateRows = `repeat(${dificultad.rows}, 1fr)`;
+            cards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = `card ${card.isFlipped ? 'flipped' : ''} ${card.isMatched ? 'matched' : ''}`;
+                cardElement.onclick = () => flipCard(card.id);
+                cardElement.innerHTML = `
+                    <div class="card-front">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <div class="card-back">
+                        <i class="${card.icon}"></i>
+                    </div>
+                `;
+                grid.appendChild(cardElement);
+            });
+        }
+        function flipCard(cardId) {
+            const card = cards.find(c => c.id === cardId);
+            if (!card || card.isFlipped || card.isMatched || flippedCards.length >= 2) return;
+            if (!gameStarted) startGame();
+            card.isFlipped = true;
+            flippedCards.push(card);
+            renderCards();
+            if (flippedCards.length === 2) setTimeout(checkMatch, 700);
+        }
+        function checkMatch() {
+            if (flippedCards.length !== 2) return;
+            moves++;
+            updateStats();
+            const [card1, card2] = flippedCards;
+            if (card1.icon === card2.icon) {
+                card1.isMatched = true;
+                card2.isMatched = true;
+                matchedPairs++;
+            }
+            setTimeout(() => {
+                flippedCards.forEach(card => { if (!card.isMatched) card.isFlipped = false; });
+                flippedCards = [];
+                renderCards();
+                updateStats();
+                if (matchedPairs === dificultad.parejas) {
+                    showMessage('¡Felicidades! Has encontrado todas las parejas.', 'success');
+                    stopGame();
+                }
+            }, 600);
+        }
+        function startGame() {
+            gameStarted = true;
+            startTime = Date.now();
+            if (gameTimer) clearInterval(gameTimer);
+            gameTimer = setInterval(updateTime, 1000);
+        }
+        function stopGame() {
+            gameStarted = false;
+            if (gameTimer) clearInterval(gameTimer);
+        }
+        function updateStats() {
+            document.getElementById('moves').textContent = moves;
+            document.getElementById('pairs').textContent = `${matchedPairs}/${dificultad.parejas}`;
+        }
+        function updateTime() {
+            if (!gameStarted) return;
+            const now = Date.now();
+            const diff = Math.floor((now - startTime) / 1000);
+            const min = String(Math.floor(diff / 60)).padStart(2, '0');
+            const sec = String(diff % 60).padStart(2, '0');
+            document.getElementById('time').textContent = `${min}:${sec}`;
+        }
+        function startNewGame() { initializeGame(); }
+        function resetGame() { initializeGame(); document.getElementById('time').textContent = '00:00'; }
+        function showHint() { showMessage('¡Buscá las cartas iguales!'); }
+        function showMessage(msg, type) {
+            const m = document.getElementById('message');
+            const mt = document.getElementById('messageText');
+            mt.textContent = msg;
+            m.className = 'message show ' + (type || 'info');
+        }
+        function hideMessage() {
+            const m = document.getElementById('message');
+            m.className = 'message';
+        }
+        window.onload = () => { initializeGame(); };
+
+        // Navbar hamburguesa
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        menuToggle.addEventListener('click', () => {
+          mainMenu.classList.toggle('show');
+        });
+    </script>
+</body>
+</html> 

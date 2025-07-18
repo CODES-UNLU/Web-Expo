@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Demostraciones interactivas del Stand de Sistemas de la Expo UNLu 2025. Experimentá con tecnologías del futuro." />
+    <meta name="keywords" content="UNLu, Sistemas, Expo, Demostraciones, tecnología, programación, IA, VR" />
+    <meta name="author" content="CODES++ - Centro de Estudiantes de Sistemas UNLu" />
+    <meta property="og:title" content="Demostraciones Interactivas - Expo UNLu" />
+    <meta property="og:description" content="Experimentá con las tecnologías del futuro en el stand de Sistemas" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/x-icon" href="../LogoCodes.png" />
+    <title>Demostraciones Interactivas - Expo UNLu</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+            <img src="logoLSIUNLu.svg" alt="Logo Licenciatura en Sistemas de Información UNLu" height="40" />
+          </a>
+        </div>
+        <ul class="menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+          <li><a href="../index.html#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
+          <li><a href="demostraciones.html"><i class="fas fa-flask"></i> Demostraciones</a></li>
+          <li><a href="../utec.html"><i class="fas fa-university"></i> UTEC</a></li>
+          <li><a href="../faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+        </ul>
+        <div class="nav-right">
+          <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+            <img src="logo-sin-fondo.png" alt="Logo CODES++ Centro de Estudiantes" height="40" />
+          </a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <header>
+      <div class="header-row">
+        <h1><i class="fas fa-flask"></i> Demostraciones Interactivas</h1>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="hero-section">
+        <h2>Experimentá con las tecnologías del futuro</h2>
+        <p class="hero-text">
+          Tocá, probá y descubrí el mundo de la programación y la tecnología de manera práctica y divertida. 
+          Estas experiencias interactivas están diseñadas para que puedas experimentar de primera mano las tecnologías 
+          que aprenderás en la universidad.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <i class="fas fa-flask"></i>
+            <span class="stat-number">4</span>
+            <span class="stat-label">Experiencias Interactivas</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-gift"></i>
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Gratuitas</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-infinity"></i>
+            <span class="stat-number">∞</span>
+            <span class="stat-label">Posibilidades</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="botonera">
+        <a class="btn" href="editor-codigo.html">
+          <i class="fas fa-code"></i>
+          <span class="btn-text">Editor de Código</span>
+          <span class="subtexto">HTML, CSS y JavaScript en tiempo real</span>
+        </a>
+
+        <a class="btn" href="ia-chat.html">
+          <i class="fas fa-robot"></i>
+          <span class="btn-text">Chat con IA</span>
+          <span class="subtexto">Conversá con un asistente virtual inteligente</span>
+        </a>
+
+        <a class="btn" href="realidad-virtual.html">
+          <i class="fas fa-vr-cardboard"></i>
+          <span class="btn-text">Realidad Virtual</span>
+          <span class="subtexto">Explorá mundos 3D interactivos</span>
+        </a>
+
+        <a class="btn" href="juego-memoria.html">
+          <i class="fas fa-brain"></i>
+          <span class="btn-text">Juego de Memoria</span>
+          <span class="subtexto">Poné a prueba tu memoria</span>
+        </a>
+      </div>
+
+      <div class="highlight">
+        <div class="highlight-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="highlight-content">
+          <strong>🎓 Aprendizaje práctico:</strong> Desde programación básica hasta inteligencia artificial y realidad virtual, 
+          cada demostración te muestra el potencial de la tecnología y te ayuda a descubrir tu pasión por la informática.
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3><i class="fas fa-lightbulb"></i> ¿Por qué estas demostraciones?</h3>
+        <p>
+          Estas experiencias interactivas están diseñadas para que puedas experimentar de primera mano las tecnologías 
+          que aprenderás en la universidad. Desde programación básica hasta inteligencia artificial y realidad virtual, 
+          cada demostración te muestra el potencial de la tecnología y te ayuda a descubrir tu pasión por la informática.
+        </p>
+        <div class="features">
+          <div class="feature">
+            <i class="fas fa-hands-on"></i>
+            <h4>Experiencia Práctica</h4>
+            <p>Tocá, probá y experimentá con tecnologías reales</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-rocket"></i>
+            <h4>Tecnologías del Futuro</h4>
+            <p>Descubrí IA, VR, programación y más</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-users"></i>
+            <h4>Comunidad</h4>
+            <p>Conectá con otros estudiantes apasionados</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-graduation-cap"></i>
+            <h4>Preparación Universitaria</h4>
+            <p>Conocé lo que aprenderás en la carrera</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4><i class="fas fa-university"></i> <a href="https://www.unlu.edu.ar/" target="_blank" style="color: inherit; text-decoration: none;">UNLu - Sistemas</a></h4>
+          <p>Universidad Nacional de Luján</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-users"></i> <a href="https://codes-unlu.github.io/Web-Codes/" target="_blank" style="color: inherit; text-decoration: none;">CODES++</a></h4>
+          <p>Centro de Estudiantes</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-envelope"></i> Contacto</h4>
+          <p><a href="mailto:codes.unlu@gmail.com" style="color: inherit; text-decoration: none;">codes.unlu@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
+        de información UNLu. Todos los derechos reservados.
+      </div>
+      <div class="footer-author" style="text-align:center; color:#667eea; font-size:1rem; margin-top:0.5rem;">
+        Desarrollada por
+        <a href="https://www.linkedin.com/in/federico-s-rizzo/" target="_blank" style="color:#667eea; text-decoration:underline; font-weight:600;">
+          <i class="fab fa-linkedin" style="margin-right:4px;"></i>Federico Rizzo
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.querySelector('.menu');
+        menu.classList.toggle('show');
+      }
+
+      // Cerrar menú al hacer clic en cualquier enlace del menú
+      document.querySelectorAll('.menu a').forEach(link => {
+        link.addEventListener('click', function() {
+          const menu = document.querySelector('.menu');
+          if (menu.classList.contains('show')) {
+            menu.classList.remove('show');
+          }
+        });
+      });
+
+      // Cerrar menú al hacer clic fuera de él
+      document.addEventListener('click', function(event) {
+        const menu = document.querySelector('.menu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        // Si el menú está abierto y el clic no es en el menú ni en el botón toggle
+        if (menu.classList.contains('show') && 
+            !menu.contains(event.target) && 
+            !menuToggle.contains(event.target)) {
+          menu.classList.remove('show');
+        }
+      });
+
+      // Animación de entrada para elementos
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observar elementos para animación
+      document.querySelectorAll('.btn, .feature, .stat').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html> 

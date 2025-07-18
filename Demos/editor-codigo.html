@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Editor visual paso a paso del Stand de Sistemas de la Expo UNLu 2025. Creá texto, figuras y animaciones sin saber programar." />
+    <meta name="keywords" content="UNLu, Sistemas, Expo, Editor, Visual, HTML, CSS, Animaciones" />
+    <meta name="author" content="CODES++ - Centro de Estudiantes de Sistemas UNLu" />
+    <meta property="og:title" content="Editor Visual - Expo UNLu" />
+    <meta property="og:description" content="Creá texto, figuras y animaciones paso a paso" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/x-icon" href="../LogoCodes.png" />
+    <title>Editor Visual - Expo UNLu</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      .step-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+      
+      .step {
+        display: none;
+        animation: fadeIn 0.5s ease-in;
+      }
+      
+      .step.active {
+        display: block;
+      }
+      
+      .step-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #e2e8f0;
+      }
+      
+      .step-number {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 50%;
+        line-height: 40px;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      
+      .step-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+      }
+      
+      .step-description {
+        color: #718096;
+        font-size: 1.1rem;
+      }
+      
+      .control-group {
+        margin-bottom: 1.5rem;
+      }
+      
+      .control-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #4a5568;
+        font-size: 1.1rem;
+      }
+      
+      .control-group input, .control-group select {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        background: #f7fafc;
+      }
+      
+      .control-group input:focus, .control-group select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        background: white;
+      }
+      
+      .color-picker {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      
+      .color-picker input[type="color"] {
+        width: 80px;
+        height: 50px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      .color-picker input[type="text"] {
+        flex: 1;
+      }
+      
+      .range-group {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .range-group input[type="range"] {
+        flex: 1;
+      }
+      
+      .range-group span {
+        min-width: 60px;
+        font-weight: 600;
+        color: #667eea;
+      }
+      
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+      
+      .btn-step {
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        min-width: 150px;
+      }
+      
+      .btn-step:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      }
+      
+      .btn-step.secondary {
+        background: #e2e8f0;
+        color: #4a5568;
+      }
+      
+      .btn-step.secondary:hover {
+        background: #cbd5e0;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+      
+      .preview-section {
+        text-align: center;
+        margin: 2rem 0;
+        padding: 2rem;
+        background: #f7fafc;
+        border-radius: 16px;
+        border: 2px dashed #e2e8f0;
+      }
+      
+      .preview-frame {
+        width: 100%;
+        min-height: 300px;
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        margin: 1rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      .code-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+      }
+      
+      .code-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        max-width: 90%;
+        max-height: 80%;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      
+      .code-display {
+        background: #1a202c;
+        color: #e2e8f0;
+        padding: 1.5rem;
+        border-radius: 12px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        overflow-x: auto;
+        margin: 1rem 0;
+      }
+      
+      .code-display h4 {
+        color: #667eea;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+      
+      .close-modal {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #718096;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+      
+      .close-modal:hover {
+        background: #f7fafc;
+        color: #4a5568;
+      }
+      
+      .shape-preview {
+        width: 100px;
+        height: 100px;
+        margin: 1rem auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px dashed #e2e8f0;
+        border-radius: 12px;
+        background: #f7fafc;
+      }
+      
+      .animation-preview {
+        padding: 1rem;
+        text-align: center;
+        background: white;
+        border-radius: 12px;
+        margin: 1rem 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      @media (max-width: 768px) {
+        .step-container {
+          margin: 1rem;
+          padding: 1.5rem;
+        }
+        
+        .button-group {
+          flex-direction: column;
+        }
+        
+        .btn-step {
+          width: 100%;
+        }
+        
+        .color-picker {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        
+        .color-picker input[type="color"] {
+          width: 100%;
+          height: 60px;
+        }
+      }
+      
+      /* Animaciones CSS */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
+      }
+      
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+      
+      @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      
+      @keyframes slide {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes glow {
+        0%, 100% { box-shadow: 0 0 5px currentColor; }
+        50% { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+            <img src="../logoLSIUNLu.svg" alt="Logo Licenciatura en Sistemas de Información UNLu" height="40" />
+          </a>
+        </div>
+        <ul class="menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+          <li><a href="../index.html#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
+          <li><a href="demostraciones.html"><i class="fas fa-flask"></i> Demostraciones</a></li>
+          <li><a href="../utec.html"><i class="fas fa-university"></i> UTEC</a></li>
+          <li><a href="../faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+        </ul>
+        <div class="nav-right">
+          <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+            <img src="../LogoCodes.png" alt="Logo CODES++ Centro de Estudiantes" height="40" />
+          </a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <header>
+      <div class="header-row">
+        <h1><i class="fas fa-palette"></i> Editor Visual Paso a Paso</h1>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="hero-section">
+        <h2>Creá tu primera página web</h2>
+        <p class="hero-text">
+          Te vamos a guiar paso a paso para crear texto, figuras y animaciones. 
+          Al final verás el resultado y el código que se generó automáticamente.
+        </p>
+      </div>
+
+      <!-- Paso 1: Texto -->
+      <div class="step-container">
+        <div id="step1" class="step active">
+          <div class="step-header">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Escribí tu texto</h3>
+            <p class="step-description">Empecemos con el texto que quieres mostrar</p>
+          </div>
+          
+          <div class="control-group">
+            <label for="textInput">¿Qué texto querés mostrar?</label>
+            <input type="text" id="textInput" placeholder="Escribí tu mensaje aquí..." value="¡Hola Mundo!">
+          </div>
+          
+          <div class="control-group">
+            <label for="fontSize">Tamaño del texto</label>
+            <div class="range-group">
+              <input type="range" id="fontSize" min="16" max="72" value="32">
+              <span id="fontSizeValue">32px</span>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label for="textColor">Color del texto</label>
+            <div class="color-picker">
+              <input type="color" id="textColor" value="#667eea">
+              <input type="text" id="textColorHex" value="#667eea" placeholder="#667eea">
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label for="fontFamily">Tipo de letra</label>
+            <select id="fontFamily">
+              <option value="Arial, sans-serif">Arial (Simple)</option>
+              <option value="Times New Roman, serif">Times New Roman (Elegante)</option>
+              <option value="Courier New, monospace">Courier New (Máquina de escribir)</option>
+              <option value="Georgia, serif">Georgia (Clásica)</option>
+              <option value="Verdana, sans-serif">Verdana (Fácil de leer)</option>
+            </select>
+          </div>
+          
+          <div class="button-group">
+            <button class="btn-step" onclick="nextStep(2)">
+              <i class="fas fa-arrow-right"></i> Siguiente
+            </button>
+          </div>
+        </div>
+
+        <!-- Paso 2: Figura -->
+        <div id="step2" class="step">
+          <div class="step-header">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Agregá una figura</h3>
+            <p class="step-description">Elegí una figura para acompañar tu texto</p>
+          </div>
+          
+          <div class="control-group">
+            <label for="shapeType">¿Qué figura querés?</label>
+            <select id="shapeType">
+              <option value="circle">Círculo</option>
+              <option value="square">Cuadrado</option>
+              <option value="triangle">Triángulo</option>
+              <option value="star">Estrella ⭐</option>
+              <option value="heart">Corazón ❤️</option>
+              <option value="none">No quiero figura</option>
+            </select>
+          </div>
+          
+          <div class="control-group">
+            <label for="shapeSize">Tamaño de la figura</label>
+            <div class="range-group">
+              <input type="range" id="shapeSize" min="30" max="150" value="80">
+              <span id="shapeSizeValue">80px</span>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label for="shapeColor">Color de la figura</label>
+            <div class="color-picker">
+              <input type="color" id="shapeColor" value="#48bb78">
+              <input type="text" id="shapeColorHex" value="#48bb78" placeholder="#48bb78">
+            </div>
+          </div>
+          
+          <div class="shape-preview" id="shapePreview">
+            <div id="previewShape"></div>
+          </div>
+          
+          <div class="button-group">
+            <button class="btn-step" onclick="nextStep(3)">
+              <i class="fas fa-arrow-right"></i> Siguiente
+            </button>
+          </div>
+        </div>
+
+        <!-- Paso 3: Animaciones -->
+        <div id="step3" class="step">
+          <div class="step-header">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Agregá animaciones</h3>
+            <p class="step-description">Hacé que tu texto y figura se muevan</p>
+          </div>
+          
+          <div class="control-group">
+            <label for="animationTarget">¿Qué querés animar?</label>
+            <select id="animationTarget">
+              <option value="text">Solo el texto</option>
+              <option value="shape">Solo la figura</option>
+              <option value="both">Ambos</option>
+            </select>
+          </div>
+
+          <div id="textAnimControls">
+            <div class="control-group">
+              <label for="animationTypeText">Animación para el texto</label>
+              <select id="animationTypeText">
+                <option value="none">Sin animación</option>
+                <option value="bounce">Rebote</option>
+                <option value="pulse">Pulso</option>
+                <option value="rotate">Rotación</option>
+                <option value="slide">Deslizamiento</option>
+                <option value="fadeIn">Aparecer</option>
+                <option value="glow">Brillo</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label for="animationDurationText">Velocidad de la animación (texto)</label>
+              <div class="range-group">
+                <input type="range" id="animationDurationText" min="0.5" max="3" step="0.1" value="1">
+                <span id="animationDurationValueText">1s</span>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="animationRepeatText">¿Cuántas veces se repite? (texto)</label>
+              <select id="animationRepeatText">
+                <option value="1">Una vez</option>
+                <option value="infinite">Infinito</option>
+                <option value="3">3 veces</option>
+                <option value="5">5 veces</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="shapeAnimControls">
+            <div class="control-group">
+              <label for="animationTypeShape">Animación para la figura</label>
+              <select id="animationTypeShape">
+                <option value="none">Sin animación</option>
+                <option value="bounce">Rebote</option>
+                <option value="pulse">Pulso</option>
+                <option value="rotate">Rotación</option>
+                <option value="slide">Deslizamiento</option>
+                <option value="fadeIn">Aparecer</option>
+                <option value="glow">Brillo</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label for="animationDurationShape">Velocidad de la animación (figura)</label>
+              <div class="range-group">
+                <input type="range" id="animationDurationShape" min="0.5" max="3" step="0.1" value="1">
+                <span id="animationDurationValueShape">1s</span>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="animationRepeatShape">¿Cuántas veces se repite? (figura)</label>
+              <select id="animationRepeatShape">
+                <option value="1">Una vez</option>
+                <option value="infinite">Infinito</option>
+                <option value="3">3 veces</option>
+                <option value="5">5 veces</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="animation-preview" id="animationPreview">
+            <p>Vista previa de la animación:</p>
+            <div id="previewAnimation"></div>
+          </div>
+          
+          <div class="button-group">
+            <button class="btn-step" onclick="nextStep(4)">
+              <i class="fas fa-arrow-right"></i> Siguiente
+            </button>
+          </div>
+        </div>
+
+        <!-- Paso 4: Fondo -->
+        <div id="step4" class="step">
+          <div class="step-header">
+            <div class="step-number">4</div>
+            <h3 class="step-title">Elegí el fondo</h3>
+            <p class="step-description">Personalizá el fondo de tu creación</p>
+          </div>
+          <div class="control-group">
+            <label for="bgMode">Tipo de fondo</label>
+            <select id="bgMode">
+              <option value="solid">Color sólido</option>
+              <option value="preset">Gradiente predefinido</option>
+              <option value="custom">Gradiente personalizado</option>
+            </select>
+          </div>
+          <div class="control-group" id="bgSolidGroup">
+            <label for="bgColor">Color sólido</label>
+            <div class="color-picker">
+              <input type="color" id="bgColor" value="#ffffff">
+              <input type="text" id="bgColorHex" value="#ffffff" placeholder="#ffffff">
+            </div>
+          </div>
+          <div class="control-group" id="bgPresetGroup" style="display:none;">
+            <label for="bgGradient">Gradiente predefinido</label>
+            <select id="bgGradient">
+              <option value="linear-gradient(45deg, #667eea, #764ba2)">Azul a Púrpura</option>
+              <option value="linear-gradient(45deg, #48bb78, #38a169)">Verde</option>
+              <option value="linear-gradient(45deg, #ed8936, #dd6b20)">Naranja</option>
+              <option value="linear-gradient(45deg, #e53e3e, #c53030)">Rojo</option>
+              <option value="linear-gradient(45deg, #9f7aea, #805ad5)">Violeta</option>
+              <option value="linear-gradient(45deg, #f6d365, #fda085)">Amarillo a Naranja</option>
+              <option value="linear-gradient(45deg, #43cea2, #185a9d)">Verde a Azul</option>
+              <option value="linear-gradient(45deg, #ff512f, #dd2476)">Rojo a Rosa</option>
+              <option value="linear-gradient(45deg, #4568dc, #b06ab3)">Azul a Lila</option>
+            </select>
+            <div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #667eea, #764ba2);"></div>
+              <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #48bb78, #38a169);"></div>
+              <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #ed8936, #dd6b20);"></div>
+              <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #e53e3e, #c53030);"></div>
+              <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #9f7aea, #805ad5);"></div>
+              <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #f6d365, #fda085);"></div>
+              <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #43cea2, #185a9d);"></div>
+              <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #ff512f, #dd2476);"></div>
+              <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #4568dc, #b06ab3);"></div>
+            </div>
+          </div>
+          <div class="control-group" id="bgCustomGroup" style="display:none;">
+            <label>Gradiente personalizado</label>
+            <div style="display:flex;gap:1rem;align-items:center;">
+              <div>
+                <label for="bgCustomColor1" style="font-size:0.95rem;">Color 1</label>
+                <input type="color" id="bgCustomColor1" value="#667eea">
+              </div>
+              <div>
+                <label for="bgCustomColor2" style="font-size:0.95rem;">Color 2</label>
+                <input type="color" id="bgCustomColor2" value="#764ba2">
+              </div>
+              <div>
+                <label for="bgCustomDir" style="font-size:0.95rem;">Dirección</label>
+                <select id="bgCustomDir">
+                  <option value="to right">Horizontal</option>
+                  <option value="to bottom">Vertical</option>
+                  <option value="135deg">Diagonal</option>
+                  <option value="to top right">Diagonal inversa</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="button-group">
+            <button class="btn-step" onclick="showPreview()">
+              <i class="fas fa-arrow-right"></i> Siguiente
+            </button>
+          </div>
+        </div>
+
+        <!-- Paso 5: Vista Previa -->
+        <div id="step5" class="step">
+          <div class="step-header">
+            <div class="step-number">5</div>
+            <h3 class="step-title">¡Tu creación está lista!</h3>
+            <p class="step-description">Mirá el resultado y el código que se generó</p>
+          </div>
+          
+          <div class="preview-section">
+            <h4>Vista previa de tu página web:</h4>
+            <div class="preview-frame" id="finalPreview">
+              <!-- Aquí se mostrará el resultado final -->
+            </div>
+          </div>
+          
+          <div class="button-group">
+            <button class="btn-step" onclick="showCode()">
+              <i class="fas fa-code"></i> Ver Código
+            </button>
+            <button class="btn-step" onclick="restart()">
+              <i class="fas fa-redo"></i> Crear Otro
+            </button>
+            <a class="btn-step" href="demostraciones.html" style="text-decoration:none;display:inline-block;">
+              <i class="fas fa-arrow-left"></i> Volver a las demostraciones
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight" id="stepHint">
+        <div class="highlight-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <div class="highlight-content" id="stepHintText">
+          <!-- Mensaje educativo dinámico -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para mostrar código -->
+    <div id="codeModal" class="code-modal">
+      <div class="code-content">
+        <button class="close-modal" onclick="closeCodeModal()">×</button>
+        <h3><i class="fas fa-code"></i> Código Generado</h3>
+        <p>Este es el código HTML y CSS que se creó automáticamente:</p>
+        
+        <div class="code-display">
+          <h4>HTML:</h4>
+          <pre id="htmlCode"></pre>
+        </div>
+        
+        <div class="code-display">
+          <h4>CSS:</h4>
+          <pre id="cssCode"></pre>
+        </div>
+        
+        <div class="button-group">
+          <button class="btn-step" onclick="closeCodeModal()">
+            <i class="fas fa-check"></i> Entendido
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4><i class="fas fa-university"></i> <a href="https://www.unlu.edu.ar/" target="_blank" style="color: inherit; text-decoration: none;">UNLu - Sistemas</a></h4>
+          <p>Universidad Nacional de Luján</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-users"></i> <a href="https://codes-unlu.github.io/Web-Codes/" target="_blank" style="color: inherit; text-decoration: none;">CODES++</a></h4>
+          <p>Centro de Estudiantes</p>
+        </div>
+        <div class="footer-section">
+          <h4><i class="fas fa-envelope"></i> Contacto</h4>
+          <p><a href="mailto:codes.unlu@gmail.com" style="color: inherit; text-decoration: none;">codes.unlu@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Codes++ Centro de Estudiantes de la licenciatura en sistemas
+        de información UNLu. Todos los derechos reservados.
+      </div>
+      <div class="footer-author" style="text-align:center; color:#667eea; font-size:1rem; margin-top:0.5rem;">
+        Desarrollada por
+        <a href="https://www.linkedin.com/in/federico-s-rizzo/" target="_blank" style="color:#667eea; text-decoration:underline; font-weight:600;">
+          <i class="fab fa-linkedin" style="margin-right:4px;"></i>Federico Rizzo
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.querySelector('.menu');
+        menu.classList.toggle('show');
+      }
+
+      // Cerrar menú al hacer clic en cualquier enlace del menú
+      document.querySelectorAll('.menu a').forEach(link => {
+        link.addEventListener('click', function() {
+          const menu = document.querySelector('.menu');
+          if (menu.classList.contains('show')) {
+            menu.classList.remove('show');
+          }
+        });
+      });
+
+      // Cerrar menú al hacer clic fuera de él
+      document.addEventListener('click', function(event) {
+        const menu = document.querySelector('.menu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (menu.classList.contains('show') && 
+            !menu.contains(event.target) && 
+            !menuToggle.contains(event.target)) {
+          menu.classList.remove('show');
+        }
+      });
+
+      // Variables globales
+      let currentStep = 1;
+      let projectData = {
+        text: '¡Hola Mundo!',
+        fontSize: 32,
+        textColor: '#667eea',
+        fontFamily: 'Arial, sans-serif',
+        shapeType: 'circle',
+        shapeSize: 80,
+        shapeColor: '#48bb78',
+        animationTarget: 'text',
+        animationTypeText: 'none',
+        animationDurationText: 1,
+        animationRepeatText: 1,
+        animationTypeShape: 'none',
+        animationDurationShape: 1,
+        animationRepeatShape: 1,
+        bgMode: 'solid',
+        bgColor: '#ffffff',
+        bgGradient: 'linear-gradient(45deg, #667eea, #764ba2)',
+        bgCustomColor1: '#667eea',
+        bgCustomColor2: '#764ba2',
+        bgCustomDir: '135deg'
+      };
+
+      // Elementos del DOM
+      const textInput = document.getElementById('textInput');
+      const fontSize = document.getElementById('fontSize');
+      const fontSizeValue = document.getElementById('fontSizeValue');
+      const textColor = document.getElementById('textColor');
+      const textColorHex = document.getElementById('textColorHex');
+      const fontFamily = document.getElementById('fontFamily');
+      const shapeType = document.getElementById('shapeType');
+      const shapeSize = document.getElementById('shapeSize');
+      const shapeSizeValue = document.getElementById('shapeSizeValue');
+      const shapeColor = document.getElementById('shapeColor');
+      const shapeColorHex = document.getElementById('shapeColorHex');
+      const animationTarget = document.getElementById('animationTarget');
+      const animationTypeText = document.getElementById('animationTypeText');
+      const animationDurationText = document.getElementById('animationDurationText');
+      const animationDurationValueText = document.getElementById('animationDurationValueText');
+      const animationRepeatText = document.getElementById('animationRepeatText');
+      const animationTypeShape = document.getElementById('animationTypeShape');
+      const animationDurationShape = document.getElementById('animationDurationShape');
+      const animationDurationValueShape = document.getElementById('animationDurationValueShape');
+      const animationRepeatShape = document.getElementById('animationRepeatShape');
+      const bgMode = document.getElementById('bgMode');
+      const bgColor = document.getElementById('bgColor');
+      const bgColorHex = document.getElementById('bgColorHex');
+      const bgGradient = document.getElementById('bgGradient');
+      const bgCustomColor1 = document.getElementById('bgCustomColor1');
+      const bgCustomColor2 = document.getElementById('bgCustomColor2');
+      const bgCustomDir = document.getElementById('bgCustomDir');
+      const bgSolidGroup = document.getElementById('bgSolidGroup');
+      const bgPresetGroup = document.getElementById('bgPresetGroup');
+      const bgCustomGroup = document.getElementById('bgCustomGroup');
+
+      // Event listeners
+      textInput.addEventListener('input', updateProjectData);
+      fontSize.addEventListener('input', updateProjectData);
+      fontFamily.addEventListener('change', updateProjectData);
+      shapeType.addEventListener('change', updateProjectData);
+      shapeSize.addEventListener('input', updateProjectData);
+      bgMode.addEventListener('change', updateProjectData);
+      bgColor.addEventListener('input', updateProjectData);
+      bgColorHex.addEventListener('input', updateProjectData);
+      bgGradient.addEventListener('change', updateProjectData);
+      bgCustomColor1.addEventListener('input', updateProjectData);
+      bgCustomColor2.addEventListener('input', updateProjectData);
+      bgCustomDir.addEventListener('change', updateProjectData);
+      animationTarget.addEventListener('change', updateProjectData);
+      animationTypeText.addEventListener('change', updateProjectData);
+      animationDurationText.addEventListener('input', updateProjectData);
+      animationRepeatText.addEventListener('change', updateProjectData);
+      animationTypeShape.addEventListener('change', updateProjectData);
+      animationDurationShape.addEventListener('input', updateProjectData);
+      animationRepeatShape.addEventListener('change', updateProjectData);
+
+      // Inicializar
+      syncColorPickers();
+      updateProjectData();
+
+      function updateProjectData() {
+        // Actualizar datos del proyecto
+        projectData.text = textInput.value;
+        projectData.fontSize = parseInt(fontSize.value);
+        projectData.textColor = textColor.value;
+        projectData.fontFamily = fontFamily.value;
+        projectData.shapeType = shapeType.value;
+        projectData.shapeSize = parseInt(shapeSize.value);
+        projectData.shapeColor = shapeColor.value;
+        projectData.animationTarget = animationTarget.value;
+        projectData.animationTypeText = animationTypeText.value;
+        projectData.animationDurationText = parseFloat(animationDurationText.value);
+        projectData.animationRepeatText = animationRepeatText.value;
+        projectData.animationTypeShape = animationTypeShape.value;
+        projectData.animationDurationShape = parseFloat(animationDurationShape.value);
+        projectData.animationRepeatShape = animationRepeatShape.value;
+        projectData.bgMode = bgMode.value;
+        projectData.bgColor = bgColor.value;
+        projectData.bgGradient = bgGradient.value;
+        projectData.bgCustomColor1 = bgCustomColor1.value;
+        projectData.bgCustomColor2 = bgCustomColor2.value;
+        projectData.bgCustomDir = bgCustomDir.value;
+        // Mostrar/ocultar controles de fondo
+        if (projectData.bgMode === 'solid') {
+          bgSolidGroup.style.display = 'block';
+          bgPresetGroup.style.display = 'none';
+          bgCustomGroup.style.display = 'none';
+        } else if (projectData.bgMode === 'preset') {
+          bgSolidGroup.style.display = 'none';
+          bgPresetGroup.style.display = 'block';
+          bgCustomGroup.style.display = 'none';
+        } else {
+          bgSolidGroup.style.display = 'none';
+          bgPresetGroup.style.display = 'none';
+          bgCustomGroup.style.display = 'block';
+        }
+
+        // Actualizar valores mostrados
+        fontSizeValue.textContent = projectData.fontSize + 'px';
+        textColorHex.value = projectData.textColor;
+        shapeSizeValue.textContent = projectData.shapeSize + 'px';
+        shapeColorHex.value = projectData.shapeColor;
+        animationDurationValueText.textContent = projectData.animationDurationText + 's';
+        animationDurationValueShape.textContent = projectData.animationDurationShape + 's';
+        bgColorHex.value = projectData.bgColor;
+
+        // Mostrar/ocultar controles según selección
+        if (projectData.animationTarget === 'text') {
+          document.getElementById('textAnimControls').style.display = 'block';
+          document.getElementById('shapeAnimControls').style.display = 'none';
+        } else if (projectData.animationTarget === 'shape') {
+          document.getElementById('textAnimControls').style.display = 'none';
+          document.getElementById('shapeAnimControls').style.display = 'block';
+        } else {
+          document.getElementById('textAnimControls').style.display = 'block';
+          document.getElementById('shapeAnimControls').style.display = 'block';
+        }
+        // Actualizar vistas previas
+        updateShapePreview();
+        updateAnimationPreview();
+      }
+
+      // Función específica para sincronizar colores
+      function syncColorPickers() {
+        // Sincronizar color de texto
+        textColor.addEventListener('input', function() {
+          textColorHex.value = this.value;
+          updateProjectData();
+        });
+        
+        textColorHex.addEventListener('input', function() {
+          textColor.value = this.value;
+          updateProjectData();
+        });
+
+        // Sincronizar color de figura
+        shapeColor.addEventListener('input', function() {
+          shapeColorHex.value = this.value;
+          updateProjectData();
+        });
+        
+        shapeColorHex.addEventListener('input', function() {
+          shapeColor.value = this.value;
+          updateProjectData();
+        });
+
+        // Sincronizar color de fondo
+        bgColor.addEventListener('input', function() {
+          bgColorHex.value = this.value;
+          updateProjectData();
+        });
+        
+        bgColorHex.addEventListener('input', function() {
+          bgColor.value = this.value;
+          updateProjectData();
+        });
+      }
+
+      function updateShapePreview() {
+        const previewShape = document.getElementById('previewShape');
+        const shapeColorGroup = document.querySelector('.control-group label[for="shapeColor"]').parentElement;
+        const shapeColorInput = document.getElementById('shapeColor');
+        const shapeColorHexInput = document.getElementById('shapeColorHex');
+        let colorMsg = document.getElementById('colorMsg');
+        if (!colorMsg) {
+          colorMsg = document.createElement('div');
+          colorMsg.id = 'colorMsg';
+          colorMsg.style.color = '#e53e3e';
+          colorMsg.style.fontSize = '0.95rem';
+          colorMsg.style.marginTop = '0.5rem';
+          shapeColorGroup.appendChild(colorMsg);
+        }
+        if (projectData.shapeType === 'none') {
+          previewShape.innerHTML = '<p style="color: #718096;">Sin figura</p>';
+          shapeColorInput.disabled = false;
+          shapeColorHexInput.disabled = false;
+          colorMsg.textContent = '';
+          return;
+        }
+        // Deshabilitar color para estrella/corazon
+        if (projectData.shapeType === 'star' || projectData.shapeType === 'heart') {
+          shapeColorInput.disabled = true;
+          shapeColorHexInput.disabled = true;
+          colorMsg.textContent = 'No se puede cambiar el color de la estrella o el corazón.';
+        } else {
+          shapeColorInput.disabled = false;
+          shapeColorHexInput.disabled = false;
+          colorMsg.textContent = '';
+        }
+        previewShape.innerHTML = '';
+        const shape = document.createElement('div');
+        shape.style.width = projectData.shapeSize + 'px';
+        shape.style.height = projectData.shapeSize + 'px';
+        shape.style.backgroundColor = projectData.shapeColor;
+        shape.style.margin = '0 auto';
+        shape.style.display = 'flex';
+        shape.style.alignItems = 'center';
+        shape.style.justifyContent = 'center';
+        switch(projectData.shapeType) {
+          case 'circle':
+            shape.style.borderRadius = '50%';
+            break;
+          case 'square':
+            shape.style.borderRadius = '0';
+            break;
+          case 'triangle':
+            shape.style.width = '0';
+            shape.style.height = '0';
+            shape.style.backgroundColor = 'transparent';
+            shape.style.borderLeft = (projectData.shapeSize/2) + 'px solid transparent';
+            shape.style.borderRight = (projectData.shapeSize/2) + 'px solid transparent';
+            shape.style.borderBottom = projectData.shapeSize + 'px solid ' + projectData.shapeColor;
+            break;
+          case 'star':
+            shape.innerHTML = '⭐';
+            shape.style.fontSize = projectData.shapeSize + 'px';
+            shape.style.backgroundColor = 'transparent';
+            break;
+          case 'heart':
+            shape.innerHTML = '❤️';
+            shape.style.fontSize = projectData.shapeSize + 'px';
+            shape.style.backgroundColor = 'transparent';
+            break;
+        }
+        previewShape.appendChild(shape);
+      }
+
+      function updateAnimationPreview() {
+        const previewAnimation = document.getElementById('previewAnimation');
+        previewAnimation.innerHTML = '';
+        // Texto
+        const textPrev = document.createElement('div');
+        textPrev.textContent = projectData.text;
+        textPrev.style.fontSize = projectData.fontSize + 'px';
+        textPrev.style.color = projectData.textColor;
+        textPrev.style.fontFamily = projectData.fontFamily;
+        textPrev.style.marginBottom = '1rem';
+        textPrev.style.textAlign = 'center';
+        if (projectData.animationTarget === 'text' || projectData.animationTarget === 'both') {
+          if (projectData.animationTypeText !== 'none') {
+            textPrev.style.animation = `${projectData.animationTypeText} ${projectData.animationDurationText}s ${projectData.animationRepeatText === 'infinite' ? 'infinite' : projectData.animationRepeatText} ease-in-out`;
+          }
+        }
+        previewAnimation.appendChild(textPrev);
+        // Figura
+        if (projectData.shapeType !== 'none') {
+          const shapePrev = document.createElement('div');
+          shapePrev.style.width = projectData.shapeSize + 'px';
+          shapePrev.style.height = projectData.shapeSize + 'px';
+          shapePrev.style.backgroundColor = projectData.shapeColor;
+          shapePrev.style.margin = '0 auto';
+          shapePrev.style.display = 'block';
+          shapePrev.style.textAlign = 'center';
+          shapePrev.style.alignItems = 'center';
+          shapePrev.style.justifyContent = 'center';
+          switch(projectData.shapeType) {
+            case 'circle':
+              shapePrev.style.borderRadius = '50%';
+              break;
+            case 'square':
+              shapePrev.style.borderRadius = '0';
+              break;
+            case 'triangle':
+              shapePrev.style.width = '0';
+              shapePrev.style.height = '0';
+              shapePrev.style.backgroundColor = 'transparent';
+              shapePrev.style.borderLeft = (projectData.shapeSize/2) + 'px solid transparent';
+              shapePrev.style.borderRight = (projectData.shapeSize/2) + 'px solid transparent';
+              shapePrev.style.borderBottom = projectData.shapeSize + 'px solid ' + projectData.shapeColor;
+              break;
+            case 'star':
+              shapePrev.innerHTML = '⭐';
+              shapePrev.style.fontSize = projectData.shapeSize + 'px';
+              shapePrev.style.backgroundColor = 'transparent';
+              break;
+            case 'heart':
+              shapePrev.innerHTML = '❤️';
+              shapePrev.style.fontSize = projectData.shapeSize + 'px';
+              shapePrev.style.backgroundColor = 'transparent';
+              break;
+          }
+          if (projectData.animationTarget === 'shape' || projectData.animationTarget === 'both') {
+            if (projectData.animationTypeShape !== 'none') {
+              shapePrev.style.animation = `${projectData.animationTypeShape} ${projectData.animationDurationShape}s ${projectData.animationRepeatShape === 'infinite' ? 'infinite' : projectData.animationRepeatShape} ease-in-out`;
+            }
+          }
+          previewAnimation.appendChild(shapePrev);
+        }
+      }
+
+      // Mensajes educativos para cada paso
+      const stepHints = [
+        '',
+        '<strong>💡 Tip:</strong> El texto es la base de toda página web. ¡Probá diferentes fuentes y colores para ver cómo cambia la personalidad de tu mensaje!',
+        '<strong>💡 Tip:</strong> Las figuras hacen tu diseño más atractivo. Elegí la que más te guste y experimentá con tamaños y colores.',
+        '<strong>💡 Tip:</strong> Las animaciones le dan vida a tu creación. Probá diferentes efectos y velocidades.',
+        '<strong>💡 Tip:</strong> El fondo puede cambiar completamente el aspecto de tu página. ¡Probá colores sólidos y gradientes!',
+        '<strong>🎉 Listo:</strong> ¡Felicitaciones! Así se ve tu creación. Mirá el código generado y animate a seguir probando.'
+      ];
+      function updateStepHint() {
+        const hint = stepHints[currentStep] || '';
+        document.getElementById('stepHintText').innerHTML = hint;
+      }
+      // Llamar al cambiar de paso
+      function nextStep(step) {
+        document.getElementById('step' + currentStep).classList.remove('active');
+        document.getElementById('step' + step).classList.add('active');
+        currentStep = step;
+        updateStepHint();
+      }
+      function prevStep(step) {
+        document.getElementById('step' + currentStep).classList.remove('active');
+        document.getElementById('step' + step).classList.add('active');
+        currentStep = step;
+        updateStepHint();
+      }
+      // Inicializar hint al cargar
+      updateStepHint();
+
+      function showPreview() {
+        const finalPreview = document.getElementById('finalPreview');
+        finalPreview.innerHTML = '';
+        // Crear elemento de texto
+        const textElement = document.createElement('div');
+        textElement.style.fontSize = projectData.fontSize + 'px';
+        textElement.style.color = projectData.textColor;
+        textElement.style.fontFamily = projectData.fontFamily;
+        textElement.style.marginBottom = '1rem';
+        textElement.style.textAlign = 'center';
+        if (projectData.animationTarget === 'text' || projectData.animationTarget === 'both') {
+          if (projectData.animationTypeText !== 'none') {
+            textElement.style.animation = `${projectData.animationTypeText} ${projectData.animationDurationText}s ${projectData.animationRepeatText === 'infinite' ? 'infinite' : projectData.animationRepeatText} ease-in-out`;
+          }
+        }
+        textElement.textContent = projectData.text;
+        finalPreview.appendChild(textElement);
+        // Crear figura si se seleccionó
+        if (projectData.shapeType !== 'none') {
+          const shape = document.createElement('div');
+          shape.style.width = projectData.shapeSize + 'px';
+          shape.style.height = projectData.shapeSize + 'px';
+          shape.style.backgroundColor = projectData.shapeColor;
+          shape.style.margin = '0 auto';
+          shape.style.display = 'block';
+          switch(projectData.shapeType) {
+            case 'circle':
+              shape.style.borderRadius = '50%';
+              break;
+            case 'square':
+              shape.style.borderRadius = '0';
+              break;
+            case 'triangle':
+              shape.style.width = '0';
+              shape.style.height = '0';
+              shape.style.backgroundColor = 'transparent';
+              shape.style.borderLeft = (projectData.shapeSize/2) + 'px solid transparent';
+              shape.style.borderRight = (projectData.shapeSize/2) + 'px solid transparent';
+              shape.style.borderBottom = projectData.shapeSize + 'px solid ' + projectData.shapeColor;
+              break;
+            case 'star':
+              shape.innerHTML = '⭐';
+              shape.style.fontSize = projectData.shapeSize + 'px';
+              shape.style.backgroundColor = 'transparent';
+              break;
+            case 'heart':
+              shape.innerHTML = '❤️';
+              shape.style.fontSize = projectData.shapeSize + 'px';
+              shape.style.backgroundColor = 'transparent';
+              break;
+          }
+          if (projectData.animationTarget === 'shape' || projectData.animationTarget === 'both') {
+            if (projectData.animationTypeShape !== 'none') {
+              shape.style.animation = `${projectData.animationTypeShape} ${projectData.animationDurationShape}s ${projectData.animationRepeatShape === 'infinite' ? 'infinite' : projectData.animationRepeatShape} ease-in-out`;
+            }
+          }
+          finalPreview.appendChild(shape);
+        }
+        // Aplicar fondo
+        if (projectData.bgMode === 'solid') {
+          finalPreview.style.background = projectData.bgColor;
+        } else if (projectData.bgMode === 'preset') {
+          finalPreview.style.background = projectData.bgGradient;
+        } else {
+          finalPreview.style.background = `linear-gradient(${projectData.bgCustomDir}, ${projectData.bgCustomColor1}, ${projectData.bgCustomColor2})`;
+        }
+        nextStep(5);
+      }
+
+      function showCode() {
+        // Generar código HTML
+        let html = '&lt;div class="contenedor"&gt;\n';
+        html += '  &lt;div class="texto"&gt;\n';
+        html += `    ${projectData.text}\n`;
+        html += '  &lt;/div&gt;\n';
+        
+        if (projectData.shapeType !== 'none') {
+          html += '  &lt;div class="figura"&gt;&lt;/div&gt;\n';
+        }
+        
+        html += '&lt;/div&gt;';
+        // Generar código CSS
+        let css = '.contenedor {\n';
+        if (projectData.bgMode === 'solid') {
+          css += `  background-color: ${projectData.bgColor};\n`;
+        } else if (projectData.bgMode === 'preset') {
+          css += `  background: ${projectData.bgGradient};\n`;
+        } else {
+          css += `  background: linear-gradient(${projectData.bgCustomDir}, ${projectData.bgCustomColor1}, ${projectData.bgCustomColor2});\n`;
+        }
+        css += '  padding: 2rem;\n';
+        css += '  text-align: center;\n';
+        css += '}\n\n';
+        css += '.texto {\n';
+        css += `  font-size: ${projectData.fontSize}px;\n`;
+        css += `  color: ${projectData.textColor};\n`;
+        css += `  font-family: ${projectData.fontFamily};\n`;
+        css += '  margin-bottom: 1rem;\n';
+        if (projectData.animationTarget === 'text' || projectData.animationTarget === 'both') {
+          if (projectData.animationTypeText !== 'none') {
+            css += `  animation: ${projectData.animationTypeText} ${projectData.animationDurationText}s ${projectData.animationRepeatText === 'infinite' ? 'infinite' : projectData.animationRepeatText} ease-in-out;\n`;
+          }
+        }
+        css += '}\n';
+        if (projectData.shapeType !== 'none') {
+          css += '\n.figura {\n';
+          css += `  width: ${projectData.shapeSize}px;\n`;
+          css += `  height: ${projectData.shapeSize}px;\n`;
+          css += `  background-color: ${projectData.shapeColor};\n`;
+          css += '  margin: 0 auto;\n';
+          css += '  display: block;\n';
+          switch(projectData.shapeType) {
+            case 'circle':
+              css += '  border-radius: 50%;\n';
+              break;
+            case 'square':
+              css += '  border-radius: 0;\n';
+              break;
+            case 'triangle':
+              css = css.replace(`width: ${projectData.shapeSize}px;`, `width: 0;`);
+              css = css.replace(`height: ${projectData.shapeSize}px;`, `height: 0;`);
+              css = css.replace(`background-color: ${projectData.shapeColor};`, 'background-color: transparent;');
+              css += `  border-left: ${projectData.shapeSize/2}px solid transparent;\n`;
+              css += `  border-right: ${projectData.shapeSize/2}px solid transparent;\n`;
+              css += `  border-bottom: ${projectData.shapeSize}px solid ${projectData.shapeColor};\n`;
+              break;
+            case 'star':
+              css += `  font-size: ${projectData.shapeSize}px;\n`;
+              css += '  background-color: transparent;\n';
+              css += `  color: ${projectData.shapeColor};\n`;
+              css += '  content: "⭐";\n';
+              break;
+            case 'heart':
+              css += `  font-size: ${projectData.shapeSize}px;\n`;
+              css += '  background-color: transparent;\n';
+              css += `  color: ${projectData.shapeColor};\n`;
+              css += '  content: "❤️";\n';
+              break;
+          }
+          if (projectData.animationTarget === 'shape' || projectData.animationTarget === 'both') {
+            if (projectData.animationTypeShape !== 'none') {
+              css += `  animation: ${projectData.animationTypeShape} ${projectData.animationDurationShape}s ${projectData.animationRepeatShape === 'infinite' ? 'infinite' : projectData.animationRepeatShape} ease-in-out;\n`;
+            }
+          }
+          css += '}';
+        }
+
+        document.getElementById('htmlCode').textContent = html;
+        document.getElementById('cssCode').textContent = css;
+        document.getElementById('codeModal').style.display = 'block';
+      }
+
+      function closeCodeModal() {
+        document.getElementById('codeModal').style.display = 'none';
+      }
+
+      function restart() {
+        // Resetear datos
+        projectData = {
+          text: '¡Hola Mundo!',
+          fontSize: 32,
+          textColor: '#667eea',
+          fontFamily: 'Arial, sans-serif',
+          shapeType: 'circle',
+          shapeSize: 80,
+          shapeColor: '#48bb78',
+          animationTarget: 'text',
+          animationTypeText: 'none',
+          animationDurationText: 1,
+          animationRepeatText: 1,
+          animationTypeShape: 'none',
+          animationDurationShape: 1,
+          animationRepeatShape: 1,
+          bgMode: 'solid',
+          bgColor: '#ffffff',
+          bgGradient: 'linear-gradient(45deg, #667eea, #764ba2)',
+          bgCustomColor1: '#667eea',
+          bgCustomColor2: '#764ba2',
+          bgCustomDir: '135deg'
+        };
+
+        // Resetear controles
+        textInput.value = projectData.text;
+        fontSize.value = projectData.fontSize;
+        textColor.value = projectData.textColor;
+        fontFamily.value = projectData.fontFamily;
+        shapeType.value = projectData.shapeType;
+        shapeSize.value = projectData.shapeSize;
+        shapeColor.value = projectData.shapeColor;
+        animationTarget.value = projectData.animationTarget;
+        animationTypeText.value = projectData.animationTypeText;
+        animationDurationText.value = projectData.animationDurationText;
+        animationRepeatText.value = projectData.animationRepeatText;
+        animationTypeShape.value = projectData.animationTypeShape;
+        animationDurationShape.value = projectData.animationDurationShape;
+        animationRepeatShape.value = projectData.animationRepeatShape;
+        bgMode.value = projectData.bgMode;
+        bgColor.value = projectData.bgColor;
+        bgGradient.value = projectData.bgGradient;
+        bgCustomColor1.value = projectData.bgCustomColor1;
+        bgCustomColor2.value = projectData.bgCustomColor2;
+        bgCustomDir.value = projectData.bgCustomDir;
+
+        // Actualizar
+        updateProjectData();
+
+        // Volver al paso 1
+        document.getElementById('step5').classList.remove('active');
+        document.getElementById('step1').classList.add('active');
+        currentStep = 1;
+        updateStepHint();
+      }
+
+      // Cerrar modal al hacer clic fuera
+      document.getElementById('codeModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeCodeModal();
+        }
+      });
+
+      // Animación de entrada para elementos
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observar elementos para animación
+      document.querySelectorAll('.btn, .feature, .stat').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html> 

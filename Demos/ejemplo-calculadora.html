@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora - Editor de Código UNLu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #2d3748;
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        /* Navbar styles */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #2d3748;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .menu a:hover {
+            color: #667eea;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #2d3748;
+            cursor: pointer;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: 70vh;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .code-panel {
+            background: #1a202c;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .code-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            background: #2d3748;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: #667eea;
+        }
+
+        .lang-btn:hover {
+            background: #5a67d8;
+        }
+
+        .code-editor {
+            flex: 1;
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #e2e8f0;
+            border: none;
+            resize: none;
+            outline: none;
+        }
+
+        .preview-panel {
+            background: white;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .preview-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .run-btn {
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .run-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.3);
+        }
+
+        .preview-frame {
+            flex: 1;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2d3748;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin-bottom: 1rem;
+        }
+
+        .back-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                min-height: 60vh;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .menu.show {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+                    <img src="../logoLSIUNLu.svg" alt="Logo Licenciatura en Sistemas de Información UNLu" height="40" />
+                </a>
+            </div>
+            <ul class="menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="../index.html#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
+                <li><a href="../index.html#info"><i class="fas fa-info-circle"></i> Información</a></li>
+                <li><a href="../faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+                    <img src="../LogoCodes.png" alt="Logo CODES++ Centro de Estudiantes" height="40" />
+                </a>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1><i class="fas fa-calculator"></i> Calculadora Simple</h1>
+        <p>Una calculadora funcional con JavaScript. Practica lógica de programación y manejo de eventos.</p>
+    </div>
+
+    <div class="container">
+        <a href="editor-codigo.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Volver a Ejemplos
+        </a>
+
+        <div class="editor-container">
+            <div class="code-panel">
+                <div class="code-header">
+                    <h3><i class="fas fa-edit"></i> Código</h3>
+                    <div class="language-selector">
+                        <button class="lang-btn active" onclick="switchLanguage('html', event)">HTML</button>
+                        <button class="lang-btn" onclick="switchLanguage('css', event)">CSS</button>
+                        <button class="lang-btn" onclick="switchLanguage('js', event)">JS</button>
+                    </div>
+                </div>
+                <textarea id="codeEditor" class="code-editor" placeholder="Escribí tu código aquí..."></textarea>
+            </div>
+            
+            <div class="preview-panel">
+                <div class="preview-header">
+                    <h3><i class="fas fa-eye"></i> Vista Previa</h3>
+                    <button class="run-btn" onclick="runCode()">
+                        <i class="fas fa-play"></i> Ejecutar
+                    </button>
+                </div>
+                <iframe id="previewFrame" class="preview-frame"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'html';
+        let htmlCode = '<div style="text-align: center; padding: 20px;">\n    <h2>Calculadora Simple</h2>\n    <input type="text" id="display" readonly style="width: 200px; height: 40px; font-size: 18px; text-align: right; margin: 10px;">\n    <br>\n    <button onclick="appendNumber(\'7\')">7</button>\n    <button onclick="appendNumber(\'8\')">8</button>\n    <button onclick="appendNumber(\'9\')">9</button>\n    <button onclick="setOperator(\'+\')">+</button>\n    <br>\n    <button onclick="appendNumber(\'4\')">4</button>\n    <button onclick="appendNumber(\'5\')">5</button>\n    <button onclick="appendNumber(\'6\')">6</button>\n    <button onclick="setOperator(\'-\')">-</button>\n    <br>\n    <button onclick="appendNumber(\'1\')">1</button>\n    <button onclick="appendNumber(\'2\')">2</button>\n    <button onclick="appendNumber(\'3\')">3</button>\n    <button onclick="setOperator(\'*\')">×</button>\n    <br>\n    <button onclick="appendNumber(\'0\')">0</button>\n    <button onclick="clearDisplay()">C</button>\n    <button onclick="calculate()">=</button>\n    <button onclick="setOperator(\'/\')">/</button>\n</div>';
+        let cssCode = 'button {\n    width: 50px;\n    height: 50px;\n    margin: 5px;\n    font-size: 18px;\n    border: none;\n    border-radius: 8px;\n    background: #e2e8f0;\n    cursor: pointer;\n    transition: all 0.2s ease;\n}\n\nbutton:hover {\n    background: #cbd5e0;\n    transform: scale(1.05);\n}\n\ninput {\n    border: 2px solid #e2e8f0;\n    border-radius: 8px;\n    padding: 5px;\n}\n\nh2 {\n    color: #2d3748;\n    margin-bottom: 20px;\n}';
+        let jsCode = 'let displayValue = "";\nlet operator = "";\nlet firstNumber = "";\n\nfunction appendNumber(num) {\n    displayValue += num;\n    document.getElementById("display").value = displayValue;\n}\n\nfunction setOperator(op) {\n    if (displayValue !== "") {\n        firstNumber = displayValue;\n        operator = op;\n        displayValue = "";\n    }\n}\n\nfunction calculate() {\n    if (firstNumber !== "" && operator !== "" && displayValue !== "") {\n        const num1 = parseFloat(firstNumber);\n        const num2 = parseFloat(displayValue);\n        let result;\n\n        switch(operator) {\n            case "+": result = num1 + num2; break;\n            case "-": result = num1 - num2; break;\n            case "*": result = num1 * num2; break;\n            case "/": result = num1 / num2; break;\n        }\n\n        document.getElementById("display").value = result;\n        displayValue = result.toString();\n        firstNumber = "";\n        operator = "";\n    }\n}\n\nfunction clearDisplay() {\n    displayValue = "";\n    firstNumber = "";\n    operator = "";\n    document.getElementById("display").value = "";\n}';
+
+        function switchLanguage(lang, event) {
+            const editor = document.getElementById('codeEditor');
+            
+            // Guardar lo que se estaba escribiendo
+            switch (currentLanguage) {
+                case 'html':
+                    htmlCode = editor.value;
+                    break;
+                case 'css':
+                    cssCode = editor.value;
+                    break;
+                case 'js':
+                    jsCode = editor.value;
+                    break;
+            }
+            
+            currentLanguage = lang;
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Cargar el código correspondiente al nuevo lenguaje
+            switch (lang) {
+                case 'html':
+                    editor.value = htmlCode;
+                    break;
+                case 'css':
+                    editor.value = cssCode;
+                    break;
+                case 'js':
+                    editor.value = jsCode;
+                    break;
+            }
+        }
+
+        function runCode() {
+            const editor = document.getElementById('codeEditor');
+            const code = editor.value;
+            
+            switch (currentLanguage) {
+                case 'html':
+                    htmlCode = code;
+                    break;
+                case 'css':
+                    cssCode = code;
+                    break;
+                case 'js':
+                    jsCode = code;
+                    break;
+            }
+            
+            const escapedJS = jsCode.replace(/<\/script>/g, '<\\/script>');
+            
+            const fullHTML = `
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <style>${cssCode}</style>
+                </head>
+                <body>
+                    ${htmlCode}
+                    <script>${escapedJS}<\/script>
+                </body>
+                </html>
+            `;
+            
+            const iframe = document.getElementById('previewFrame');
+            iframe.srcdoc = fullHTML;
+        }
+
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('show');
+        }
+
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', function(event) {
+            const menu = document.querySelector('.menu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (menu.classList.contains('show') && 
+                !menu.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
+        // Cargar HTML por defecto
+        document.getElementById('codeEditor').value = htmlCode;
+        runCode();
+    </script>
+</body>
+</html> 
