@@ -267,6 +267,12 @@
     font-size: 0.92rem;
     padding: 0.7rem;
   }
+  #finalActions {
+    display: block !important;
+  }
+  #finalActions .ver-pagina-group {
+    margin-top: 1.2rem;
+  }
 }
 </style>
   </head>
@@ -303,7 +309,6 @@
     </header>
 
     <div class="container">
-      <div style="text-align:center; margin-top: 30px; font-size: 2em; color: #b22222; font-weight: bold;">En desarrollo</div>
       <!-- Eliminar la pantalla de bienvenida y el botón Comenzar -->
       <!-- Paso 1: Texto -->
       <div class="step-container" id="stepsContainer" style="min-height:60vh;">
@@ -328,17 +333,6 @@
           </div>
           
           <div class="control-group">
-            <label for="textPosition">Posición del texto</label>
-            <select id="textPosition">
-              <option value="top">Arriba</option>
-              <option value="center">Centro</option>
-              <option value="bottom">Abajo</option>
-              <option value="left">Izquierda</option>
-              <option value="right">Derecha</option>
-            </select>
-          </div>
-          
-          <div class="control-group">
             <label for="fontFamily">Tipo de letra</label>
             <select id="fontFamily">
               <option value="Arial, sans-serif">Arial (Simple)</option>
@@ -354,7 +348,10 @@
               <i class="fas fa-arrow-right"></i> Siguiente
             </button>
           </div>
-        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Escribí un mensaje claro y divertido. Podés cambiar el tamaño, la fuente y la posición del texto.</div></div>
+          <div class="preview-section" id="previewTextSection">
+            <div id="previewText"></div>
+          </div>
+        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Escribí un mensaje claro y divertido. Podés cambiar el tamaño y la fuente del texto.</div></div>
         </div>
 
         <!-- Paso 2: Figura -->
@@ -371,7 +368,7 @@
               <option value="square">Cuadrado</option>
               <option value="triangle">Triángulo</option>
               <option value="star">Estrella ⭐</option>
-              <option value="heart">Corazón ❤️</option>
+              <option value="pentagon">Pentágono</option>
               <option value="none">No quiero figura</option>
             </select>
           </div>
@@ -389,44 +386,27 @@
               <input type="text" id="shapeColorHex" value="#48bb78" placeholder="#48bb78">
             </div>
           </div>
-          <div class="control-group">
-            <label for="shapePosition">Posición de la figura</label>
-            <select id="shapePosition">
-              <option value="top">Arriba</option>
-              <option value="center">Centro</option>
-              <option value="bottom">Abajo</option>
-              <option value="left">Izquierda</option>
-              <option value="right">Derecha</option>
-            </select>
-          </div>
           <div class="shape-preview" id="shapePreview">
             <div id="previewShape"></div>
           </div>
           <div class="button-group">
+            <button class="btn-step secondary" onclick="nextStep(1)">
+              <i class="fas fa-arrow-left"></i> Volver
+            </button>
             <button class="btn-step" onclick="nextStep(3)">
               <i class="fas fa-arrow-right"></i> Siguiente
             </button>
           </div>
-        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Las figuras hacen tu diseño más atractivo. Elegí la que más te guste, experimentá con tamaños, colores y posición.</div></div>
+        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Las figuras hacen tu diseño más atractivo. Elegí la que más te guste, experimentá con tamaños y colores.</div></div>
         </div>
 
-        <!-- Paso 3: Animaciones -->
+        <!-- Paso 3: Animación de texto -->
         <div id="step3" class="step">
           <div class="step-header">
             <div class="step-number">3</div>
-            <h3 class="step-title">Agregá animaciones</h3>
-            <p class="step-description">Hacé que tu texto y figura se muevan</p>
+            <h3 class="step-title">Animá el texto</h3>
+            <p class="step-description">Elegí una animación para el texto</p>
           </div>
-          
-          <div class="control-group">
-            <label for="animationTarget">¿Qué querés animar?</label>
-            <select id="animationTarget">
-              <option value="text">Solo el texto</option>
-              <option value="shape">Solo la figura</option>
-              <option value="both">Ambos</option>
-            </select>
-          </div>
-
           <div id="textAnimControls">
             <div class="control-group">
               <label for="animationTypeText">Animación para el texto</label>
@@ -457,7 +437,24 @@
               </select>
             </div>
           </div>
+          <div class="button-group">
+            <button class="btn-step secondary" onclick="nextStep(2)">
+              <i class="fas fa-arrow-left"></i> Volver
+            </button>
+            <button class="btn-step" onclick="nextStep(4)">
+              <i class="fas fa-arrow-right"></i> Siguiente
+            </button>
+          </div>
+        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Las animaciones le dan vida a tu texto. Probá diferentes efectos y velocidades.</div></div>
+        </div>
 
+        <!-- Paso 4: Animación de figura -->
+        <div id="step4" class="step">
+          <div class="step-header">
+            <div class="step-number">4</div>
+            <h3 class="step-title">Animá la figura</h3>
+            <p class="step-description">Elegí una animación para la figura</p>
+          </div>
           <div id="shapeAnimControls">
             <div class="control-group">
               <label for="animationTypeShape">Animación para la figura</label>
@@ -488,24 +485,21 @@
               </select>
             </div>
           </div>
-
-          <div class="animation-preview" id="animationPreview">
-            <p>Vista previa de la animación:</p>
-            <div id="previewAnimation"></div>
-          </div>
-          
           <div class="button-group">
-            <button class="btn-step" onclick="nextStep(4)">
+            <button class="btn-step secondary" onclick="nextStep(3)">
+              <i class="fas fa-arrow-left"></i> Volver
+            </button>
+            <button class="btn-step" onclick="nextStep(5)">
               <i class="fas fa-arrow-right"></i> Siguiente
             </button>
           </div>
-        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Las animaciones le dan vida a tu creación. Probá diferentes efectos y velocidades.</div></div>
+        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> Las animaciones le dan vida a tu figura. Probá diferentes efectos y velocidades.</div></div>
         </div>
 
-        <!-- Paso 4: Fondo -->
-        <div id="step4" class="step">
+        <!-- Paso 5: Fondo -->
+        <div id="step5" class="step">
           <div class="step-header">
-            <div class="step-number">4</div>
+            <div class="step-number">5</div>
             <h3 class="step-title">Elegí el fondo</h3>
             <p class="step-description">Personalizá el fondo de tu creación</p>
           </div>
@@ -514,7 +508,6 @@
             <select id="bgMode">
               <option value="solid">Color sólido</option>
               <option value="preset">Gradiente predefinido</option>
-              <option value="custom">Gradiente personalizado</option>
             </select>
           </div>
           <div class="control-group" id="bgSolidGroup">
@@ -549,53 +542,31 @@
               <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(45deg, #4568dc, #b06ab3);"></div>
             </div>
           </div>
-          <div class="control-group" id="bgCustomGroup" style="display:none;">
-            <label>Gradiente personalizado</label>
-            <div style="display:flex;gap:1rem;align-items:center;">
-              <div>
-                <label for="bgCustomColor1" style="font-size:0.95rem;">Color 1</label>
-                <input type="color" id="bgCustomColor1" value="#667eea">
-              </div>
-              <div>
-                <label for="bgCustomColor2" style="font-size:0.95rem;">Color 2</label>
-                <input type="color" id="bgCustomColor2" value="#764ba2">
-              </div>
-              <div>
-                <label for="bgCustomDir" style="font-size:0.95rem;">Dirección</label>
-                <select id="bgCustomDir">
-                  <option value="to right">Horizontal</option>
-                  <option value="to bottom">Vertical</option>
-                  <option value="135deg">Diagonal</option>
-                  <option value="to top right">Diagonal inversa</option>
-                </select>
-              </div>
-            </div>
-          </div>
           <div class="button-group">
-            <button class="btn-step" onclick="showPreview()">
-              <i class="fas fa-arrow-right"></i> Siguiente
+            <button class="btn-step secondary" onclick="nextStep(4)">
+              <i class="fas fa-arrow-left"></i> Volver
             </button>
           </div>
-        <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> El fondo puede cambiar completamente el aspecto de tu página. ¡Probá colores sólidos y gradientes!</div></div>
+          <!-- Botones de acción solo visibles al final -->
+          <div class="button-group ver-pagina-group">
+            <button class="btn-step" onclick="showPreview()">
+              <i class="fas fa-eye"></i> Ver página
+            </button>
+          </div>
+          
+          <div id="finalActions" style="margin-top: 1.5rem; display:none;">
+            <div class="button-group">
+              <button class="btn-step" onclick="restart()">
+                <i class="fas fa-redo"></i> Crear Otro
+              </button>
+              <a class="btn-step" href="demostraciones.html" style="text-decoration:none;display:inline-block;">
+                <i class="fas fa-arrow-left"></i> Volver a las demostraciones
+              </a>
+            </div>
+            
+          </div>
+          <div class="highlight"><div class="highlight-icon"><i class="fas fa-lightbulb"></i></div><div class="highlight-content"><strong>💡 Tip:</strong> El fondo puede cambiar completamente el aspecto de tu página. ¡Probá colores sólidos y gradientes!</div></div>
         </div>
-
-        <!-- Mover los botones de acción (Ver página, Ver Código, Crear Otro, Volver) al final del paso 4, después del tip -->
-        <div class="button-group" style="margin-top: 1.5rem;">
-          <button class="btn-step" onclick="showPreview()">
-            <i class="fas fa-eye"></i> Ver página
-          </button>
-          <button class="btn-step" onclick="showCode()">
-            <i class="fas fa-code"></i> Ver Código
-          </button>
-          <button class="btn-step" onclick="restart()">
-            <i class="fas fa-redo"></i> Crear Otro
-          </button>
-          <a class="btn-step" href="demostraciones.html" style="text-decoration:none;display:inline-block;">
-            <i class="fas fa-arrow-left"></i> Volver a las demostraciones
-          </a>
-        </div>
-      </div>
-      <!-- El recuadro de tips ahora está debajo de cada paso -->
 
     <!-- Modal para mostrar código -->
     <div id="codeModal" class="code-modal">
@@ -624,24 +595,283 @@
 
     <!-- Mover el script aquí para asegurar que el DOM esté cargado -->
     <script>
-// Paso actual global
-window.currentStep = 1;
-
-// Avanzar de paso
-function nextStep(step) {
-  document.getElementById('step' + window.currentStep).classList.remove('active');
-  document.getElementById('step' + step).classList.add('active');
-  window.currentStep = step;
-  if (typeof syncAllControls === 'function') syncAllControls();
-  window.scrollTo({top: 0, behavior: 'smooth'});
-  if (typeof updateFullscreenBtn === 'function') updateFullscreenBtn();
-}
-
-// Menú hamburguesa
 function toggleMenu() {
   const menu = document.querySelector('.menu');
   menu.classList.toggle('show');
 }
+// Paso actual global
+window.currentStep = 1;
+window.projectData = {
+  text: '¡Hola Mundo!',
+  fontSize: 32,
+  fontFamily: 'Arial, sans-serif',
+  textColor: '#667eea',
+  shapeType: 'circle',
+  shapeSize: 80,
+  shapeColor: '#48bb78',
+  animationTypeText: 'none',
+  animationDurationText: 1,
+  animationRepeatText: '1',
+  animationTypeShape: 'none',
+  animationDurationShape: 1,
+  animationRepeatShape: '1',
+  bgMode: 'solid',
+  bgColor: '#ffffff',
+  bgGradient: 'linear-gradient(45deg, #667eea, #764ba2)'
+};
+
+function updateProjectData() {
+  // Paso 1
+  window.projectData.text = document.getElementById('textInput').value;
+  window.projectData.fontSize = parseInt(document.getElementById('fontSize').value);
+  window.projectData.fontFamily = document.getElementById('fontFamily').value;
+  // Paso 2
+  window.projectData.shapeType = document.getElementById('shapeType').value;
+  window.projectData.shapeSize = parseInt(document.getElementById('shapeSize').value);
+  window.projectData.shapeColor = document.getElementById('shapeColor').value;
+  // Paso 3
+  window.projectData.animationTypeText = document.getElementById('animationTypeText').value;
+  window.projectData.animationDurationText = parseFloat(document.getElementById('animationDurationText').value);
+  window.projectData.animationRepeatText = document.getElementById('animationRepeatText').value;
+  // Paso 4
+  window.projectData.animationTypeShape = document.getElementById('animationTypeShape').value;
+  window.projectData.animationDurationShape = parseFloat(document.getElementById('animationDurationShape').value);
+  window.projectData.animationRepeatShape = document.getElementById('animationRepeatShape').value;
+  // Paso 5
+  window.projectData.bgMode = document.getElementById('bgMode').value;
+  window.projectData.bgColor = document.getElementById('bgColor').value;
+  window.projectData.bgGradient = document.getElementById('bgGradient').value;
+  renderLivePreview();
+}
+
+function renderLivePreview() {
+  updateProjectData();
+  // Vista previa de texto en el paso 1
+  let previewText = document.getElementById('previewText');
+  if (previewText) {
+    previewText.textContent = window.projectData.text;
+    previewText.style.fontSize = window.projectData.fontSize + 'px';
+    previewText.style.fontFamily = window.projectData.fontFamily;
+    previewText.style.color = window.projectData.textColor;
+    // Posición
+    let pos = 'center'; // Eliminado
+    previewText.style.display = 'flex';
+    previewText.style.width = '100%';
+    previewText.style.height = '60px';
+    previewText.style.alignItems = 'center';
+    previewText.style.justifyContent = 'center';
+    previewText.style.margin = '1rem 0';
+    previewText.style.textAlign = 'center'; // Eliminado
+  }
+  // Vista previa principal (en paso 1, 2, 3)
+  let previewShape = document.getElementById('previewShape');
+  if (previewShape) {
+    previewShape.innerHTML = '';
+    if (window.projectData.shapeType && window.projectData.shapeType !== 'none') {
+      let shapeDiv = document.createElement('div');
+      shapeDiv.style.width = window.projectData.shapeSize + 'px';
+      shapeDiv.style.height = window.projectData.shapeSize + 'px';
+      shapeDiv.style.background = window.projectData.shapeColor;
+      shapeDiv.style.margin = '0 auto';
+      shapeDiv.style.display = 'block';
+      shapeDiv.style.position = 'relative';
+      // Forma
+      if (window.projectData.shapeType === 'circle') {
+        shapeDiv.style.borderRadius = '50%';
+      } else if (window.projectData.shapeType === 'square') {
+        shapeDiv.style.borderRadius = '0';
+      } else if (window.projectData.shapeType === 'triangle') {
+        shapeDiv.style.background = 'none';
+        shapeDiv.style.width = '0';
+        shapeDiv.style.height = '0';
+        shapeDiv.style.borderLeft = (window.projectData.shapeSize/2) + 'px solid transparent';
+        shapeDiv.style.borderRight = (window.projectData.shapeSize/2) + 'px solid transparent';
+        shapeDiv.style.borderBottom = window.projectData.shapeSize + 'px solid ' + window.projectData.shapeColor;
+      } else if (window.projectData.shapeType === 'star') {
+        shapeDiv.innerHTML = '<svg width="'+window.projectData.shapeSize+'" height="'+window.projectData.shapeSize+'" viewBox="0 0 100 100"><polygon points="50,5 61,39 98,39 67,59 78,91 50,70 22,91 33,59 2,39 39,39" fill="'+window.projectData.shapeColor+'"/></svg>';
+        shapeDiv.style.background = 'none';
+      } else if (window.projectData.shapeType === 'pentagon') {
+        shapeDiv.innerHTML = '<svg width="'+window.projectData.shapeSize+'" height="'+window.projectData.shapeSize+'" viewBox="0 0 100 100"><polygon points="50,10 90,38 73,85 27,85 10,38" fill="'+window.projectData.shapeColor+'"/></svg>';
+        shapeDiv.style.background = 'none';
+      }
+      previewShape.appendChild(shapeDiv);
+    }
+  }
+  // Vista previa de animación (paso 3)
+  let previewAnimation = document.getElementById('previewAnimation');
+  if (previewAnimation) {
+    previewAnimation.innerHTML = '';
+    // Texto
+    let textDiv = document.createElement('div');
+    textDiv.textContent = window.projectData.text;
+    textDiv.style.fontSize = window.projectData.fontSize + 'px';
+    textDiv.style.fontFamily = window.projectData.fontFamily;
+    textDiv.style.color = window.projectData.textColor;
+    textDiv.style.marginBottom = '1rem';
+    // Animación texto
+    applyAnimation(textDiv, window.projectData.animationTypeText, window.projectData.animationDurationText, window.projectData.animationRepeatText);
+    previewAnimation.appendChild(textDiv);
+    // Figura
+    if (window.projectData.shapeType && window.projectData.shapeType !== 'none') {
+      let shapeDiv = document.createElement('div');
+      shapeDiv.style.width = window.projectData.shapeSize + 'px';
+      shapeDiv.style.height = window.projectData.shapeSize + 'px';
+      shapeDiv.style.background = window.projectData.shapeColor;
+      shapeDiv.style.margin = '0 auto';
+      shapeDiv.style.display = 'block';
+      shapeDiv.style.position = 'relative';
+      // Forma
+      if (window.projectData.shapeType === 'circle') {
+        shapeDiv.style.borderRadius = '50%';
+      } else if (window.projectData.shapeType === 'square') {
+        shapeDiv.style.borderRadius = '0';
+      } else if (window.projectData.shapeType === 'triangle') {
+        shapeDiv.style.background = 'none';
+        shapeDiv.style.width = '0';
+        shapeDiv.style.height = '0';
+        shapeDiv.style.borderLeft = (window.projectData.shapeSize/2) + 'px solid transparent';
+        shapeDiv.style.borderRight = (window.projectData.shapeSize/2) + 'px solid transparent';
+        shapeDiv.style.borderBottom = window.projectData.shapeSize + 'px solid ' + window.projectData.shapeColor;
+      } else if (window.projectData.shapeType === 'star') {
+        shapeDiv.innerHTML = '<svg width="'+window.projectData.shapeSize+'" height="'+window.projectData.shapeSize+'" viewBox="0 0 100 100"><polygon points="50,5 61,39 98,39 67,59 78,91 50,70 22,91 33,59 2,39 39,39" fill="'+window.projectData.shapeColor+'"/></svg>';
+        shapeDiv.style.background = 'none';
+      } else if (window.projectData.shapeType === 'pentagon') {
+        shapeDiv.innerHTML = '<svg width="'+window.projectData.shapeSize+'" height="'+window.projectData.shapeSize+'" viewBox="0 0 100 100"><polygon points="50,10 90,38 73,85 27,85 10,38" fill="'+window.projectData.shapeColor+'"/></svg>';
+        shapeDiv.style.background = 'none';
+      }
+      // Animación figura
+      applyAnimation(shapeDiv, window.projectData.animationTypeShape, window.projectData.animationDurationShape, window.projectData.animationRepeatShape);
+      previewAnimation.appendChild(shapeDiv);
+    }
+  }
+}
+
+function applyAnimation(element, type, duration, repeat) {
+  let anim = '';
+  if (type === 'bounce') {
+    anim = `bounce ${duration}s ${repeat === 'infinite' ? 'infinite' : repeat}`;
+  } else if (type === 'pulse') {
+    anim = `pulse ${duration}s ${repeat === 'infinite' ? 'infinite' : repeat}`;
+  } else if (type === 'rotate') {
+    anim = `rotate ${duration}s linear ${repeat === 'infinite' ? 'infinite' : repeat}`;
+  } else if (type === 'slide') {
+    anim = `slide ${duration}s ${repeat === 'infinite' ? 'infinite' : repeat}`;
+  } else if (type === 'fadeIn') {
+    anim = `fadeIn ${duration}s ${repeat === 'infinite' ? 'infinite' : repeat}`;
+  } else if (type === 'glow') {
+    anim = `glow ${duration}s ${repeat === 'infinite' ? 'infinite' : repeat}`;
+  }
+  if (anim) {
+    element.style.animation = anim;
+  }
+}
+
+// Animaciones CSS (agregar al head si no existen)
+(function ensureAnimations() {
+  if (!document.getElementById('editor-anim-styles')) {
+    const style = document.createElement('style');
+    style.id = 'editor-anim-styles';
+    style.textContent = `
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30%); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes slide { 0% { transform: translateX(-50%); opacity:0; } 100% { transform: translateX(0); opacity:1; } }
+@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes glow { 0%, 100% { filter: drop-shadow(0 0 0px #fff); } 50% { filter: drop-shadow(0 0 16px #ffd700); } }
+`;
+    document.head.appendChild(style);
+  }
+})();
+
+// Sincronizar controles con datos y vista previa
+function syncAllControls() {
+  // Paso 1
+  document.getElementById('textInput').value = window.projectData.text;
+  document.getElementById('fontSize').value = window.projectData.fontSize;
+  document.getElementById('fontSizeValue').textContent = window.projectData.fontSize + 'px';
+  document.getElementById('fontFamily').value = window.projectData.fontFamily;
+  // Paso 2
+  document.getElementById('shapeType').value = window.projectData.shapeType;
+  document.getElementById('shapeSize').value = window.projectData.shapeSize;
+  document.getElementById('shapeSizeValue').textContent = window.projectData.shapeSize + 'px';
+  document.getElementById('shapeColor').value = window.projectData.shapeColor;
+  document.getElementById('shapeColorHex').value = window.projectData.shapeColor;
+  // Paso 3
+  document.getElementById('animationTypeText').value = window.projectData.animationTypeText;
+  document.getElementById('animationDurationText').value = window.projectData.animationDurationText;
+  document.getElementById('animationDurationValueText').textContent = window.projectData.animationDurationText + 's';
+  document.getElementById('animationRepeatText').value = window.projectData.animationRepeatText;
+  // Paso 4
+  document.getElementById('animationTypeShape').value = window.projectData.animationTypeShape;
+  document.getElementById('animationDurationShape').value = window.projectData.animationDurationShape;
+  document.getElementById('animationDurationValueShape').textContent = window.projectData.animationDurationShape + 's';
+  document.getElementById('animationRepeatShape').value = window.projectData.animationRepeatShape;
+  // Paso 5
+  document.getElementById('bgMode').value = window.projectData.bgMode;
+  document.getElementById('bgColor').value = window.projectData.bgColor;
+  document.getElementById('bgColorHex').value = window.projectData.bgColor;
+  document.getElementById('bgGradient').value = window.projectData.bgGradient;
+  renderLivePreview();
+}
+
+// Listeners para todos los controles relevantes
+function addLiveListeners() {
+  const ids = [
+    'textInput','fontSize','fontFamily',
+    'shapeType','shapeSize','shapeColor','shapeColorHex',
+    'animationTypeText','animationDurationText','animationRepeatText',
+    'animationTypeShape','animationDurationShape','animationRepeatShape',
+    'bgMode','bgColor','bgColorHex','bgGradient'
+  ];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', function() {
+        if (id === 'fontSize') {
+          document.getElementById('fontSizeValue').textContent = this.value + 'px';
+        }
+        if (id === 'shapeSize') document.getElementById('shapeSizeValue').textContent = this.value + 'px';
+        if (id === 'animationDurationText') document.getElementById('animationDurationValueText').textContent = this.value + 's';
+        if (id === 'animationDurationShape') document.getElementById('animationDurationValueShape').textContent = this.value + 's';
+        if (id === 'shapeColor') document.getElementById('shapeColorHex').value = this.value;
+        if (id === 'shapeColorHex') document.getElementById('shapeColor').value = this.value;
+        if (id === 'bgColor') document.getElementById('bgColorHex').value = this.value;
+        if (id === 'bgColorHex') document.getElementById('bgColor').value = this.value;
+        updateProjectData();
+        renderLivePreview();
+      });
+    }
+  });
+}
+function nextStep(step) {
+  document.getElementById('step' + window.currentStep).classList.remove('active');
+  document.getElementById('step' + step).classList.add('active');
+  window.currentStep = step;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function updateFinalActionsVisibility() {
+  var actions = document.getElementById('finalActions');
+  if (!actions) return;
+  if (window.currentStep === 5) {
+    actions.style.display = 'flex';
+  } else {
+    actions.style.display = 'none';
+  }
+}
+// Llama a updateFinalActionsVisibility en nextStep y al cargar
+var _originalNextStep = nextStep;
+nextStep = function(step) {
+  _originalNextStep(step);
+  updateFinalActionsVisibility();
+};
+function updateBgControls() {
+  var mode = document.getElementById('bgMode').value;
+  var solidGroup = document.getElementById('bgSolidGroup');
+  var presetGroup = document.getElementById('bgPresetGroup');
+  if (solidGroup) solidGroup.style.display = (mode === 'solid') ? '' : 'none';
+  if (presetGroup) presetGroup.style.display = (mode === 'preset') ? '' : 'none';
+}
+document.getElementById('bgMode').addEventListener('change', updateBgControls);
 document.addEventListener('DOMContentLoaded', function() {
   // Menú
   document.querySelector('.menu-toggle').onclick = toggleMenu;
@@ -658,44 +888,95 @@ document.addEventListener('DOMContentLoaded', function() {
       menu.classList.remove('show');
     }
   });
+  // Listeners para vista previa en vivo
+  addLiveListeners();
+  syncAllControls();
+  updateFinalActionsVisibility();
+  updateBgControls();
 });
 
-function showCode() {
-  // Generar HTML y CSS de la vista previa
-  var html = '<div class="contenedor">\n';
-  html += '  <div class="texto">' + (window.projectData?.text || '¡Hola Mundo!') + '</div>\n';
-  if (window.projectData?.shapeType && window.projectData.shapeType !== 'none') {
-    html += '  <div class="figura"></div>\n';
-  }
-  html += '</div>';
-  var css = '.contenedor {\n';
-  css += '  background: ' + (window.projectData?.bgColor || '#fff') + ';\n';
-  css += '  padding: 2rem;\n  text-align: center;\n}\n';
-  css += '.texto {\n  font-size: ' + (window.projectData?.fontSize || 32) + 'px;\n  color: ' + (window.projectData?.textColor || '#667eea') + ';\n  font-family: ' + (window.projectData?.fontFamily || 'Arial, sans-serif') + ';\n  margin-bottom: 1rem;\n}\n';
-  if (window.projectData?.shapeType && window.projectData.shapeType !== 'none') {
-    css += '.figura { width: ' + (window.projectData.shapeSize || 80) + 'px; height: ' + (window.projectData.shapeSize || 80) + 'px; background: ' + (window.projectData.shapeColor || '#48bb78') + '; margin: 0 auto; display: block; border-radius: ' + (window.projectData.shapeType === 'circle' ? '50%' : '0') + '; }\n';
-  }
-  document.getElementById('htmlCode').textContent = html;
-  document.getElementById('cssCode').textContent = css;
-  var modal = document.getElementById('codeModal');
-  if (modal) modal.classList.add('show');
-}
-function closeCodeModal() {
-  var modal = document.getElementById('codeModal');
-  if (modal) modal.classList.remove('show');
-}
 function showPreview() {
   // Generar HTML y CSS completos
   var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">';
   html += '<title>Mi Página Generada</title>';
-  html += '<style>body{background:#f7fafc;margin:0;padding:0;display:flex;align-items:center;justify-content:center;min-height:100vh;} .contenedor{padding:2rem;text-align:center;background:#fff;border-radius:18px;box-shadow:0 8px 32px rgba(102,126,234,0.10);} .texto{font-size:' + (window.projectData?.fontSize||32) + 'px;color:' + (window.projectData?.textColor||'#667eea') + ';font-family:' + (window.projectData?.fontFamily||'Arial, sans-serif') + ';margin-bottom:1rem;} .figura{width:' + (window.projectData?.shapeSize||80) + 'px;height:' + (window.projectData?.shapeSize||80) + 'px;background:' + (window.projectData?.shapeColor||'#48bb78') + ';margin:0 auto;display:block;border-radius:' + (window.projectData?.shapeType==='circle'?'50%':'0') + ';}</style>';
+  html += '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">';
+  var css = 'body{background:#f7fafc;margin:0;padding:0;min-height:100vh;font-family:Inter,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;}';
+  css += '.main-header{width:100%;background:linear-gradient(90deg,#667eea,#764ba2);color:#fff;padding:1.5rem 0;text-align:center;box-shadow:0 2px 12px rgba(102,126,234,0.10);font-size:2rem;font-weight:700;letter-spacing:1px;margin-bottom:2rem;}';
+  css += '.contenedor{background:#fff;border-radius:18px;box-shadow:0 8px 32px rgba(102,126,234,0.10);padding:2.5rem 2rem;max-width:480px;width:95vw;margin:2rem auto 0 auto;display:flex;flex-direction:column;align-items:center;}';
+  css += '.texto{font-size:' + (window.projectData?.fontSize||32) + 'px;color:' + (window.projectData?.textColor||'#667eea') + ';font-family:' + (window.projectData?.fontFamily||'Inter,sans-serif') + ';margin-bottom:1.5rem;text-align:center;width:100%;font-weight:600;}';
+  if(window.projectData?.shapeType && window.projectData.shapeType !== 'none') {
+    if (window.projectData.shapeType === 'star' || window.projectData.shapeType === 'pentagon') {
+      css += '.figura{display:block;margin:0 auto 1.5rem auto;background:none;padding:0;border:none;width:auto;height:auto;}';
+    } else if (window.projectData.shapeType === 'triangle') {
+      css += '.figura{background:none;display:block;margin:0 auto 1.5rem auto;width:' + (window.projectData?.shapeSize||80) + 'px;height:' + (window.projectData?.shapeSize||80) + 'px;}';
+    } else if (window.projectData.shapeType === 'circle') {
+      css += '.figura{width:' + (window.projectData?.shapeSize||80) + 'px;height:' + (window.projectData?.shapeSize||80) + 'px;background:' + (window.projectData?.shapeColor||'#48bb78') + ';margin:0 auto 1.5rem auto;display:block;border-radius:50%;}';
+    } else if (window.projectData.shapeType === 'square') {
+      css += '.figura{width:' + (window.projectData?.shapeSize||80) + 'px;height:' + (window.projectData?.shapeSize||80) + 'px;background:' + (window.projectData?.shapeColor||'#48bb78') + ';margin:0 auto 1.5rem auto;display:block;border-radius:0;}';
+    }
+  }
+  // Fondo
+  if (window.projectData.bgMode === 'solid') {
+    css += '.contenedor{background:' + (window.projectData.bgColor || '#fff') + ';}';
+  } else if (window.projectData.bgMode === 'preset') {
+    css += '.contenedor{background:' + (window.projectData.bgGradient || 'linear-gradient(45deg, #667eea, #764ba2)') + ';}';
+  }
+  css += '.volver-btn{display:inline-block;margin-top:2.5rem;padding:0.9rem 2.2rem;background:#667eea;color:#fff;border-radius:10px;text-decoration:none;font-weight:700;font-size:1.1rem;box-shadow:0 2px 8px rgba(102,126,234,0.10);transition:background 0.2s;}';
+  css += '.volver-btn:hover{background:#764ba2;}';
+  // Animaciones CSS
+  let animCSS = '';
+  animCSS += '@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30%); } }';
+  animCSS += '@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }';
+  animCSS += '@keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
+  animCSS += '@keyframes slide { 0% { transform: translateX(-50%); opacity:0; } 100% { transform: translateX(0); opacity:1; } }';
+  animCSS += '@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }';
+  animCSS += '@keyframes glow { 0%, 100% { filter: drop-shadow(0 0 0px #fff); } 50% { filter: drop-shadow(0 0 16px #ffd700); } }';
+
+  // Animación texto
+  let animText = '';
+  if (window.projectData.animationTypeText && window.projectData.animationTypeText !== 'none') {
+    let type = window.projectData.animationTypeText;
+    let duration = window.projectData.animationDurationText || 1;
+    let repeat = window.projectData.animationRepeatText || 1;
+    let infinite = repeat === 'infinite' ? 'infinite' : repeat;
+    let extra = type === 'rotate' ? ' linear' : '';
+    animText = type + ' ' + duration + 's' + extra + ' ' + infinite;
+    css += '.texto{animation:' + animText + ';}';
+  }
+  // Animación figura
+  let animShape = '';
+  if (window.projectData.animationTypeShape && window.projectData.animationTypeShape !== 'none') {
+    let type = window.projectData.animationTypeShape;
+    let duration = window.projectData.animationDurationShape || 1;
+    let repeat = window.projectData.animationRepeatShape || 1;
+    let infinite = repeat === 'infinite' ? 'infinite' : repeat;
+    let extra = type === 'rotate' ? ' linear' : '';
+    animShape = type + ' ' + duration + 's' + extra + ' ' + infinite;
+    if(window.projectData.shapeType === 'pentagon') {
+      css += '.figura svg{animation:' + animShape + ';}';
+    } else {
+      css += '.figura{animation:' + animShape + ';}';
+    }
+  }
+
+  html += '<style>' + css + animCSS + '</style>';
   html += '</head><body>';
+  html += '<div class="main-header">Mi Página Generada</div>';
   html += '<div class="contenedor">';
   html += '<div class="texto">' + (window.projectData?.text||'¡Hola Mundo!') + '</div>';
   if(window.projectData?.shapeType && window.projectData.shapeType !== 'none') {
-    html += '<div class="figura"></div>';
+    if (window.projectData.shapeType === 'star') {
+      html += '<div class="figura"><svg width="'+(window.projectData.shapeSize||80)+'" height="'+(window.projectData.shapeSize||80)+'" viewBox="0 0 100 100"><polygon points="50,5 61,39 98,39 67,59 78,91 50,70 22,91 33,59 2,39 39,39" fill="'+(window.projectData.shapeColor||'#48bb78')+'"/></svg></div>';
+    } else if (window.projectData.shapeType === 'pentagon') {
+      html += '<div class="figura"><svg width="'+(window.projectData.shapeSize||80)+'" height="'+(window.projectData.shapeSize||80)+'" viewBox="0 0 100 100"><polygon points="50,10 90,38 73,85 27,85 10,38" fill="'+(window.projectData.shapeColor||'#48bb78')+'"/></svg></div>';
+    } else if (window.projectData.shapeType === 'triangle') {
+      html += '<div class="figura" style="background:none;width:0;height:0;border-left:'+(window.projectData.shapeSize/2)+'px solid transparent;border-right:'+(window.projectData.shapeSize/2)+'px solid transparent;border-bottom:'+(window.projectData.shapeSize)+'px solid '+(window.projectData.shapeColor||'#48bb78')+';"></div>';
+    } else {
+      html += '<div class="figura"></div>';
+    }
   }
   html += '</div>';
+  html += '<a href="demostraciones.html" class="volver-btn">← Volver a las demostraciones</a>';
   html += '</body></html>';
   var blob = new Blob([html], {type: 'text/html'});
   var url = URL.createObjectURL(blob);
