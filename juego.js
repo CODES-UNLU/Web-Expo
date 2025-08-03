@@ -254,50 +254,53 @@ function enviarEmail() {
   // URL del Google Apps Script
   const scriptURL = 'https://script.google.com/macros/s/AKfycbz2XIqDM5ux2IlTs9ZDFP-bNMqucBZb7jZ-sljE6m5S-rMHFsIuJR6kC4Xw4tTjGjY_2A/exec';
   
-  // Primero verificar si el email ya existe
-  fetch(scriptURL)
-    .then(response => response.text())
-    .then(text => {
-      try {
-        const rankingData = JSON.parse(text);
-        const emailExiste = rankingData.some(jugador => jugador.email.toLowerCase() === email.toLowerCase());
-        
-        if (emailExiste) {
-          // Email ya registrado
-          emailMensaje.innerHTML = '<span style="color: #e53e3e;">❌ Este email ya está registrado. Solo se permite una participación por persona.</span>';
-          emailBtn.disabled = false;
-          emailBtn.innerHTML = 'Enviar';
-          return;
-        }
-        
-        // Email no existe, proceder con el envío
-        emailBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-        emailMensaje.innerHTML = '<span style="color: #667eea;">⏳ Enviando datos...</span>';
-        
-        // Calcular tiempo total
-        const fin = new Date();
-        const segundos = Math.floor((fin - inicioTiempo) / 1000);
-        
-        // Preparar datos para enviar
-        const datos = {
-          email: email,
-          tiempo: segundos
-        };
-        
-        // Enviar datos a Google Sheets
-        return fetch(scriptURL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(datos)
-        });
-      } catch (error) {
-        console.error('Error parsing ranking data:', error);
-        // Si hay error al parsear, continuar con el envío
-        return enviarDatosDirectamente(email);
+  // Verificar si el email ya existe usando GET sin no-cors
+  fetch(scriptURL, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+      return response.json();
+    })
+    .then(rankingData => {
+      const emailExiste = rankingData.some(jugador => jugador.email.toLowerCase() === email.toLowerCase());
+      
+      if (emailExiste) {
+        // Email ya registrado
+        emailMensaje.innerHTML = '<span style="color: #e53e3e;">❌ Este email ya está registrado. Solo se permite una participación por persona.</span>';
+        emailBtn.disabled = false;
+        emailBtn.innerHTML = 'Enviar';
+        return;
+      }
+      
+      // Email no existe, proceder con el envío
+      emailBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+      emailMensaje.innerHTML = '<span style="color: #667eea;">⏳ Enviando datos...</span>';
+      
+      // Calcular tiempo total
+      const fin = new Date();
+      const segundos = Math.floor((fin - inicioTiempo) / 1000);
+      
+      // Preparar datos para enviar
+      const datos = {
+        email: email,
+        tiempo: segundos
+      };
+      
+      // Enviar datos a Google Sheets
+      return fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos)
+      });
     })
     .then(response => {
       if (response) {
@@ -312,9 +315,11 @@ function enviarEmail() {
     })
     .catch(error => {
       console.error('Error:', error);
-      emailMensaje.innerHTML = '<span style="color: #e53e3e;">❌ Error al enviar. Intentá nuevamente</span>';
-      emailBtn.disabled = false;
-      emailBtn.innerHTML = 'Enviar';
+      // Si hay error al verificar, mostrar mensaje pero permitir envío
+      emailMensaje.innerHTML = '<span style="color: #ed8936;">⚠️ No se pudo verificar duplicados. Intentando envío...</span>';
+      
+      // Intentar envío directo como fallback
+      return enviarDatosDirectamente(email);
     });
 }
 
@@ -337,5 +342,26 @@ function enviarDatosDirectamente(email) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(datos)
+  })
+  .then(response => {
+    // Como no-cors no devuelve respuesta detallada, asumimos éxito
+    const emailMensaje = document.getElementById('emailMensaje');
+    const emailBtn = document.getElementById('unluwords-email-btn');
+    
+    emailMensaje.innerHTML = '<span style="color: #38a169;">✅ ¡Datos enviados correctamente! Gracias por participar</span>';
+    emailBtn.innerHTML = 'Enviado ✓';
+    emailBtn.style.background = '#38a169';
+    
+    // Limpiar formulario
+    document.getElementById('email').value = '';
+  })
+  .catch(error => {
+    console.error('Error en envío directo:', error);
+    const emailMensaje = document.getElementById('emailMensaje');
+    const emailBtn = document.getElementById('unluwords-email-btn');
+    
+    emailMensaje.innerHTML = '<span style="color: #e53e3e;">❌ Error al enviar. Intentá nuevamente</span>';
+    emailBtn.disabled = false;
+    emailBtn.innerHTML = 'Enviar';
   });
 }
