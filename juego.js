@@ -250,15 +250,10 @@ function enviarEmail() {
   const fin = new Date();
   const segundos = Math.floor((fin - inicioTiempo) / 1000);
   
-  // Preparar datos para enviar
+  // Preparar datos para enviar (compatible con tu script existente)
   const datos = {
     email: email,
-    tiempo: segundos,
-    intentosNivel4: intentosPorNivel[0] || 0,
-    intentosNivel5: intentosPorNivel[1] || 0,
-    intentosNivel6: intentosPorNivel[2] || 0,
-    fecha: new Date().toLocaleString('es-AR'),
-    totalIntentos: intentosPorNivel.reduce((a, b) => a + b, 0)
+    tiempo: segundos
   };
   
   // Deshabilitar botón y mostrar loading

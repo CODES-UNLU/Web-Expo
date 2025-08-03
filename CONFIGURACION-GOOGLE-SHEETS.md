@@ -3,18 +3,57 @@
 ## Paso 1: Crear Google Sheet
 
 1. Ve a [Google Sheets](https://sheets.google.com)
-2. Crea una nueva hoja de cálculo
-3. Nombra la hoja como "UNLuWords - Resultados"
-4. Copia el ID de la URL (está entre /d/ y /edit)
+2. Crea una nueva hoja de cálculo o usa tu hoja existente
+3. Crea una hoja llamada "Ranking" (o usa la que ya tienes)
+4. Asegúrate de que la hoja "Ranking" tenga al menos estas columnas:
+   - Columna A: Email
+   - Columna B: Tiempo (segundos)
+   - Columna C: Fecha
+5. Copia el ID de la URL (está entre /d/ y /edit)
    - Ejemplo: `https://docs.google.com/spreadsheets/d/`**`1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms`**`/edit`
 
 ## Paso 2: Configurar Google Apps Script
 
 1. Ve a [Google Apps Script](https://script.google.com)
-2. Crea un nuevo proyecto
+2. Crea un nuevo proyecto o usa tu proyecto existente
 3. Nombra el proyecto como "UNLuWords API"
-4. Reemplaza todo el código por defecto con el contenido del archivo `google-apps-script.js`
-5. **IMPORTANTE**: Reemplaza `TU_SPREADSHEET_ID_AQUI` con el ID que copiaste en el paso 1
+4. Reemplaza todo el código por defecto con este código simplificado:
+
+```javascript
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Ranking");
+  const data = JSON.parse(e.postData.contents);
+  sheet.appendRow([data.email, data.tiempo, new Date()]);
+  return ContentService.createTextOutput("OK").setMimeType(ContentService.MimeType.TEXT);
+}
+
+function doGet() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Ranking");
+  const rows = sheet.getDataRange().getValues();
+  const result = [];
+
+  for (let i = 1; i < rows.length; i++) {
+    result.push({ 
+      email: rows[i][0], 
+      tiempo: Number(rows[i][1]),
+      fecha: rows[i][2] // Incluir la fecha para desempate
+    });
+  }
+
+  // Ordenar por tiempo ascendente, y en caso de empate, por fecha (más antiguo primero)
+  result.sort((a, b) => {
+    if (a.tiempo === b.tiempo) {
+      // Si tienen el mismo tiempo, ordenar por fecha (más antiguo primero)
+      return new Date(a.fecha) - new Date(b.fecha);
+    }
+    return a.tiempo - b.tiempo;
+  });
+
+  return ContentService
+    .createTextOutput(JSON.stringify(result))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
 
 ## Paso 3: Configurar Permisos
 
@@ -37,8 +76,11 @@
 
 ## Paso 5: Configurar la hoja de cálculo
 
-1. En Google Apps Script, ejecuta la función `configurarHoja()`
-2. Esto creará los encabezados en tu Google Sheet
+1. En tu Google Sheet, asegúrate de que la hoja "Ranking" tenga los encabezados:
+   - A1: Email
+   - B1: Tiempo
+   - C1: Fecha
+2. Opcional: Puedes formatear los encabezados con colores para que se vean mejor
 
 ## Paso 6: Probar la integración
 
@@ -52,24 +94,20 @@
 
 - **Email**: Correo del jugador
 - **Tiempo**: Tiempo total en segundos
-- **Intentos Nivel 4**: Número de intentos en el primer nivel
-- **Intentos Nivel 5**: Número de intentos en el segundo nivel
-- **Intentos Nivel 6**: Número de intentos en el tercer nivel
-- **Total Intentos**: Suma de todos los intentos
-- **Fecha**: Fecha y hora del juego
+- **Fecha**: Se agrega automáticamente por el script
 
 ## Funcionalidades incluidas:
 
 ✅ **Almacenamiento en Google Sheets**: Todos los resultados se guardan automáticamente
-✅ **Email de confirmación**: Los jugadores reciben un email elegante con su resultado
 ✅ **Validación de email**: Se verifica que el email sea válido
 ✅ **Feedback visual**: El botón cambia de estado durante el envío
 ✅ **Manejo de errores**: Mensajes claros si algo falla
-✅ **Datos completos**: Se guarda tiempo, intentos por nivel y total
+✅ **Datos simples**: Se guarda email y tiempo para el ranking
 
 ## Notas importantes:
 
 - El Google Apps Script debe estar desplegado como "Web app"
 - Los permisos deben ser "Anyone" para que funcione desde GitHub Pages
-- El email de confirmación se envía automáticamente a cada jugador
-- Los datos se guardan con timestamp para seguimiento temporal 
+- Los datos se guardan con timestamp automático
+- El script incluye función `doGet()` para obtener el ranking ordenado por tiempo
+- **Manejo de empates**: Si dos o más jugadores tienen el mismo tiempo, se ordenan por fecha de registro (quien se registró primero aparece primero) 

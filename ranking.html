@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🏆 Ranking UNLuWords - TV Display</title>
-  <meta http-equiv="refresh" content="15">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+     <title>🏆 Ranking UNLuWords - TV Display</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -16,14 +15,14 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #2d3748;
-      min-height: 100vh;
-      overflow: hidden;
-      position: relative;
-    }
+         body {
+       font-family: 'Inter', sans-serif;
+       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+       color: #2d3748;
+       min-height: 100vh;
+       overflow-y: auto;
+       position: relative;
+     }
 
     body::before {
       content: '';
@@ -36,15 +35,15 @@
       pointer-events: none;
     }
 
-    .tv-container {
-      position: relative;
-      z-index: 1;
-      padding: 2rem;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+         .tv-container {
+       position: relative;
+       z-index: 1;
+       padding: 2rem;
+       min-height: 100vh;
+       display: flex;
+       flex-direction: column;
+       justify-content: flex-start;
+     }
 
     .header-tv {
       text-align: center;
@@ -108,10 +107,109 @@
       color: #ffd700;
     }
 
-    .ranking-header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
+         .ranking-header p {
+       font-size: 1.2rem;
+       opacity: 0.9;
+     }
+     
+     /* Estilos para el filtro de búsqueda */
+     .search-container {
+       padding: 1.5rem 2rem;
+       background: rgba(248, 250, 252, 0.8);
+       border-bottom: 1px solid #e2e8f0;
+     }
+     
+     .search-box {
+       display: flex;
+       align-items: center;
+       gap: 1rem;
+       max-width: 500px;
+       margin: 0 auto;
+     }
+     
+     .search-box i {
+       color: #667eea;
+       font-size: 1.2rem;
+     }
+     
+     .search-box input {
+       flex: 1;
+       padding: 0.75rem 1rem;
+       border: 2px solid #e2e8f0;
+       border-radius: 8px;
+       font-size: 1rem;
+       font-family: 'Inter', sans-serif;
+       transition: all 0.3s ease;
+     }
+     
+     .search-box input:focus {
+       outline: none;
+       border-color: #667eea;
+       box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+     }
+     
+     .search-box button {
+       padding: 0.75rem 1.5rem;
+       background: linear-gradient(135deg, #667eea, #764ba2);
+       color: white;
+       border: none;
+       border-radius: 8px;
+       font-size: 1rem;
+       font-weight: 600;
+       cursor: pointer;
+       transition: all 0.3s ease;
+     }
+     
+     .search-box button:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+     }
+     
+     .search-result {
+       margin-top: 1rem;
+       text-align: center;
+       min-height: 60px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+     }
+     
+     .search-result.found {
+       background: rgba(56, 161, 105, 0.1);
+       border: 2px solid #38a169;
+       border-radius: 8px;
+       padding: 1rem;
+       margin: 1rem 0;
+     }
+     
+     .search-result.not-found {
+       background: rgba(229, 62, 62, 0.1);
+       border: 2px solid #e53e3e;
+       border-radius: 8px;
+       padding: 1rem;
+       margin: 1rem 0;
+     }
+     
+     .search-result h3 {
+       color: #2d3748;
+       font-size: 1.2rem;
+       margin-bottom: 0.5rem;
+     }
+     
+     .search-result p {
+       color: #4a5568;
+       font-size: 1rem;
+     }
+     
+     .search-result .position-highlight {
+       background: linear-gradient(135deg, #667eea, #764ba2);
+       color: white;
+       padding: 0.5rem 1rem;
+       border-radius: 20px;
+       font-weight: 700;
+       display: inline-block;
+       margin: 0.5rem 0;
+     }
 
     .ranking-table {
       width: 100%;
@@ -292,25 +390,35 @@
       }
     }
 
-    @media screen and (max-width: 768px) {
-      .tv-container {
-        padding: 1rem;
-      }
-      
-      .header-tv h1 {
-        font-size: 2.5rem;
-      }
-      
-      .ranking-container {
-        border-radius: 16px;
-      }
-      
-      .ranking-table th,
-      .ranking-table td {
-        font-size: 1rem;
-        padding: 0.75rem;
-      }
-    }
+         @media screen and (max-width: 768px) {
+       .tv-container {
+         padding: 1rem;
+       }
+       
+       .header-tv h1 {
+         font-size: 2.5rem;
+       }
+       
+       .ranking-container {
+         border-radius: 16px;
+       }
+       
+       .search-box {
+         flex-direction: column;
+         gap: 0.5rem;
+       }
+       
+       .search-box input,
+       .search-box button {
+         width: 100%;
+       }
+       
+       .ranking-table th,
+       .ranking-table td {
+         font-size: 1rem;
+         padding: 0.75rem;
+       }
+     }
   </style>
 </head>
 <body>
@@ -323,14 +431,24 @@
       <p>🏆 Los mejores jugadores de la Expo UNLu</p>
     </div>
 
-    <div class="ranking-container">
-      <div class="ranking-header">
-        <h2>
-          <i class="fas fa-medal"></i>
-          Top Jugadores
-        </h2>
-        <p>Actualizado en tiempo real</p>
-      </div>
+         <div class="ranking-container">
+       <div class="ranking-header">
+                  <h2>
+            <i class="fas fa-medal"></i>
+            Top 10 Jugadores
+          </h2>
+          <p>Actualizado en tiempo real - Solo los mejores tiempos</p>
+       </div>
+       
+       <!-- Filtro de búsqueda -->
+       <div class="search-container">
+         <div class="search-box">
+           <i class="fas fa-search"></i>
+           <input type="email" id="searchEmail" placeholder="Buscar por email..." />
+           <button id="searchBtn">Buscar</button>
+         </div>
+         <div id="searchResult" class="search-result"></div>
+       </div>
 
       <table class="ranking-table">
         <thead>
@@ -362,7 +480,7 @@
   </div>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz2XIqDM5ux2IlTs9ZDFP-bNMqucBZb7jZ-sljE6m5S-rMHFsIuJR6kC4Xw4tTjGjY_2A/exec';
   
     // Enviar resultado al servidor
     function enviarResultado(email, tiempo) {
@@ -378,31 +496,68 @@
   
     // Cargar y actualizar ranking
     function updateRanking() {
+      const tbody = document.getElementById('rankingBody');
+      
+      // Mostrar loading
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="3" class="no-data">
+            <i class="fas fa-spinner fa-spin"></i><br>Actualizando ranking...
+          </td>
+        </tr>`;
+      
       fetch(scriptURL)
-        .then(response => response.json())
-        .then(data => {
-          const tbody = document.getElementById('rankingBody');
-  
-          if (!data || data.length === 0) {
-            tbody.innerHTML = `
-              <tr>
-                <td colspan="3" class="no-data">
-                  <i class="fas fa-users"></i><br>Aún no hay jugadores registrados
-                </td>
-              </tr>`;
-            return;
+        .then(response => {
+          console.log('Response status:', response.status);
+          console.log('Response ok:', response.ok);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
           }
-  
-          tbody.innerHTML = '';
-          data.forEach((jugador, index) => {
+          return response.text().then(text => {
+            console.log('Response text:', text);
+            try {
+              return JSON.parse(text);
+            } catch (e) {
+              console.error('Error parsing JSON:', e);
+              throw new Error('Invalid JSON response');
+            }
+          });
+        })
+                 .then(data => {
+           console.log('Datos recibidos:', data);
+           
+           if (!data || data.length === 0) {
+             tbody.innerHTML = `
+               <tr>
+                 <td colspan="3" class="no-data">
+                   <i class="fas fa-users"></i><br>Aún no hay jugadores registrados
+                 </td>
+               </tr>`;
+             allRankingData = [];
+             return;
+           }
+   
+           // Guardar todos los datos para búsqueda
+           allRankingData = data;
+           
+           // Limitar a top 10 jugadores para mostrar
+           const top10 = data.slice(0, 10);
+           console.log('Top 10 jugadores:', top10);
+   
+           tbody.innerHTML = '';
+           top10.forEach((jugador, index) => {
             const position = index + 1;
             const positionClass = position <= 3 ? `position-${position}` : '';
             const trophyIcon = position <= 3 ? `<i class="fas fa-trophy trophy-icon"></i>` : '';
+            
+            // Ocultar parte del email por privacidad
+            const email = jugador.email;
+            const maskedEmail = email.replace(/(.{2}).*@/, '$1***@');
   
             const row = document.createElement('tr');
             row.innerHTML = `
               <td class="position ${positionClass}">${trophyIcon}${position}º</td>
-              <td class="player-email">${jugador.email}</td>
+              <td class="player-email">${maskedEmail}</td>
               <td class="player-time">${jugador.tiempo}s</td>`;
             if (position <= 3) row.classList.add('pulse');
             tbody.appendChild(row);
@@ -410,18 +565,81 @@
         })
         .catch(error => {
           console.error('Error cargando ranking:', error);
-          document.getElementById('rankingBody').innerHTML = `
+          tbody.innerHTML = `
             <tr>
               <td colspan="3" class="no-data">
-                <i class="fas fa-exclamation-triangle"></i><br>Error al cargar el ranking
+                <i class="fas fa-exclamation-triangle"></i><br>Error al cargar el ranking<br>
+                <small>Reintentando en 15 segundos...</small>
               </td>
             </tr>`;
         });
     }
   
-    // Actualizar cada 15 segundos
-    updateRanking();
-    setInterval(updateRanking, 15000);
+         // Variables globales para almacenar datos del ranking
+     let allRankingData = [];
+     
+     // Función para buscar jugador por email
+     function buscarJugador() {
+       const searchEmail = document.getElementById('searchEmail').value.trim().toLowerCase();
+       const searchResult = document.getElementById('searchResult');
+       
+       if (!searchEmail) {
+         searchResult.innerHTML = '<p>Ingresa un email para buscar</p>';
+         searchResult.className = 'search-result';
+         return;
+       }
+       
+       if (allRankingData.length === 0) {
+         searchResult.innerHTML = '<p>No hay datos disponibles para buscar</p>';
+         searchResult.className = 'search-result';
+         return;
+       }
+       
+       const jugador = allRankingData.find(j => j.email.toLowerCase() === searchEmail);
+       
+       if (jugador) {
+         const position = allRankingData.findIndex(j => j.email.toLowerCase() === searchEmail) + 1;
+         const trophyIcon = position <= 3 ? `<i class="fas fa-trophy"></i> ` : '';
+         
+         searchResult.innerHTML = `
+           <div>
+             <h3>¡Jugador encontrado!</h3>
+             <p><strong>Email:</strong> ${jugador.email}</p>
+             <p><strong>Tiempo:</strong> ${jugador.tiempo} segundos</p>
+             <div class="position-highlight">
+               ${trophyIcon}Posición: ${position}º
+             </div>
+           </div>
+         `;
+         searchResult.className = 'search-result found';
+       } else {
+         searchResult.innerHTML = `
+           <div>
+             <h3>Jugador no encontrado</h3>
+             <p>No se encontró ningún jugador con el email: <strong>${searchEmail}</strong></p>
+             <p>Verifica que el email esté correcto o que el jugador haya completado el juego.</p>
+           </div>
+         `;
+         searchResult.className = 'search-result not-found';
+       }
+     }
+     
+     // Event listeners para búsqueda
+     document.addEventListener('DOMContentLoaded', function() {
+       const searchBtn = document.getElementById('searchBtn');
+       const searchInput = document.getElementById('searchEmail');
+       
+       searchBtn.addEventListener('click', buscarJugador);
+       searchInput.addEventListener('keypress', function(e) {
+         if (e.key === 'Enter') {
+           buscarJugador();
+         }
+       });
+     });
+     
+     // Actualizar cada 15 segundos
+     updateRanking();
+     setInterval(updateRanking, 15000);
   
     // Efecto título
     setInterval(() => {
@@ -432,6 +650,55 @@
     }, 3000);
   
     // Ejemplo de uso: enviarResultado('test@unlu.edu.ar', 37);
+    
+    // Función para probar el envío de datos (solo para desarrollo)
+    function testEnvio() {
+      const testEmail = 'test' + Date.now() + '@unlu.edu.ar';
+      const testTiempo = Math.floor(Math.random() * 100) + 30; // 30-130 segundos
+      enviarResultado(testEmail, testTiempo);
+      console.log('Datos de prueba enviados:', testEmail, testTiempo);
+    }
+    
+    // Botón de prueba (solo visible en desarrollo)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      const testBtn = document.createElement('button');
+      testBtn.innerHTML = '🧪 Probar Envío';
+      testBtn.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1000;
+      `;
+      testBtn.onclick = testEnvio;
+      document.body.appendChild(testBtn);
+      
+      // Botón para probar conexión al servidor
+      const testConnectionBtn = document.createElement('button');
+      testConnectionBtn.innerHTML = '🔗 Probar Conexión';
+      testConnectionBtn.style.cssText = `
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        background: #38a169;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1000;
+      `;
+      testConnectionBtn.onclick = () => {
+        console.log('Probando conexión al servidor...');
+        updateRanking();
+      };
+      document.body.appendChild(testConnectionBtn);
+    }
   </script>
   
 </body>
