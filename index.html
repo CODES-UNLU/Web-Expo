@@ -1410,6 +1410,16 @@
         const loadingStatus = document.querySelector('.loading-status');
         const mainContent = document.querySelector('.main-content');
         
+        // Verificar si ya se mostró la animación de carga
+        const hasShownLoading = localStorage.getItem('hasShownLoading');
+        
+        if (hasShownLoading) {
+          // Si ya se mostró, ocultar la pantalla de carga inmediatamente
+          loadingScreen.style.display = 'none';
+          mainContent.style.display = 'block';
+          return;
+        }
+        
         let progress = 0;
         const targetProgress = 100;
         const progressStep = 2;
@@ -1447,6 +1457,8 @@
                   mainContent.style.display = 'block';
                   // Iniciar animación de entrada del contenido
                   mainContent.style.animation = 'fadeInUp 1s ease-out';
+                  // Marcar que ya se mostró la animación
+                  localStorage.setItem('hasShownLoading', 'true');
                 }, 500);
               }, 500);
             }, 300);
