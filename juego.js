@@ -233,3 +233,64 @@ function mostrarFinal() {
   `;
   lanzarConfeti();
 }
+
+// Función para enviar email y datos del juego a Google Sheets
+function enviarEmail() {
+  const email = document.getElementById('email').value.trim();
+  const emailBtn = document.getElementById('unluwords-email-btn');
+  const emailMensaje = document.getElementById('emailMensaje');
+  
+  // Validar email
+  if (!email || !email.includes('@')) {
+    emailMensaje.innerHTML = '<span style="color: #e53e3e;">❌ Por favor, ingresá un email válido</span>';
+    return;
+  }
+  
+  // Calcular tiempo total
+  const fin = new Date();
+  const segundos = Math.floor((fin - inicioTiempo) / 1000);
+  
+  // Preparar datos para enviar
+  const datos = {
+    email: email,
+    tiempo: segundos,
+    intentosNivel4: intentosPorNivel[0] || 0,
+    intentosNivel5: intentosPorNivel[1] || 0,
+    intentosNivel6: intentosPorNivel[2] || 0,
+    fecha: new Date().toLocaleString('es-AR'),
+    totalIntentos: intentosPorNivel.reduce((a, b) => a + b, 0)
+  };
+  
+  // Deshabilitar botón y mostrar loading
+  emailBtn.disabled = true;
+  emailBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+  emailMensaje.innerHTML = '<span style="color: #667eea;">⏳ Enviando datos...</span>';
+  
+  // URL del Google Apps Script
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbz2XIqDM5ux2IlTs9ZDFP-bNMqucBZb7jZ-sljE6m5S-rMHFsIuJR6kC4Xw4tTjGjY_2A/exec';
+  
+  // Enviar datos a Google Sheets
+  fetch(scriptURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(datos)
+  })
+  .then(response => {
+    // Como no-cors no devuelve respuesta detallada, asumimos éxito
+    emailMensaje.innerHTML = '<span style="color: #38a169;">✅ ¡Datos enviados correctamente! Gracias por participar</span>';
+    emailBtn.innerHTML = 'Enviado ✓';
+    emailBtn.style.background = '#38a169';
+    
+    // Limpiar formulario
+    document.getElementById('email').value = '';
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    emailMensaje.innerHTML = '<span style="color: #e53e3e;">❌ Error al enviar. Intentá nuevamente</span>';
+    emailBtn.disabled = false;
+    emailBtn.innerHTML = 'Enviar';
+  });
+}
