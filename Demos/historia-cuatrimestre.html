@@ -3,126 +3,777 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tu Primer Cuatrimestre - Juego de Historia</title>
+  <meta name="description" content="Viví tu primer cuatrimestre universitario en este juego de historia interactivo. Tomá decisiones y descubrí tu camino en la universidad." />
+  <meta name="keywords" content="universidad, primer cuatrimestre, juego, historia, decisiones, estudiantes" />
+  <meta name="author" content="CODES++ - Centro de Estudiantes de Sistemas UNLu" />
+  <meta property="og:title" content="Tu Primer Cuatrimestre - Juego Interactivo" />
+  <meta property="og:description" content="Viví tu primer cuatrimestre universitario en este juego de historia interactivo" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/x-icon" href="../LogoCodes.png" />
+  <title>Tu Primer Cuatrimestre - Juego Interactivo</title>
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    body { font-family: 'Inter', Arial, sans-serif; background: #f7fafc; }
-    .historia-container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #0001; padding: 2rem; }
-    .historia-text { font-size: 1.2rem; margin-bottom: 2rem; }
-    .opciones { display: flex; flex-direction: column; gap: 1rem; }
-    .opcion-btn { background: #667eea; color: #fff; border: none; border-radius: 8px; padding: 1rem; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
-    .opcion-btn:hover { background: #5a67d8; }
+    /* Estilos base */
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      color: #2d3748;
+    }
+
+    /* Asegurar que el navbar esté fijo */
+    nav {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 1000 !important;
+    }
+
+    /* Header */
+    .game-header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .game-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #667eea;
+      margin: 0;
+    }
+
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .progress-bar {
+      width: 200px;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #4a5568;
+      min-width: 60px;
+    }
+
+    /* Contenedor principal */
+    .game-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .story-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      padding: 3rem 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      animation: slideIn 0.6s ease-out;
+    }
+
+    .story-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Texto de la historia */
+    .story-text {
+      font-size: 1.3rem;
+      line-height: 1.7;
+      color: #2d3748;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .story-text.highlight {
+      background: linear-gradient(120deg, #667eea22, #764ba222);
+      padding: 1rem;
+      border-radius: 12px;
+      border-left: 4px solid #667eea;
+    }
+
+    /* Opciones */
+    .options-container {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .option-btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .option-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .option-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .option-btn:hover::before {
+      left: 100%;
+    }
+
+    .option-btn:active {
+      transform: translateY(0);
+    }
+
+    .option-icon {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Resultados */
+    .result-card {
+      background: linear-gradient(135deg, #48bb78, #38a169);
+      color: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .result-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .result-description {
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    /* Botones de acción */
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #48bb78, #38a169);
+      color: white;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estados especiales */
+    .thinking {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 1rem;
+      }
+
+      .progress-bar {
+        width: 150px;
+      }
+
+      .game-container {
+        padding: 0 1rem;
+        margin: 1rem auto;
+      }
+
+      .story-card {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+      }
+
+      .story-text {
+        font-size: 1.1rem;
+      }
+
+      .option-btn {
+        padding: 1rem 1.2rem;
+        font-size: 1rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .action-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Animaciones adicionales */
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .bounce-in {
+      animation: bounceIn 0.6s ease-out;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="historia-container">
-    <div id="historia" class="historia-text">
-      Es tu primer día en la universidad. Caminás por los pasillos con la mochila cargada de sueños. La clase comienza, pero no entendés el tema que explica el profesor.<br><br>
-      ¿Qué hacés?
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="https://www.sistemas.unlu.edu.ar/" target="_blank">
+          <img src="../logoLSIUNLu.svg" alt="Logo Licenciatura en Sistemas de Información UNLu" height="40" />
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="../index.html#actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
+        <li><a href="demostraciones.html"><i class="fas fa-flask"></i> Demostraciones</a></li>
+        <li><a href="../utec.html"><i class="fas fa-university"></i> UTEC</a></li>
+        <li><a href="../faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="https://codes-unlu.github.io/Web-Codes/" class="nav-logo">
+          <img src="../LogoCodes.png" alt="Logo CODES++ Centro de Estudiantes" height="40" />
+        </a>
+      </div>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
-    <div id="opciones" class="opciones">
-      <button class="opcion-btn" onclick="elegirOpcion(1)">Preguntar al profesor</button>
-      <button class="opcion-btn" onclick="elegirOpcion(2)">Preguntar a un compañero</button>
-      <button class="opcion-btn" onclick="elegirOpcion(3)">Preguntar al centro de estudiantes</button>
+  </nav>
+
+  <!-- Header con progreso -->
+  <header class="game-header">
+    <div class="header-content">
+      <h1 class="game-title">
+        <i class="fas fa-graduation-cap"></i> Tu Primer Cuatrimestre
+      </h1>
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-text" id="progressText">Paso 1/5</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor principal del juego -->
+  <div class="game-container">
+    <div class="story-card" id="storyCard">
+      <div class="story-text" id="storyText">
+        Es tu primer día en la universidad. Caminás por los pasillos con la mochila cargada de sueños y expectativas. 
+        El corazón te late fuerte mientras encontrás tu aula. La clase comienza, pero hay algo que no entendés del tema que explica el profesor.
+        <br><br>
+        <span class="highlight">¿Qué hacés?</span>
+      </div>
+      
+      <div class="options-container" id="optionsContainer">
+        <button class="option-btn" onclick="elegirOpcion(1)">
+          <i class="fas fa-chalkboard-teacher option-icon"></i>
+          Preguntar al profesor
+        </button>
+        <button class="option-btn" onclick="elegirOpcion(2)">
+          <i class="fas fa-users option-icon"></i>
+          Preguntar a un compañero
+        </button>
+        <button class="option-btn" onclick="elegirOpcion(3)">
+          <i class="fas fa-hands-helping option-icon"></i>
+          Preguntar al centro de estudiantes
+        </button>
+      </div>
     </div>
   </div>
 
   <script>
+    // Estado del juego
     let paso = 1;
-    function elegirOpcion(opcion) {
-      const historia = document.getElementById('historia');
-      const opciones = document.getElementById('opciones');
+    let puntuacion = 0;
+    const totalPasos = 5;
 
-      if (paso === 1) {
-        historia.innerHTML = opcion === 1
-          ? `El profesor te explica con más detalle y te recomienda material extra. ¡Bien hecho!`
-          : opcion === 2
-          ? `Repasás con un compañero y logran entenderlo juntos. ¡Trabajo en equipo!`
-          : `El centro de estudiantes te orienta y te sentís acompañado.`;
-
-        setTimeout(() => {
-          historia.innerHTML += `<br><br>Llega el primer trabajo práctico. ¿Cómo lo enfrentás?`;
-          opciones.innerHTML = `
-            <button class='opcion-btn' onclick='elegirOpcion(4)'>Formás grupo vos mismo</button>
-            <button class='opcion-btn' onclick='elegirOpcion(5)'>Esperás que te asignen</button>
-            <button class='opcion-btn' onclick='elegirOpcion(6)'>Lo hacés solo</button>
-          `;
-          paso = 2;
-        }, 500);
-      }
-      else if (paso === 2) {
-        historia.innerHTML = opcion === 4
-          ? `Te animás a proponer grupo y encontrás compañeros con tu misma onda.`
-          : opcion === 5
-          ? `Te asignan a un grupo y aprendés a trabajar con distintos perfiles.`
-          : `Lo hacés solo y aunque es más desafiante, te sentís orgulloso.`;
-
-        setTimeout(() => {
-          historia.innerHTML += `<br><br>Se acumulan parciales y trabajos. ¿Cómo te organizás?`;
-          opciones.innerHTML = `
-            <button class='opcion-btn' onclick='elegirOpcion(7)'>Usás una app</button>
-            <button class='opcion-btn' onclick='elegirOpcion(8)'>Dividís tareas con tu grupo</button>
-            <button class='opcion-btn' onclick='elegirOpcion(9)'>Buscás ayuda en tutorías</button>
-          `;
-          paso = 3;
-        }, 500);
-      }
-      else if (paso === 3) {
-        historia.innerHTML = opcion === 7
-          ? `Organizás todo con una app y tu productividad mejora.`
-          : opcion === 8
-          ? `El grupo se organiza y logran repartirse bien las tareas.`
-          : `Las tutorías te dan herramientas y sentís más control.`;
-
-        setTimeout(() => {
-          historia.innerHTML += `<br><br>Es el día del primer parcial. Hay una pregunta dudosa. ¿Qué hacés?`;
-          opciones.innerHTML = `
-            <button class='opcion-btn' onclick='elegirOpcion(10)'>Usás lógica</button>
-            <button class='opcion-btn' onclick='elegirOpcion(11)'>La dejás en blanco</button>
-            <button class='opcion-btn' onclick='elegirOpcion(12)'>Probás con lo que recordás</button>
-          `;
-          paso = 4;
-        }, 500);
-      }
-      else if (paso === 4) {
-        historia.innerHTML = opcion === 10
-          ? `Te la jugás con lógica y ¡acertás!`
-          : opcion === 11
-          ? `La dejás en blanco y evitás errores, aunque te quedás con la duda.`
-          : `Respondés con lo que recordás y te das cuenta que estabas cerca.`;
-
-        setTimeout(() => {
-          historia.innerHTML += `<br><br>Finaliza el cuatrimestre. ¿Cómo continuás?`;
-          opciones.innerHTML = `
-            <button class='opcion-btn' onclick='elegirOpcion(13)'>Te sumás al centro de estudiantes</button>
-            <button class='opcion-btn' onclick='elegirOpcion(14)'>Proponés un espacio de apoyo</button>
-            <button class='opcion-btn' onclick='elegirOpcion(15)'>Seguís enfocado en tus materias</button>
-          `;
-          paso = 5;
-        }, 500);
-      }
-      else if (paso === 5) {
-        historia.innerHTML = opcion === 13
-          ? `Tu experiencia te motiva y ahora ayudás a otros desde el centro de estudiantes.`
-          : opcion === 14
-          ? `Creás un espacio de apoyo y muchos te agradecen la iniciativa.`
-          : `Te enfocás en seguir aprendiendo a tu ritmo y te sentís más seguro.`;
-
-        opciones.innerHTML = `<button class='opcion-btn' onclick='reiniciar()'>Volver a empezar</button>`;
-      }
+    // Actualizar progreso
+    function actualizarProgreso() {
+      const progreso = (paso / totalPasos) * 100;
+      document.getElementById('progressFill').style.width = progreso + '%';
+      document.getElementById('progressText').textContent = `Paso ${paso}/${totalPasos}`;
     }
 
-    function reiniciar() {
-      const historia = document.getElementById('historia');
-      const opciones = document.getElementById('opciones');
-      historia.innerHTML = `Es tu primer día en la universidad. Caminás por los pasillos con la mochila cargada de sueños. La clase comienza, pero no entendés el tema que explica el profesor.<br><br>¿Qué hacés?`;
-      opciones.innerHTML = `
-        <button class='opcion-btn' onclick='elegirOpcion(1)'>Preguntar al profesor</button>
-        <button class='opcion-btn' onclick='elegirOpcion(2)'>Preguntar a un compañero</button>
-        <button class='opcion-btn' onclick='elegirOpcion(3)'>Preguntar al centro de estudiantes</button>
+    // Mostrar resultado con animación
+    function mostrarResultado(texto, descripcion, icono) {
+      const storyCard = document.getElementById('storyCard');
+      const optionsContainer = document.getElementById('optionsContainer');
+      
+      // Agregar resultado
+      const resultadoHTML = `
+        <div class="result-card bounce-in">
+          <div class="result-icon">${icono}</div>
+          <div class="result-text">${texto}</div>
+          <div class="result-description">${descripcion}</div>
+        </div>
       `;
-      paso = 1;
+      
+      storyCard.innerHTML = resultadoHTML;
+      
+      // Continuar después de un delay
+      setTimeout(() => {
+        continuarHistoria();
+      }, 3000);
     }
+
+    // Continuar con la siguiente parte de la historia
+    function continuarHistoria() {
+      const storyCard = document.getElementById('storyCard');
+      const optionsContainer = document.getElementById('optionsContainer');
+      
+      if (paso === 1) {
+        storyCard.innerHTML = `
+          <div class="story-text fade-in">
+            Llega el momento del primer trabajo práctico. Es tu oportunidad de demostrar lo que aprendiste.
+            <br><br>
+            <span class="highlight">¿Cómo lo enfrentás?</span>
+          </div>
+          <div class="options-container">
+            <button class="option-btn" onclick="elegirOpcion(4)">
+              <i class="fas fa-user-plus option-icon"></i>
+              Formás grupo vos mismo
+            </button>
+            <button class="option-btn" onclick="elegirOpcion(5)">
+              <i class="fas fa-random option-icon"></i>
+              Esperás que te asignen
+            </button>
+            <button class="option-btn" onclick="elegirOpcion(6)">
+              <i class="fas fa-user option-icon"></i>
+              Lo hacés solo
+            </button>
+          </div>
+        `;
+        paso = 2;
+      } else if (paso === 2) {
+        storyCard.innerHTML = `
+          <div class="story-text fade-in">
+            Se acumulan parciales, trabajos y entregas. La organización se vuelve clave para no perderte.
+            <br><br>
+            <span class="highlight">¿Cómo te organizás?</span>
+          </div>
+          <div class="options-container">
+            <button class="option-btn" onclick="elegirOpcion(7)">
+              <i class="fas fa-mobile-alt option-icon"></i>
+              Usás una app de organización
+            </button>
+            <button class="option-btn" onclick="elegirOpcion(8)">
+              <i class="fas fa-tasks option-icon"></i>
+              Dividís tareas con tu grupo
+            </button>
+            <button class="option-btn" onclick="elegirOpcion(9)">
+              <i class="fas fa-chalkboard option-icon"></i>
+              Buscás ayuda en tutorías
+            </button>
+          </div>
+        `;
+        paso = 3;
+      } else if (paso === 3) {
+        storyCard.innerHTML = `
+          <div class="story-text fade-in">
+            Es el día del primer parcial. Estás nervioso pero preparado. Hay una pregunta que te genera dudas.
+            <br><br>
+            <span class="highlight">¿Qué hacés?</span>
+          </div>
+          <div class="options-container">
+            <button class="option-btn" onclick="elegirOpcion(10)">
+              <i class="fas fa-brain option-icon"></i>
+              Usás lógica y razonamiento
+            </button>
+            <button class="option-btn" onclick="elegirOpcion(11)">
+              <i class="fas fa-minus-circle option-icon"></i>
+              La dejás en blanco
+            </button>
+            <button class="option-btn" onclick="elegirOpcion(12)">
+              <i class="fas fa-lightbulb option-icon"></i>
+              Probás con lo que recordás
+            </button>
+          </div>
+        `;
+        paso = 4;
+      } else if (paso === 4) {
+        storyCard.innerHTML = `
+          <div class="story-text fade-in">
+            Finaliza el cuatrimestre. Has aprendido mucho y crecido como estudiante. Ahora tenés la experiencia para ayudar a otros.
+            <br><br>
+            <span class="highlight">¿Cómo continuás?</span>
+          </div>
+          <div class="options-container">
+            <button class="option-btn" onclick="elegirOpcion(13)">
+              <i class="fas fa-users-cog option-icon"></i>
+              Te sumás al centro de estudiantes
+            </button>
+            <button class="option-btn" onclick="elegirOpcion(14)">
+              <i class="fas fa-hands-helping option-icon"></i>
+              Proponés un espacio de apoyo
+            </button>
+            <button class="option-btn" onclick="elegirOpcion(15)">
+              <i class="fas fa-graduation-cap option-icon"></i>
+              Seguís enfocado en tus materias
+            </button>
+          </div>
+        `;
+        paso = 5;
+      } else if (paso === 5) {
+        // Final del juego
+        mostrarFinal();
+      }
+      
+      actualizarProgreso();
+    }
+
+    // Función principal para elegir opción
+    function elegirOpcion(opcion) {
+      // Deshabilitar botones durante la transición
+      const botones = document.querySelectorAll('.option-btn');
+      botones.forEach(btn => btn.classList.add('thinking'));
+      
+      let resultado = '';
+      let descripcion = '';
+      let icono = '';
+      
+      if (paso === 1) {
+        switch(opcion) {
+          case 1:
+            resultado = '¡Excelente decisión!';
+            descripcion = 'El profesor te explica con más detalle y te recomienda material extra. Demostraste iniciativa y ganas de aprender.';
+            icono = '🎓';
+            puntuacion += 10;
+            break;
+          case 2:
+            resultado = '¡Trabajo en equipo!';
+            descripcion = 'Repasás con un compañero y logran entenderlo juntos. Las mejores amistades se forman así.';
+            icono = '🤝';
+            puntuacion += 8;
+            break;
+          case 3:
+            resultado = '¡Bienvenido a la comunidad!';
+            descripcion = 'El centro de estudiantes te orienta y te sentís acompañado. Ya sos parte de la familia universitaria.';
+            icono = '🏠';
+            puntuacion += 9;
+            break;
+        }
+      } else if (paso === 2) {
+        switch(opcion) {
+          case 4:
+            resultado = '¡Líder natural!';
+            descripcion = 'Te animás a proponer grupo y encontrás compañeros con tu misma onda. El liderazgo se desarrolla así.';
+            icono = '⭐';
+            puntuacion += 10;
+            break;
+          case 5:
+            resultado = '¡Adaptabilidad!';
+            descripcion = 'Te asignan a un grupo y aprendés a trabajar con distintos perfiles. La diversidad enriquece.';
+            icono = '🔄';
+            puntuacion += 8;
+            break;
+          case 6:
+            resultado = '¡Independencia!';
+            descripcion = 'Lo hacés solo y aunque es más desafiante, te sentís orgulloso de tu capacidad.';
+            icono = '💪';
+            puntuacion += 7;
+            break;
+        }
+      } else if (paso === 3) {
+        switch(opcion) {
+          case 7:
+            resultado = '¡Organización digital!';
+            descripcion = 'Organizás todo con una app y tu productividad mejora notablemente. La tecnología es tu aliada.';
+            icono = '📱';
+            puntuacion += 9;
+            break;
+          case 8:
+            resultado = '¡Sinergia grupal!';
+            descripcion = 'El grupo se organiza y logran repartirse bien las tareas. El trabajo en equipo es fundamental.';
+            icono = '👥';
+            puntuacion += 10;
+            break;
+          case 9:
+            resultado = '¡Búsqueda de ayuda!';
+            descripcion = 'Las tutorías te dan herramientas y sentís más control sobre tu aprendizaje.';
+            icono = '📚';
+            puntuacion += 8;
+            break;
+        }
+      } else if (paso === 4) {
+        switch(opcion) {
+          case 10:
+            resultado = '¡Pensamiento crítico!';
+            descripcion = 'Te la jugás con lógica y ¡acertás! El razonamiento es una habilidad fundamental.';
+            icono = '🧠';
+            puntuacion += 10;
+            break;
+          case 11:
+            resultado = '¡Prudencia!';
+            descripcion = 'La dejás en blanco y evitás errores, aunque te quedás con la duda. A veces es mejor ser cauteloso.';
+            icono = '⚠️';
+            puntuacion += 6;
+            break;
+          case 12:
+            resultado = '¡Intuición!';
+            descripcion = 'Respondés con lo que recordás y te das cuenta que estabas cerca. La intuición también cuenta.';
+            icono = '💡';
+            puntuacion += 7;
+            break;
+        }
+      } else if (paso === 5) {
+        switch(opcion) {
+          case 13:
+            resultado = '¡Servicio a la comunidad!';
+            descripcion = 'Tu experiencia te motiva y ahora ayudás a otros desde el centro de estudiantes. El círculo se completa.';
+            icono = '🌟';
+            puntuacion += 10;
+            break;
+          case 14:
+            resultado = '¡Innovación social!';
+            descripcion = 'Creás un espacio de apoyo y muchos te agradecen la iniciativa. Sos un agente de cambio.';
+            icono = '🚀';
+            puntuacion += 10;
+            break;
+          case 15:
+            resultado = '¡Enfoque académico!';
+            descripcion = 'Te enfocás en seguir aprendiendo a tu ritmo y te sentís más seguro. Cada uno tiene su camino.';
+            icono = '📖';
+            puntuacion += 8;
+            break;
+        }
+      }
+      
+      mostrarResultado(resultado, descripcion, icono);
+    }
+
+    // Mostrar final del juego
+    function mostrarFinal() {
+      const storyCard = document.getElementById('storyCard');
+      let mensajeFinal = '';
+      let iconoFinal = '';
+      
+      if (puntuacion >= 45) {
+        mensajeFinal = '¡Excelente cuatrimestre!';
+        iconoFinal = '🏆';
+      } else if (puntuacion >= 35) {
+        mensajeFinal = '¡Muy buen cuatrimestre!';
+        iconoFinal = '🎉';
+      } else {
+        mensajeFinal = '¡Buen cuatrimestre!';
+        iconoFinal = '👍';
+      }
+      
+      storyCard.innerHTML = `
+        <div class="result-card bounce-in">
+          <div class="result-icon">${iconoFinal}</div>
+          <div class="result-text">${mensajeFinal}</div>
+          <div class="result-description">
+            Has completado tu primer cuatrimestre con ${puntuacion} puntos de experiencia. 
+            Cada decisión te ha ayudado a crecer como estudiante y persona.
+            <br><br>
+            ¡Felicitaciones por tu primer cuatrimestre universitario!
+          </div>
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn btn-primary" onclick="reiniciar()">
+            <i class="fas fa-redo"></i> Jugar de nuevo
+          </button>
+          <a href="demostraciones.html" class="action-btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Volver a demostraciones
+          </a>
+        </div>
+      `;
+    }
+
+    // Reiniciar juego
+    function reiniciar() {
+      paso = 1;
+      puntuacion = 0;
+      actualizarProgreso();
+      
+      const storyCard = document.getElementById('storyCard');
+      storyCard.innerHTML = `
+        <div class="story-text fade-in">
+          Es tu primer día en la universidad. Caminás por los pasillos con la mochila cargada de sueños y expectativas. 
+          El corazón te late fuerte mientras encontrás tu aula. La clase comienza, pero hay algo que no entendés del tema que explica el profesor.
+          <br><br>
+          <span class="highlight">¿Qué hacés?</span>
+        </div>
+        <div class="options-container">
+          <button class="option-btn" onclick="elegirOpcion(1)">
+            <i class="fas fa-chalkboard-teacher option-icon"></i>
+            Preguntar al profesor
+          </button>
+          <button class="option-btn" onclick="elegirOpcion(2)">
+            <i class="fas fa-users option-icon"></i>
+            Preguntar a un compañero
+          </button>
+          <button class="option-btn" onclick="elegirOpcion(3)">
+            <i class="fas fa-hands-helping option-icon"></i>
+            Preguntar al centro de estudiantes
+          </button>
+        </div>
+      `;
+    }
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', function() {
+      actualizarProgreso();
+    });
   </script>
 </body>
 </html>
