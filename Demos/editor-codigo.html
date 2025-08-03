@@ -903,6 +903,22 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showPreview() {
+  // Crear un modal para mostrar la página generada
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  `;
+  
   // Generar HTML y CSS completos
   var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">';
   html += '<title>Mi Página Generada</title>';
@@ -983,11 +999,72 @@ function showPreview() {
     }
   }
   html += '</div>';
-  html += '<a href="demostraciones.html" class="volver-btn">← Volver a las demostraciones</a>';
+  html += '<a href="../index.html" class="volver-btn">← Volver al inicio</a>';
   html += '</body></html>';
-  var blob = new Blob([html], {type: 'text/html'});
-  var url = URL.createObjectURL(blob);
-  window.open(url, '_blank');
+  
+  // Crear iframe para mostrar la página generada
+  const iframe = document.createElement('iframe');
+  iframe.style.cssText = `
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    background: white;
+  `;
+  iframe.srcdoc = html;
+  
+  // Botón para cerrar el modal
+  const closeBtn = document.createElement('button');
+  closeBtn.innerHTML = '×';
+  closeBtn.style.cssText = `
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    border: 2px solid #667eea;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10001;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  `;
+  
+  // Efectos hover para el botón
+  closeBtn.onmouseenter = function() {
+    this.style.background = '#667eea';
+    this.style.color = 'white';
+    this.style.transform = 'scale(1.1)';
+  };
+  
+  closeBtn.onmouseleave = function() {
+    this.style.background = 'rgba(255, 255, 255, 0.95)';
+    this.style.color = '#333';
+    this.style.transform = 'scale(1)';
+  };
+  
+  closeBtn.onclick = function() {
+    document.body.removeChild(modal);
+  };
+  
+  // Cerrar modal al hacer clic fuera del iframe
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      document.body.removeChild(modal);
+    }
+  };
+  
+  modal.appendChild(iframe);
+  modal.appendChild(closeBtn);
+  document.body.appendChild(modal);
 }
 function restart() {
   // Opcional: puedes resetear campos aquí si lo deseas
