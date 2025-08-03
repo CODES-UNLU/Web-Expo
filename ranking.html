@@ -224,6 +224,14 @@
       padding: 1.5rem;
       text-align: center;
       border-bottom: 3px solid #e2e8f0;
+      vertical-align: middle;
+      line-height: 1.2;
+    }
+    
+    .ranking-table th i {
+      vertical-align: middle;
+      font-size: 1.8rem;
+      color: #667eea;
     }
 
     .ranking-table th:first-child {
@@ -240,6 +248,8 @@
       text-align: center;
       border-bottom: 1px solid #e2e8f0;
       transition: all 0.3s ease;
+      vertical-align: middle;
+      line-height: 1.2;
     }
 
     .ranking-table tr:hover {
@@ -258,19 +268,40 @@
       font-weight: 700;
       font-size: 1.5rem;
       color: #667eea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .position span {
+      font-size: 1.5rem;
+      font-weight: 700;
     }
 
     .position-1 {
+      color: #ffd700;
+    }
+    
+    .position-1 span {
       color: #ffd700;
       text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
     }
 
     .position-2 {
       color: #c0c0c0;
+    }
+    
+    .position-2 span {
+      color: #c0c0c0;
       text-shadow: 0 2px 4px rgba(192, 192, 192, 0.3);
     }
 
     .position-3 {
+      color: #cd7f32;
+    }
+    
+    .position-3 span {
       color: #cd7f32;
       text-shadow: 0 2px 4px rgba(205, 127, 50, 0.3);
     }
@@ -292,6 +323,7 @@
     .trophy-icon {
       font-size: 1.2rem;
       margin-right: 0.5rem;
+      vertical-align: middle;
     }
 
     .position-1 .trophy-icon {
@@ -451,13 +483,13 @@
        </div>
 
       <table class="ranking-table">
-        <thead>
-          <tr>
-            <th>🏆 Puesto</th>
-            <th>👤 Jugador</th>
-            <th>⏱️ Tiempo</th>
-          </tr>
-        </thead>
+                 <thead>
+           <tr>
+             <th><i class="fas fa-trophy"></i></th>
+             <th><i class="fas fa-user"></i></th>
+             <th><i class="fas fa-clock"></i></th>
+           </tr>
+         </thead>
         <tbody id="rankingBody">
           <tr>
             <td colspan="3" class="no-data">
@@ -556,7 +588,9 @@
   
             const row = document.createElement('tr');
             row.innerHTML = `
-              <td class="position ${positionClass}">${trophyIcon}${position}º</td>
+              <td class="position ${positionClass}">
+                ${trophyIcon}<span>${position}º</span>
+              </td>
               <td class="player-email">${maskedEmail}</td>
               <td class="player-time">${jugador.tiempo}s</td>`;
             if (position <= 3) row.classList.add('pulse');
@@ -651,54 +685,7 @@
   
     // Ejemplo de uso: enviarResultado('test@unlu.edu.ar', 37);
     
-    // Función para probar el envío de datos (solo para desarrollo)
-    function testEnvio() {
-      const testEmail = 'test' + Date.now() + '@unlu.edu.ar';
-      const testTiempo = Math.floor(Math.random() * 100) + 30; // 30-130 segundos
-      enviarResultado(testEmail, testTiempo);
-      console.log('Datos de prueba enviados:', testEmail, testTiempo);
-    }
-    
-    // Botón de prueba (solo visible en desarrollo)
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      const testBtn = document.createElement('button');
-      testBtn.innerHTML = '🧪 Probar Envío';
-      testBtn.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #667eea;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        z-index: 1000;
-      `;
-      testBtn.onclick = testEnvio;
-      document.body.appendChild(testBtn);
-      
-      // Botón para probar conexión al servidor
-      const testConnectionBtn = document.createElement('button');
-      testConnectionBtn.innerHTML = '🔗 Probar Conexión';
-      testConnectionBtn.style.cssText = `
-        position: fixed;
-        top: 60px;
-        right: 20px;
-        background: #38a169;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        z-index: 1000;
-      `;
-      testConnectionBtn.onclick = () => {
-        console.log('Probando conexión al servidor...');
-        updateRanking();
-      };
-      document.body.appendChild(testConnectionBtn);
-    }
+
   </script>
   
 </body>
