@@ -1109,10 +1109,10 @@
           <span class="subtexto">Propuesta de Lic. en Sistemas</span>
         </a>
 
-        <a class="btn" href="explora.html">
-          <i class="fas fa-compass"></i>
-          <span class="btn-text">Explorá la Expo UNLu</span>
-          <span class="subtexto">Recorrido general por la Expo</span>
+        <a class="btn" href="Demos/demostraciones.html">
+          <i class="fas fa-flask"></i>
+          <span class="btn-text">Demostraciones Interactivas</span>
+          <span class="subtexto">Editor de código y juegos</span>
         </a>
 
         <a class="btn" href="faq.html">
@@ -1133,8 +1133,10 @@
         </div>
       </div>
 
+    
+      <!-- Sección Charlas Destacadas -->
       <section
-        id="demostraciones"
+        id="charlas-destacadas"
         class="seccion-destacada"
         style="
           max-width: 900px;
@@ -1162,43 +1164,107 @@
               justify-content: center;
             "
           >
-            <i class="fas fa-flask"></i> Demostraciones Interactivas
+            <i class="fas fa-microphone"></i> Charlas Destacadas
           </h2>
-          <p class="demostraciones-texto" style="font-size: 1.15rem; color: #444; margin-bottom: 1.2rem; text-align: center;">
-            Experimentá con las tecnologías del futuro: <strong>editor de código y juego de historia</strong>. ¡Sumergite en el mundo de la programación y la tecnología de manera práctica y divertida!
+          <p style="font-size: 1.15rem; color: #444; margin-bottom: 2rem; text-align: center;">
+            ¡No te pierdas estas charlas imperdibles sobre tecnología y el futuro de la profesión!
           </p>
 
-          <div
-            style="
-              display: flex;
-              gap: 2.5rem;
-              justify-content: center;
-              align-items: center;
-              margin: 2rem 0;
-              flex-wrap: wrap;
-            "
-          >
-            
+          <div style="display: flex; flex-direction: column; gap: 1.5rem; margin: 2rem 0;">
+            <!-- Charla 1 -->
+            <div style="
+              background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+              border-radius: 15px;
+              padding: 1.5rem;
+              border-left: 4px solid #667eea;
+              transition: all 0.3s ease;
+            " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+              <h3 style="
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #667eea;
+                margin-bottom: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+              ">
+                <i class="fas fa-graduation-cap"></i> Derecho a estudiar
+              </h3>
+              <p style="font-size: 1.1rem; color: #555; margin: 0;">
+                Conocé la Licenciatura en Sistemas de Información de UNLu
+              </p>
+            </div>
 
-          <a
-            href="Demos/demostraciones.html"
-            class="seccion-btn"
-            style="
-              display: inline-block;
-              padding: 0.7rem 2rem;
-              background: #667eea;
-              color: #fff;
-              font-weight: 700;
-              border-radius: 12px;
-              text-decoration: none;
-              font-size: 1.1rem;
-              box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-              transition: background 0.2s;
-              min-width: 220px;
-              text-align: center;
-            "
-            >Ver demostraciones</a
-          >
+            <!-- Charla 2 -->
+            <div style="
+              background: linear-gradient(135deg, rgba(72, 187, 120, 0.1), rgba(102, 126, 234, 0.1));
+              border-radius: 15px;
+              padding: 1.5rem;
+              border-left: 4px solid #48bb78;
+              transition: all 0.3s ease;
+            " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(72, 187, 120, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+              <h3 style="
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #48bb78;
+                margin-bottom: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+              ">
+                <i class="fas fa-rocket"></i> Más allá del código
+              </h3>
+              <p style="font-size: 1.1rem; color: #555; margin: 0;">
+                Horizontes de la tecnología y la Profesión
+              </p>
+            </div>
+
+            <!-- Charla 3 -->
+            <div style="
+              background: linear-gradient(135deg, rgba(237, 137, 54, 0.1), rgba(159, 122, 234, 0.1));
+              border-radius: 15px;
+              padding: 1.5rem;
+              border-left: 4px solid #ed8936;
+              transition: all 0.3s ease;
+            " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(237, 137, 54, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+              <h3 style="
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #ed8936;
+                margin-bottom: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+              ">
+                <i class="fas fa-building"></i> Los tres gigantes tecnológicos
+              </h3>
+              <p style="font-size: 1.1rem; color: #555; margin: 0;">
+                Google, Amazon y Spotify
+              </p>
+            </div>
+          </div>
+
+          <div style="
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+          ">
+            <p style="
+              font-size: 1rem;
+              color: #667eea;
+              font-weight: 600;
+              margin: 0;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              justify-content: center;
+            ">
+              <i class="fas fa-info-circle"></i>
+              Horarios y aulas por confirmar - ¡Mantenete atento!
+            </p>
+          </div>
         </div>
       </section>
 
@@ -1331,6 +1397,8 @@
           </div>
         </div>
       </section>
+
+
 
       <div class="info-section">
         <h3><i class="fas fa-handshake"></i> Acercate a nuestro stand</h3>
